@@ -20,6 +20,7 @@ namespace DineOut
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            //a comment
         }
 
         public IConfiguration Configuration { get; }
