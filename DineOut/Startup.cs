@@ -22,6 +22,8 @@ namespace DineOut
             Configuration = configuration;
             //a comment
             // another comment
+            //we're the best team
+
         }
 
         public IConfiguration Configuration { get; }
