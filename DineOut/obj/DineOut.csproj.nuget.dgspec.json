@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\james\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {}
+    "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj": {}
   },
   "projects": {
-    "C:\\Users\\james\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {
+    "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\james\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "C:\\Users\\james\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
-        "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\james\\Source\\Repos\\DineOut\\DineOut\\obj\\",
+        "projectPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
+        "packagesPath": "C:\\Users\\Dioums\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Dioums\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"

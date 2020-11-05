@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Order>
+
+@{
+    ViewBag.Title = "Completed Orders";
+    Layout = "_AdminLayout";
+}
+
+<div>
+    <div>
+        <label>Search Item</label>
+        <input type="text" placeholder="Search Item" />
+    </div>
+    <div>
+        <form asp-action="List" method="post">
+            <button type="submit"> By Category</button>
+        </form>
+    </div>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Table #</th>
+            <th>Costumer ID</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-action="OrderDetails">
+                        @order.OrderId
+                    </a>
+                </td>
+                <td>@order.TableNum</td>
+                <td>
+                    <a asp-action="CustomerInfo">
+                        @order.CustomerId
+                    </a>
+                </td>
+                <td>@order.Date</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
