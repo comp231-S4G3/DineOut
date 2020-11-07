@@ -12,6 +12,7 @@ namespace DineOut.Models
         [Key]
         [Column("restaurant_id")]
         public int RestaurantId { get; set; }
+<<<<<<< HEAD
         [Column("restaurant_name")]
         public string RestaurantName { get; set; }
         [Column("QR_Code")]
@@ -22,6 +23,12 @@ namespace DineOut.Models
         {
             return RestaurantName;
         }
+=======
+        public String OwnerFirstName { get; set; }
+        public String OwnerLastName { get; set; }
+        public String RestaurantName { get; set; }
+        public String QRCode { get; set; }
+>>>>>>> Mamadou
 
     }
 }

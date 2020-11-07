@@ -12017,23 +12017,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sina\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Dioums\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\DineOut.csproj",
+      "projectUniqueName": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
       "projectName": "DineOut",
-      "projectPath": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\DineOut.csproj",
-      "packagesPath": "C:\\Users\\Sina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\obj\\",
+      "projectPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
+      "packagesPath": "C:\\Users\\Dioums\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Sina\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dioums\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -12093,7 +12089,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
