@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\james\\Desktop\\DineOutTest\\DineOut\\DineOut\\DineOut.csproj": {}
+    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {}
   },
   "projects": {
-    "C:\\Users\\james\\Desktop\\DineOutTest\\DineOut\\DineOut\\DineOut.csproj": {
+    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\james\\Desktop\\DineOutTest\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "C:\\Users\\james\\Desktop\\DineOutTest\\DineOut\\DineOut\\DineOut.csproj",
+        "projectPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
         "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\james\\Desktop\\DineOutTest\\DineOut\\DineOut\\obj\\",
+        "outputPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -63,6 +63,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[2.1.2, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.3.9, )"
             }
           },
           "imports": [

@@ -12017,24 +12017,27 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sina\\.nuget\\packages\\": {},
+    "C:\\Users\\james\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\DineOut.csproj",
+      "projectUniqueName": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
       "projectName": "DineOut",
-      "projectPath": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\DineOut.csproj",
-      "packagesPath": "C:\\Users\\Sina\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sina\\Source\\Repos\\comp231-S4G3\\DineOut\\DineOut\\obj\\",
+      "projectPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
+      "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
+      "outputPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Sina\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.1"
@@ -12093,7 +12096,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.402\\RuntimeIdentifierGraph.json"
       }
     }
   }
