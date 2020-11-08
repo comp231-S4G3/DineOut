@@ -193,4 +193,5 @@ C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.genr
 C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.csproj.CopyComplete
 C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.csproj.CoreCompileInputs.cache
 C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
-C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\OrderDetails\Index.cshtml.g.cs
+C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\OrderDetails\Order.cshtml.g.cs
+C:\Users\edmar\Source\Repos\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\OrderDetails\EditOrder.cshtml.g.cs

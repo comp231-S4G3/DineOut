@@ -9,7 +9,11 @@ namespace DineOut.Controllers
 {
     public class OrderDetailsController:Controller
     {
-        public ViewResult Index()
+        public ViewResult Order()
+        {
+            return View();
+        }
+        public ViewResult EditOrder()
         {
             return View();
         }
