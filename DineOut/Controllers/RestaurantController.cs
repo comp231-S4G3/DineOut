@@ -11,12 +11,12 @@ namespace DineOut.Controllers
     {
         DineOutContext DineOutContext = new DineOutContext();
 
-        public RestaurantController ()
+        public RestaurantController () { }
+
+        public IActionResult MenuIndex()
         {
-            
+            return View();
         }
-
-
         //This belongs to Order Controller
         //Added here, so we do not forget
         /*public IActionResult CurrentOrders() 
@@ -39,5 +39,13 @@ namespace DineOut.Controllers
         }
 
         //Create Profile Action bellow
+
+
+
+
+
+
+
+        // MENU CRUD
     }
 }

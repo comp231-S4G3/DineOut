@@ -1,26 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {}
+    "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj": {}
   },
   "projects": {
-    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {
+    "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
-        "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
-        "outputPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\obj\\",
+        "projectPath": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj",
+        "packagesPath": "C:\\Users\\luizs\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\luizs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"

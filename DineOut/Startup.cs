@@ -76,6 +76,10 @@ namespace DineOut
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "Menu Index",
+                    template: "{controller=Restaurant}/{action=Index}");
             });
         }
     }
