@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Qr Generator";
+}
+
+<br />
+<br />
+<br />
+<br />
+@using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
+{
+    <input type="text" name="inputText" />
+    <input type="submit" value="Generate" />
+
+}
+
+
+<hr />
+
+@if (ViewBag.QRCode != null)
+{
+    <img src="@ViewBag.QRCode" style="width:200px;height200px;" />
+
+}
