@@ -9,11 +9,11 @@ namespace DineOut.Controllers
 {
     public class RestaurantController : Controller
     {
-        private IRestaurantRepository repository;
+        DineOutContext DineOutContext = new DineOutContext();
 
-        public RestaurantController (IRestaurantRepository repo)
+        public RestaurantController ()
         {
-            repository = repo;
+            
         }
 
 
@@ -31,9 +31,9 @@ namespace DineOut.Controllers
             return View();
         }*/
 
-        public IActionResult List(string menuID, string created)
+        public IActionResult List(int menuID, DateTime created)
         {
-            return View(repository.Item
+            return View(DineOutContext.Item
                 .Where(m => m.MenuId == menuID)
                 .OrderBy(i => i.CreatedOn == created));
         }

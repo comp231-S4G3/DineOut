@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj": {}
+    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj": {
+    "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
-        "packagesPath": "C:\\Users\\Dioums\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\obj\\",
+        "projectPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\DineOut.csproj",
+        "packagesPath": "C:\\Users\\james\\.nuget\\packages\\",
+        "outputPath": "D:\\Semester 4\\Software Development Project\\DineOutRepo\\DineOut\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Dioums\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\james\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp2.1"
