@@ -2,14 +2,14 @@
 
 @{ 
     ViewBag.Title = "Your Restaurant";
-    Layout = "_Layout";
+    Layout = "_RestaurantLayout";
 }
 
 <div>
     <h3>@ViewBag.Greetings !</h3>
 </div>
 
-<p>This is where the CRUD for items in menu comes in</p>
+@Html.PartialAsync("CategorySearch")
 
 <table>
     <thead>
