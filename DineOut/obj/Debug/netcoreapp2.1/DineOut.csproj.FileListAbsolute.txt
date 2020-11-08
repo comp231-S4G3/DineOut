@@ -35,7 +35,6 @@ C:\Users\user\Documents\College\2020Fall\Group231\DineOut\DineOut\obj\Debug\netc
 C:\Users\user\Documents\College\2020Fall\Group231\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.csproj.CopyComplete
 <<<<<<< HEAD
 =======
-<<<<<<< HEAD
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\bin\Debug\netcoreapp2.1\appsettings.Development.json
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\bin\Debug\netcoreapp2.1\appsettings.json
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\bin\Debug\netcoreapp2.1\Properties\launchSettings.json
@@ -76,7 +75,6 @@ C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\obj\Debug\netcoreapp2.1\
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.csproj.CoreCompileInputs.cache
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\Sina\Source\Repos\comp231-S4G3\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Home\QrGenerator.cshtml.g.cs
-=======
 >>>>>>> origin/SIna_branch
 C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\bin\Debug\netcoreapp2.1\appsettings.Development.json
 C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\bin\Debug\netcoreapp2.1\appsettings.json
@@ -117,7 +115,12 @@ C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\D
 C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.pdb
 C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.genruntimeconfig.cache
 C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\DineOut.csproj.CopyComplete
-<<<<<<< HEAD
-=======
 >>>>>>> Mamadou
->>>>>>> origin/SIna_branch
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Home\QrGenerator.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Order\CompletedOrders.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Order\CurrentOrders.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Order\List.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Restaurant\RestaurantMain.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Restaurant\CompletedOrders.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Restaurant\CurrentOrders.cshtml.g.cs
+C:\Users\Dioums\Documents\CentennialCollege\Fall20\COMP231\DineOut\DineOut\obj\Debug\netcoreapp2.1\Razor\Views\Restaurant\List.cshtml.g.cs

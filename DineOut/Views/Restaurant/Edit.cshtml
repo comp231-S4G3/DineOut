@@ -1,0 +1,44 @@
+﻿@model Item
+
+@{ 
+    ViewBag.Title = "Edit";
+    Layout = "_RestaurantLayout";
+}
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="ItemId" />
+
+    <div>
+        <label asp-for="MenuId"></label>
+        <div><input asp-for="MenuId" /></div>
+    </div>
+    <div>
+        <label asp-for="ItemName"></label>
+        <div><input asp-for="ItemName" /></div>
+    </div>
+    <div>
+        <label asp-for="Description"></label>
+        <div><input asp-for="Description" /></div>
+    </div>
+    <div>
+        <label asp-for="Ingredients"></label>
+        <div><input asp-for="Ingredients" /></div>
+    </div>
+    <div>
+        <label asp-for="Price"></label>
+        <div><input asp-for="Price" /></div>
+    </div>
+    <div>
+        <label asp-for="Image"></label>
+        <div><input asp-for="Image" /></div>
+    </div>
+    <div>
+        <label asp-for="Availability"></label>
+        <div><input asp-for="Availability" /></div>
+    </div>
+    <div>
+        <button type="submit">Save</button>
+        <a asp-action="Menu">Cancel</a>
+    </div>
+
+</form>

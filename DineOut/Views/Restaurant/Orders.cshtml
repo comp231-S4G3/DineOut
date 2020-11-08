@@ -2,20 +2,10 @@
 
 @{
     ViewBag.Title = "Current Orders";
-    Layout = "_Layout";
+    Layout = "_RestaurantLayout";
 }
 
-<div>
-    <div>
-        <label>Search Item</label>
-        <input type="text" placeholder="Search Item" />
-    </div>
-    <div>
-        <form asp-action="List" method="post">
-            <button type="submit"> By Category</button>
-        </form>
-    </div>
-</div>
+@Html.PartialAsync("CategorySearch")
 
 <table>
     <thead>
@@ -41,7 +31,7 @@
                         @order.CustomerId
                     </a>
                 </td>
-                <td>@order.Date</td>
+                <td>@order.CreatedOn</td>
             </tr>
         }
     </tbody>
