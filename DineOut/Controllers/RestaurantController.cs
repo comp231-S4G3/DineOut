@@ -31,7 +31,7 @@ namespace DineOut.Controllers
             return View();
         }*/
 
-        public IActionResult List(int menuID, DateTime created)
+        public IActionResult Menu(int menuID, DateTime created)
         {
             return View(DineOutContext.Item
                 .Where(m => m.MenuId == menuID)
