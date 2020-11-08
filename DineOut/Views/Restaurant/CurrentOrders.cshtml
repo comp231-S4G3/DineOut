@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Order>
+
+@{ 
+    ViewBag.Title = "Order List";
+    Layout = "_RestaurantLayout";
+}
+
+@Html.PartialAsync("CategorySearch")
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Table #</th>
+            <th>Costumer</th>
+            <th>Date</th>
+            <th>Ready for Pick Up</th>
+            <th>Order Complete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderId</td>
+                <td>@order.TableNum</td>
+                <td>@order.CreatedOn</td>
+                <td>
+                    <form asp-action="List" method="post">
+                        <button type="submit">Ready</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="List" method="post">
+                        <button type="submit">Complete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

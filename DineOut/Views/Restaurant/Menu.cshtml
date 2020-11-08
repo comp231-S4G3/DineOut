@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Item>
+
+@{ 
+    ViewBag.Title = "Your Restaurant";
+    Layout = "_RestaurantLayout";
+}
+
+<div>
+    <h3>@ViewBag.Greetings !</h3>
+</div>
+
+@Html.PartialAsync("CategorySearch")
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Dish</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemId</td>
+                <td>@item.ItemName</td>
+                <td>@item.Price.ToString("c")</td>
+                <td>
+                    <form asp-action="Delete" method="post">
+                        <input type="hidden" name="itemID" value="@item.ItemId" />
+                        <a asp-action="Edit" asp-route-itemId="@item.ItemId">
+                            Edit
+                        </a>
+                        <button type="submit">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Create">Add New Dish</a>
+</div>
