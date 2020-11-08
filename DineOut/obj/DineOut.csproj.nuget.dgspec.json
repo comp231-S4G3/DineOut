@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {}
+    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {
+    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+        "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
         "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\obj\\",
+        "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

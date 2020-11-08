@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/5yhRqijVIHCn2Cd0uUnPvABw982u4h3+gkiJUf9/ZZb9vMfCeq1vGzjqaQwjyAvg2KAKjbLBfcdzXMMNxf8hQ==",
+  "dgSpecHash": "NpmvCVy7jfenCU0WWK2vGYmYfI1QppdqiGw94cznLt55xgRY0+8I4DRyTxLbcOADmVKqxyloXmCBDEaevsplOA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+  "projectFilePath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
   "expectedPackageFiles": [
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.aspnet.webapi.client\\5.2.6\\microsoft.aspnet.webapi.client.5.2.6.nupkg.sha512",
     "C:\\Users\\edmar\\.nuget\\packages\\microsoft.aspnetcore\\2.1.7\\microsoft.aspnetcore.2.1.7.nupkg.sha512",
