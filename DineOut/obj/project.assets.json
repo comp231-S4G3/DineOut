@@ -8012,6 +8012,7 @@
       "path": "runtime.native.system.security.cryptography.apple/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
@@ -9906,6 +9907,7 @@
       "path": "system.linq.queryable/4.0.1",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/monoandroid10/_._",
@@ -11724,6 +11726,7 @@
       "path": "system.security.principal/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12731,6 +12734,7 @@
       "path": "system.xml.xpath.xdocument/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -12789,11 +12793,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+      "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
       "projectName": "DineOut",
-      "projectPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
+      "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
       "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\obj\\",
+      "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
