@@ -1,10 +1,10 @@
 ﻿@model AllModels
 @{
-	ViewData["Title"] = "Index";
+	ViewData["Title"] = "OrderDetails";
 	Layout = "_Layout";
 }
 
-<h2>Order Details</h2>
+<h2>OrderDetails CustomerSide</h2>
 
 <div class="orderDetailsBody">
 	<table class="table table-striped orderDetailsTable ">
@@ -27,8 +27,7 @@
 			<tr>
 				<td>@Model.Orders</td>@*//orderID*@
 				<td>@Model.Orders</td>@*//orderDate*@
-				<td>@Model.Items</td>@*ItemName*@
-				<td>@Model.Orders</td>@*OrderStatus*@
+				<td>@Model.Restaurants</td>@*retaurantName*@
 				<td>@Model.Orders</td>@*table.Num*@
 				<td>@Model.Orders</td>@*customerId*@
 				<td>@Model.Orders</td>@*Price*@
@@ -45,13 +44,9 @@
 			}
 		</tbody>
 	</table>
-
+	<form action="addNote" method="post">
+		<label>Add Notes: </label>
+		<textarea rows="4"></textarea>
+		<button class="btn-success" type="submit">Confirm</button>
+	</form>
 </div>
-
-
-@*<section class="row">
-	<div class="orderDetailsButton">
-		<a asp-action="EditOrder" asp-controller="OrderDetails" class="btn btn-danger">Edit Order</a>
-		<a class="btn btn-success" href="#">Send to Kitchen</a>
-	</div>
-</section>*@

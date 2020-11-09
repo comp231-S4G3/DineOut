@@ -128,7 +128,7 @@ Write(Html.PartialAsync("CategorySearch"));
             WriteLiteral("</td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(634, 415, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "70e52c101a0b4bd6aef7ed508405a6ee", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "739a4d9112134d6abcb3f298e0471eb8", async() => {
                 BeginContext(674, 60, true);
                 WriteLiteral("\r\n                        <input type=\"hidden\" name=\"itemID\"");
                 EndContext();
@@ -143,7 +143,7 @@ WriteAttributeValue("", 742, item.ItemId, 742, 12, false);
                 WriteLiteral(" />\r\n                        ");
                 EndContext();
                 BeginContext(784, 117, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4c4dddc01e01442ab77768706680a1a7", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "5c479391be7044e6bbea690f1a1dc858", async() => {
                     BeginContext(837, 60, true);
                     WriteLiteral("\r\n                            Edit\r\n                        ");
                     EndContext();
@@ -207,7 +207,7 @@ WriteAttributeValue("", 742, item.ItemId, 742, 12, false);
             WriteLiteral("    </tbody>\r\n</table>\r\n\r\n<div>\r\n    ");
             EndContext();
             BeginContext(1141, 39, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a90a7900bbc64f7eb01b72982b127a0d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "403cdb27f16f4b5da09aff0332226c0f", async() => {
                 BeginContext(1164, 12, true);
                 WriteLiteral("Add New Dish");
                 EndContext();
