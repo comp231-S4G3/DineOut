@@ -30,35 +30,35 @@
 		</tbody>
 	</table>
 	<form action="EditOrder" method="post">
-		<input type="hidden" asp-for="Orders.OrderId" />
+		<input type="hidden" asp-for="Orders" />@*//orderID*@
 		<table>
 			@foreach (var item in Model.Order_Items)
 			{
-			<tr>
-				<td>Image:</td>
-				<td>@Model.Items.Image</td>
-			</tr>
+				<tr>
+					<td>Image:</td>
+					<td>@Model.Items</td>@*.Image*@
+				</tr>
 				<tr>
 					<td>Description:</td>
-					<td>@Model.Items.Description</td>
+					<td>@Model.Items</td>@*.Description*@
 				</tr>
 				<tr>
 					<td>Quantity:</td>
-					<td><input type="number" asp-for="@Model.Order_Items.Quantity" /></td>
+					<td><input type="number" asp-for="@Model.Order_Items" /></td>@*.Quantity*@
 				</tr>
 				<tr>
 					<td>Total:</td>
-					<td>@Model.Items.Price.toString("c")</td>
+					<td>@Model.Items</td>@*.Price.toString("c")*@
 				</tr>
 				<tr>
 					<td>Add Notes:</td>
-					<td><textarea rows="4">@Model.Order.Notes</textarea></td>
+					<td><textarea rows="4">@Model.Orders</textarea></td>@*.Notes*@
 				</tr>
 			}
 
 		</table>
 		<div class="marginTop">
-			<button class="btn btn-success"type="submit">Save</button>
+			<button class="btn btn-success" type="submit">Save</button>
 			<a class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</a>
 		</div>
 	</form>
