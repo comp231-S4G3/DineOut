@@ -4,7 +4,8 @@
 	Layout = "_Layout";
 }
 
-<h2>OrderDetails CustomerSide</h2>
+@*I'm strugling to know how to pass diferent models to this view. Tha's why I am having erros in the code.*@
+<h2>@Model.Restaurants</h2>
 
 <div class="orderDetailsBody">
 	<table class="table table-striped orderDetailsTable ">
@@ -15,12 +16,6 @@
 				<th>Restaurant</th>
 				<th>Table #</th>
 				<th>Costumer</th>
-				<th>Price</th>
-				<th>Order Status</th>
-				<th>Item</th>
-				<th>Quantity</th>
-
-
 			</tr>
 		</thead>
 		<tbody>
@@ -30,23 +25,41 @@
 				<td>@Model.Restaurants</td>@*retaurantName*@
 				<td>@Model.Orders</td>@*table.Num*@
 				<td>@Model.Orders</td>@*customerId*@
-				<td>@Model.Orders</td>@*Price*@
-				<td>@Model.Orders</td>@*OrderStatus*@
-
-
 			</tr>
-			@foreach (var item in Model.Order_Items)
-			{
-				<tr>
-					<td>@item.ItemId</td>
-					<td>@item.Quantity</td>
-				</tr>
-			}
+			       
 		</tbody>
 	</table>
-	<form action="addNote" method="post">
-		<label>Add Notes: </label>
-		<textarea rows="4"></textarea>
-		<button class="btn-success" type="submit">Confirm</button>
+	<form action="EditOrder" method="post">
+		<input type="hidden" asp-for="Orders.OrderId" />
+		<table>
+			@foreach (var item in Model.Order_Items)
+			{
+			<tr>
+				<td>Image:</td>
+				<td>@Model.Items.Image</td>
+			</tr>
+				<tr>
+					<td>Description:</td>
+					<td>@Model.Items.Description</td>
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td><input type="number" asp-for="@Model.Order_Items.Quantity" /></td>
+				</tr>
+				<tr>
+					<td>Total:</td>
+					<td>@Model.Items.Price.toString("c")</td>
+				</tr>
+				<tr>
+					<td>Add Notes:</td>
+					<td><textarea rows="4">@Model.Order.Notes</textarea></td>
+				</tr>
+			}
+
+		</table>
+		<div class="marginTop">
+			<button class="btn btn-success"type="submit">Save</button>
+			<a class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</a>
+		</div>
 	</form>
 </div>
