@@ -13,10 +13,6 @@ namespace DineOut.Controllers
 
         public RestaurantController () { }
 
-        public IActionResult MenuIndex()
-        {
-            return View();
-        }
         //This belongs to Order Controller
         //Added here, so we do not forget
         /*public IActionResult CurrentOrders() 
@@ -46,6 +42,30 @@ namespace DineOut.Controllers
 
 
 
+        // Test View
+
+        public IActionResult Index()
+        {
+            var menus = DineOutContext.Menu.ToList();
+            var items = DineOutContext.Item.ToList();
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
+            return View();
+        }
+
         // MENU CRUD
+        public IActionResult AddMenu(Menu menu)
+        {
+            var menus = DineOutContext.Menu.ToList();
+            menus.Add(menu);
+            TempData["message"] = $"Welcome! Your menu has been created!";
+            return RedirectToAction("Index", "RestaurantController");
+        }
+        public IActionResult DeleteMenu(Menu menu)
+        {
+            var menus
+        }
     }
 }

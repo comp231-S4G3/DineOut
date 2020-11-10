@@ -1,0 +1,57 @@
+﻿@model AllModels
+@{
+	ViewData["Title"] = "Index";
+	Layout = "_Layout";
+}
+
+<h2>Order Details</h2>
+
+<div class="orderDetailsBody">
+	<table class="table table-striped orderDetailsTable ">
+		<thead>
+			<tr>
+				<th>Order Number</th>
+				<th>Date</th>
+				<th>Restaurant</th>
+				<th>Table #</th>
+				<th>Costumer</th>
+				<th>Price</th>
+				<th>Order Status</th>
+				<th>Item</th>
+				<th>Quantity</th>
+
+
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>@Model.Orders</td>@*//orderID*@
+				<td>@Model.Orders</td>@*//orderDate*@
+				<td>@Model.Items</td>@*ItemName*@
+				<td>@Model.Orders</td>@*OrderStatus*@
+				<td>@Model.Orders</td>@*table.Num*@
+				<td>@Model.Orders</td>@*customerId*@
+				<td>@Model.Orders</td>@*Price*@
+				<td>@Model.Orders</td>@*OrderStatus*@
+
+
+			</tr>
+			@foreach (var item in Model.Order_Items)
+			{
+				<tr>
+					<td>@item.ItemId</td>
+					<td>@item.Quantity</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+
+</div>
+
+
+@*<section class="row">
+	<div class="orderDetailsButton">
+		<a asp-action="EditOrder" asp-controller="OrderDetails" class="btn btn-danger">Edit Order</a>
+		<a class="btn btn-success" href="#">Send to Kitchen</a>
+	</div>
+</section>*@

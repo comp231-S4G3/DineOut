@@ -78,8 +78,8 @@ namespace DineOut
                     template: "{controller=Home}/{action=Index}/{id?}");
 
                 routes.MapRoute(
-                    name: "Menu Index",
-                    template: "{controller=Restaurant}/{action=Index}");
+                    name: "Menu",
+                    template: "{controller=RestaurantController}/{action=Index}");
             });
         }
     }
