@@ -66,7 +66,6 @@ namespace DineOut.Controllers
             return View();
         }
 
-
         [HttpPost]
         public ActionResult QrGenerator(String inputText)
         {

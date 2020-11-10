@@ -1,9 +1,11 @@
 ﻿@{
     ViewBag.Title = "Qr Generator";
-    Layout = "_Layout";
 }
 
-
+<br />
+<br />
+<br />
+<br />
 @using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
 {
     <input type="text" name="inputText" />
@@ -16,6 +18,6 @@
 
 @if (ViewBag.QRCode != null)
 {
-    <img src="@ViewBag.QRCode" style="width:200px;height:200px" />
+    <img src="@ViewBag.QRCode" style="width:200px;height200px;" />
 
 }

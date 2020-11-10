@@ -22,5 +22,6 @@ namespace DineOut.Models
         {
             return RestaurantName;
         }
+
     }
 }

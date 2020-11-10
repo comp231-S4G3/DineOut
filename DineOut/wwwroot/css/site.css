@@ -35,3 +35,10 @@ body {
         display: none;
     }
 }
+.orderDetailsTable{
+    font-weight:700;
+    max-width:50%;
+}
+.orderDetailsButton{
+    margin-left:3%;
+}
