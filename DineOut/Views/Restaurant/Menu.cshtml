@@ -42,6 +42,8 @@
         }
     </tbody>
 </table>
+<button type="button" title="Create Menu" onclick="location.href='@Url.Action("Add_Menu", new { restaurant_id = 3, menu_title = "Luiz's Menu"})'">Create Menu</button>
+<button type="button" title="Update Menu" onclick="location.href='@Url.Action("Update_Menu", new { restaurant_id = 3, menu_id = 5, menu_title = "Sato's Menu"})'">Update Menu</button>
 
 <div>
     <a asp-action="Create">Add New Dish</a>
