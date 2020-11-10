@@ -9,7 +9,12 @@ namespace DineOut.Controllers
 {
     public class RestaurantController : Controller
     {
-        DineOutContext dineOutContext = new DineOutContext();
+        DineOutContext DineOutContext = new DineOutContext();
+
+        public RestaurantController ()
+        {
+            
+        }
 
 
         //This belongs to Order Controller
@@ -28,7 +33,7 @@ namespace DineOut.Controllers
 
         public IActionResult Menu(int menuID, DateTime created)
         {
-            return View(dineOutContext.Item
+            return View(DineOutContext.Item
                 .Where(m => m.MenuId == menuID)
                 .OrderBy(i => i.CreatedOn == created));
         }
