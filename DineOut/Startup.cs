@@ -70,10 +70,6 @@ namespace DineOut
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: null,
-                    template: "{controller}/{action}/{id?}");
-
-                routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
 
