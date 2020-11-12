@@ -58,7 +58,7 @@ using DineOut.Models;
             WriteLiteral("<table>\r\n    <tr>\r\n        <td>\r\n            ");
             EndContext();
             BeginContext(45, 65, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "76c56eec870b4685b40a7a0fad041300", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cb57af05355c41b9a9efbc4027de99ff", async() => {
                 BeginContext(68, 38, true);
                 WriteLiteral("\r\n                Orders\r\n            ");
                 EndContext();
@@ -80,7 +80,7 @@ using DineOut.Models;
             WriteLiteral("\r\n        </td>\r\n        <td>\r\n            ");
             EndContext();
             BeginContext(153, 84, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c0834c9afa744482ae4b8075f5062dde", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2e715a80fb344ddf94c0b059ce4b266e", async() => {
                 BeginContext(185, 48, true);
                 WriteLiteral("\r\n                Completed Orders\r\n            ");
                 EndContext();
@@ -102,7 +102,7 @@ using DineOut.Models;
             WriteLiteral("\r\n        </td>\r\n        <td>\r\n            ");
             EndContext();
             BeginContext(280, 80, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c3890fbb5f08442b9222b658162936c3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "28a8143c10e6436285edd42a642380a9", async() => {
                 BeginContext(310, 46, true);
                 WriteLiteral("\r\n                Current Orders\r\n            ");
                 EndContext();
@@ -124,7 +124,7 @@ using DineOut.Models;
             WriteLiteral("\r\n        </td>\r\n        <td>\r\n            ");
             EndContext();
             BeginContext(403, 191, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "19e3ab0ea00e4c629e189187d6d4f35c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "88cd90a3c6e24e798fb674ef94cea588", async() => {
                 BeginContext(409, 178, true);
                 WriteLiteral("\r\n                <label>Search Item</label>\r\n                <input type=\"text\" placeholder=\"Search Item\" />\r\n                <button type=\"button\">Search</button>\r\n            ");
                 EndContext();
