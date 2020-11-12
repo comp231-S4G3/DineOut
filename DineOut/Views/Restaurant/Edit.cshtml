@@ -5,12 +5,12 @@
     Layout = "_RestaurantLayout";
 }
 
-<form asp-action="Edit" method="post">
+<form asp-action="Add_Update_Item" method="post">
     <input type="hidden" asp-for="ItemId" />
 
     <div>
         <label asp-for="MenuId"></label>
-        <div><input asp-for="MenuId" /></div>
+        <div><input asp-for="MenuId" value="5" readonly/></div>
     </div>
     <div>
         <label asp-for="ItemName"></label>
@@ -38,7 +38,7 @@
     </div>
     <div>
         <button type="submit">Save</button>
-        <a asp-action="Menu">Cancel</a>
+        <a asp-action="Index">Cancel</a>
     </div>
 
 </form>

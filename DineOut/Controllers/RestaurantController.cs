@@ -26,29 +26,21 @@ namespace DineOut.Controllers
             return View();
         }*/
 
-        public IActionResult Menu(int menuID, DateTime created)
-        {
-            return View(DineOutContext.Item
-                .Where(m => m.MenuId == menuID)
-                .OrderBy(i => i.CreatedOn == created));
-        }
-
-        //Create Profile Action bellow
-
-
-
-
-
-
-
         // Test View
-
         public IActionResult Index()
         {
-            var menus = DineOutContext.Menu.ToList();
-            var items = DineOutContext.Item.ToList();
-            return View("Menu", DineOutContext.Item);
+            int restaurant_id = 3;
+            var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+            var items = DineOutContext.Item.Where(r => r.MenuId == menud_id).ToList();
+            return View("Menu", items);
+            //return View("Menu", DineOutContext.Item);
+
         }
+        public IActionResult Add_Item_View()
+        {
+            return View("Edit");
+        }
+
 
         // MENU CRUD
         public IActionResult Add_Menu(int restaurant_id, string menu_title)
@@ -76,6 +68,7 @@ namespace DineOut.Controllers
                 return RedirectToAction("Index");
             }
         }
+        
         public IActionResult Update_Menu(int restaurant_id, int menu_id, string menu_title)
         {
             var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id)
@@ -93,30 +86,37 @@ namespace DineOut.Controllers
             TempData["message"] = $"Title updated!";
             return RedirectToAction("Index");
         }
-        public IActionResult Add_Item()
-        {
-            return RedirectToAction("Index");
-        }
-        public IActionResult Delete_Item()
-        {
-            return RedirectToAction("Index");
-        }
-        public IActionResult Update_Item()
-        {
-            return RedirectToAction("Index");
-        }
 
-        //public IActionResult DeleteMenu(int menu_id, int restaurant_id)
-        //{
-        //    var menus = DineOutContext.Menu.Where(r => r.RestaurantId == menu_id).Where(r => r.RestaurantId == restaurant_id).FirstOrDefault();
-
-        //    if (menus != null)
-        //    {
-        //        DineOutContext.Remove(menus);
-        //        DineOutContext.SaveChanges();
-        //    }
-        //    TempData["message"] = $"Your menu has been delete!";
-        //    return RedirectToAction("Index");
-        //}
+        public IActionResult Add_Update_Item(Item item)
+        {
+            if (item.ItemId == 0)
+            {
+                Console.WriteLine(item);
+                DineOutContext.Add(item);
+                DineOutContext.SaveChanges();
+            }
+            else
+            {
+                Console.WriteLine(item);
+                DineOutContext.Update(item);
+                DineOutContext.SaveChanges();
+                
+            }
+            return RedirectToAction("Index");
+        }
+        public IActionResult Delete_Item(int item_id, int menu_id)
+        {
+            var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
+            DineOutContext.Remove(item_delete);
+            DineOutContext.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        
+        public IActionResult Update_Item(int itemId, int menuId)
+        {
+            var item = DineOutContext.Item.Where(r => r.MenuId == menuId).Where(r => r.ItemId == itemId).FirstOrDefault();
+            Console.WriteLine(item);
+            return View("Edit", item);
+        }
     }
 }
