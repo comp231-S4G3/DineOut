@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Item>
-
-@{ 
+@{
     ViewBag.Title = "Your Restaurant";
     Layout = "_RestaurantLayout";
 }
@@ -30,10 +29,10 @@
                 <td>
                     <form asp-action="Delete" method="post">
                         <input type="hidden" name="itemID" value="@item.ItemId" />
-                        <a asp-action="Edit" asp-route-itemId="@item.ItemId">
+                        <a asp-action="Update_Item" asp-route-itemId="@item.ItemId" asp-route-menuId="@item.MenuId">
                             Edit
                         </a>
-                        <button type="submit">
+                        <button type="button" title="Delete Item" onclick="location.href='@Url.Action("Delete_Item", new { menu_id = 5, item_id = item.ItemId})'">
                             Delete
                         </button>
                     </form>
@@ -43,6 +42,11 @@
     </tbody>
 </table>
 
+@*Those are not necessary for now*@
+
+@*<button type="button" title="Create Menu" onclick="location.href='@Url.Action("Add_Menu", new { restaurant_id = 3, menu_title = "Luiz's Menu"})'">Create Menu</button>*@
+@*<button type="button" title="Update Menu" onclick="location.href='@Url.Action("Update_Menu", new { restaurant_id = 3, menu_id = 5, menu_title = "Sato's Menu"})'">Update Menu</button>*@
+
 <div>
-    <a asp-action="Create">Add New Dish</a>
+    <a asp-action="Add_Item_View">Add New Dish</a>
 </div>
