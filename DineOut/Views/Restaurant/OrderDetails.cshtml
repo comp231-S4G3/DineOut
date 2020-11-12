@@ -45,14 +45,15 @@
 			</tr>
 		</thead>
 		<tbody>
-		
-				@foreach (var item in Model.Items)
-				{
-			<tr>
-				<td>@item.ItemName</td>
-				<td>@item.Price.ToString("c")</td>
-			</tr>
-				}
+
+			@foreach (var item in Model.OrderItems)
+			{
+		<tr>
+			<td>@item.Item.ItemName</td>
+			<td>@item.Item.Price.ToString("c")</td>
+			<td>@item.Quantity</td>
+		</tr>
+	}
 		</tbody>
 	</table>
 	<div>

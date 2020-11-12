@@ -12,9 +12,9 @@ namespace DineOut.Controllers
     {
         DineOutContext DineOutContext = new DineOutContext();
 
-        public RestaurantController ()
+        public RestaurantController()
         {
-            
+
         }
 
 
@@ -47,13 +47,14 @@ namespace DineOut.Controllers
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
             orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
+
             foreach (OrderItem orderItem in orderDetailsInfo.OrderItems)
             {
-                Item orderd_item = DineOutContext.Item.Find(orderItem.ItemId);
-                items.Add(orderd_item);
+                orderItem.Item = DineOutContext.Item.Find(orderItem.ItemId);
             }
-            orderDetailsInfo.Items = items;
             return View(orderDetailsInfo);
+
+
         }
 
         //Create Profile Action bellow
