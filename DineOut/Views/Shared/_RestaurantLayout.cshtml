@@ -8,50 +8,53 @@
           asp-href-exclude="**/*-reboot, **/*-grid" />
 </head>
 <body>
-    <div>
-        <h2>DineOut</h2>
+    <div style="float:right">
+        <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">
+            <span>
+                <small>Log Out</small>
+            </span>
+        </a>
     </div>
-    <nav>
-        <ul class="nav navbar-nav">
-            <li><a asp-controller="Restaurant" asp-action="Menu">Menu</a></li>
-            <li><a asp-controller="Restaurant" asp-action="Profile">Profile</a></li>
-            <li><a asp-controller="Home" asp-action="QrGenerator">Generate QR Code</a></li>
-        </ul>
-    </nav>
+    <div class="bg-dark">
+        <h2 class="navbar-brand text-light">DineOut</h2>
+    </div>
+    <div class="font-weight-bold">
+        <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
+            <ul class="nav navbar-nav mr-auto">
+                <li class="nav-item active"><a asp-controller="Restaurant" asp-action="Menu" class="nav-link">Menu</a></li>
+                <li class="nav-item active"><a asp-controller="Restaurant" asp-action="Profile" class="nav-link">Profile</a></li>
+                <li class="nav-item active"><a asp-controller="Home" asp-action="QrGenerator" class="nav-link">Generate QR Code</a></li>
+            </ul>
+        </nav>
+    </div>
     <div>
         <div>
-            <table>
-                <tr>
-                    <td>
-                        <a asp-action="Orders">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Orders
                         </a>
-                    </td>
-                    <td>
-                        <a asp-action="CompletedOrders">
-                            Completed Orders
-                        </a>
-                    </td>
-                    <td>
-                        <a asp-action="CurrentOrders">
-                            Current Orders
-                        </a>
-                    </td>
-                    <td>
-                        <form>
-                            <label>Search Item</label>
-                            <input type="text" placeholder="Search Item" />
-                            <button type="button">Search</button>
-                        </form>
-                    </td>
-                </tr>
-            </table>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" asp-action="Orders">All Orders</a>
+                            <a class="dropdown-item" asp-action="CurrentOrders">Current Orders</a>
+                            <a class="dropdown-item" asp-action="CompletedOrders">Completed Orders</a>
+                        </div>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search Item" />
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </nav>
         </div>
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="d-flex justify-content-center">
             <p>&copy; Fall 2020 - COMP231 Group4 - Project DineOut</p>
         </footer>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 </html>
