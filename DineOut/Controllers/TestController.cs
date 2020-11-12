@@ -15,7 +15,7 @@ namespace DineOut.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            var res =  dineOutContext.Restaurant.ToList();
+           var res =  dineOutContext.Restaurant.ToList();
             return View();
         }
     }
