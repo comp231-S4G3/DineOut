@@ -11,6 +11,6 @@ namespace DineOut.ViewModels
         public List<Item> Items { get; set; }
         public List<OrderItem> OrderItems { get; set; }
         public Order order { get; set; }
-
+        public OrderStatus orderStatus { get; set; }
     }
 }
