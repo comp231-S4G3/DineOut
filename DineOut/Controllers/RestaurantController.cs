@@ -1,4 +1,5 @@
 ﻿using DineOut.Models;
+using DineOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -117,6 +118,23 @@ namespace DineOut.Controllers
             var item = DineOutContext.Item.Where(r => r.MenuId == menuId).Where(r => r.ItemId == itemId).FirstOrDefault();
             Console.WriteLine(item);
             return View("Edit", item);
+        }
+        //Action Created by Ederson for OrderDetails OwnerSide
+        public ViewResult OrderDetails(int orderId)
+        {
+            orderId = 1; // orderId hard coded fot testing proposes
+            OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo(); // this a new view model 
+            List<Item> items = new List<Item>();
+            orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
+            orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
+
+            foreach (OrderItem orderItem in orderDetailsInfo.OrderItems)
+            {
+                orderItem.Item = DineOutContext.Item.Find(orderItem.ItemId);
+            }
+            return View(orderDetailsInfo);
+
+
         }
     }
 }
