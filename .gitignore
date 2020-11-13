@@ -1,4 +1,4 @@
-.vs/
-bin/
-obj/
-*.obj
+DineOut/.vs/
+DineOut/bin/
+DineOut/obj/
+DineOut/*.obj
