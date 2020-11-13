@@ -1,4 +1,4 @@
 .vs/
-bin/
-obj/
-*.obj
+.git/
+DineOut/bin/
+DineOut/obj/
