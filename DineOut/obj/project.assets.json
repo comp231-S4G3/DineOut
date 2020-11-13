@@ -12783,23 +12783,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\luizs\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\Dioums\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj",
+      "projectUniqueName": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
       "projectName": "DineOut",
-      "projectPath": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\DineOut.csproj",
-      "packagesPath": "C:\\Users\\luizs\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\luizs\\Desktop\\DineOut\\DineOut\\obj\\",
+      "projectPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\DineOut.csproj",
+      "packagesPath": "C:\\Users\\Dioums\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Dioums\\Documents\\CentennialCollege\\Fall20\\COMP231\\DineOut\\DineOut\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\luizs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Dioums\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
