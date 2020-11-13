@@ -84,7 +84,7 @@ Write(Html.PartialAsync("CategorySearch"));
             WriteLiteral("            <tr>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(458, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e46a9d39960e43b6b62e5fdb6a5bbf87", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6ad8437447b74a7db5764fccf33821b8", async() => {
                 BeginContext(487, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();
@@ -126,7 +126,7 @@ Write(Html.PartialAsync("CategorySearch"));
             WriteLiteral("</td>\r\n                <td>\r\n                    ");
             EndContext();
             BeginContext(662, 98, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "35e42339c13349c5a879c11720bb57d5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b16a8657443f44aaae7b1af3bf4b76cc", async() => {
                 BeginContext(691, 26, true);
                 WriteLiteral("\r\n                        ");
                 EndContext();

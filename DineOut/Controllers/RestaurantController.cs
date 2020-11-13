@@ -27,7 +27,7 @@ namespace DineOut.Controllers
         }*/
 
         // Test View
-        public IActionResult Index()
+        public IActionResult Menu()
         {
             int restaurant_id = 3;
             var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
@@ -65,7 +65,7 @@ namespace DineOut.Controllers
                 DineOutContext.SaveChanges();
 
                 TempData["message"] = $"Welcome! Your menu has been created!";
-                return RedirectToAction("Index");
+                return RedirectToAction("Menu");
             }
         }
         
@@ -84,7 +84,7 @@ namespace DineOut.Controllers
             DineOutContext.SaveChanges();
 
             TempData["message"] = $"Title updated!";
-            return RedirectToAction("Index");
+            return RedirectToAction("Menu");
         }
 
         public IActionResult Add_Update_Item(Item item)
@@ -102,14 +102,14 @@ namespace DineOut.Controllers
                 DineOutContext.SaveChanges();
                 
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Menu");
         }
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
             var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
             DineOutContext.Remove(item_delete);
             DineOutContext.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Menu");
         }
         
         public IActionResult Update_Item(int itemId, int menuId)
