@@ -18,5 +18,6 @@ namespace DineOut.Models
         public int ItemId { get; set; }
         [Column("quantity")]
         public int Quantity { get; set; }
+        public Item Item { get; set; }
     }
 }
