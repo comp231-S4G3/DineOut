@@ -36,9 +36,9 @@ namespace DineOut.Controllers
             //return View("Menu", DineOutContext.Item);
 
         }
-        public IActionResult Add_Item_View()
+        public IActionResult Edit()
         {
-            return View("Edit");
+            return View();
         }
 
 
