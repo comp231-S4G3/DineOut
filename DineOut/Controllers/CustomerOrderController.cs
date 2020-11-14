@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
-using Microsoft.AspNetCore.Authentication;
+using DineOut.Infrastructure;
 
 namespace DineOut.Controllers
 {
@@ -13,16 +13,14 @@ namespace DineOut.Controllers
         DineOutContext DineOutContext = new DineOutContext();
 
         //Display selected orderable menu 
-        public ViewResult Order(int menu_id)
+        public ViewResult OrderDetails(int menu_id)
         {
-            AllModels allModels = new AllModels();
-
             return View(DineOutContext.Menu
                 .Where(p => p.MenuId == menu_id));
         }
 
         //Create a new order
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult CreateOrder(Order order)
         {
             //Define how do we get customer Id when we get  to the controller
@@ -47,49 +45,53 @@ namespace DineOut.Controllers
                 TempData["message"] = "Sorry, there is an error. Plese try it again.";
                 return View("OrderDetails");
             }
-        }
+        }*/
 
         //Add to CustomerOrder Model
-        public IActionResult AddToCart(int itemId)
+        public IActionResult AddToOrderItem(int itemId)
         {
             Item item = DineOutContext.Item
                 .FirstOrDefault(p => p.ItemId == itemId);
 
             if (item != null)
             {
-                CustomerOrder order = GetCart();
-                order.AddItem(item);
-                SaveCart(order);
+                CustomerOrder orderItem = GetOrderItem();
+                orderItem.AddItem(item, 1);
+                SaveOrderItem(orderItem);
             }
 
+            //How do I return a view with reflecting current order status (quentity)?
             return View("OrderDetails");
 
         }
 
-        public IActionResult RemoveFromCart(int itemId)
+        public IActionResult RemoveFromOrderItem(int itemId)
         {
             Item item = DineOutContext.Item
                 .FirstOrDefault(p => p.ItemId == itemId);
 
             if (item != null)
             {
-                CustomerOrder order = GetCart();
-                order.RemoveLine(item);
-                SaveCart(order);
+                CustomerOrder orderItem = GetOrderItem();
+                orderItem.RemoveLine(item);
+                SaveOrderItem(orderItem);
             }
 
+            //How do I return a view with reflecting current order status (quentity)?
             return View("OrderDetails");
         }
 
-        private void SaveCart(CustomerOrder item)
+        private void SaveOrderItem(CustomerOrder item)
         {
-            HttpContext.Session.SetJson("Cart", item);
+            HttpContext.Session.SetJson("OrderItem", item);
 
         }
 
-        private CustomerOrder GetCart()
+        private CustomerOrder GetOrderItem()
         {
-            CustomerOrder order = HttpContext.Session.GetJson<CustomerOrder>("Cart") ?? new Cart();
+            CustomerOrder order =
+                HttpContext.Session.GetJson<CustomerOrder>("OrderItem")
+                ?? new CustomerOrder();
 
             return order;
         }
