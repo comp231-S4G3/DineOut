@@ -10,14 +10,14 @@ namespace DineOut.Controllers
 {
     public class CustomerOrderController : Controller
     {
-        DineOutContext dineOutContext = new DineOutContext();
+        DineOutContext DineOutContext = new DineOutContext();
 
         //Display selected orderable menu 
         public ViewResult Order(int menu_id)
         {
             AllModels allModels = new AllModels();
 
-            return View(dineOutContext.Menu
+            return View(DineOutContext.Menu
                 .Where(p => p.MenuId == menu_id));
         }
 
@@ -36,9 +36,9 @@ namespace DineOut.Controllers
                 nOrder.CustomerId = customerId;
                 nOrder.RestaurantId = restaurantId;
 
-                dineOutContext.Order.Add(order);
+                DineOutContext.Order.Add(order);
 
-                Order newOrder = dineOutContext.Order.Find(order);
+                Order newOrder = DineOutContext.Order.Find(order);
                 //Is it the right way to set an opening page and the value at the same time?
                 return View("OrderSummary", newOrder.OrderId);
             }
@@ -47,6 +47,51 @@ namespace DineOut.Controllers
                 TempData["message"] = "Sorry, there is an error. Plese try it again.";
                 return View("OrderDetails");
             }
+        }
+
+        //Add to CustomerOrder Model
+        public IActionResult AddToCart(int itemId)
+        {
+            Item item = DineOutContext.Item
+                .FirstOrDefault(p => p.ItemId == itemId);
+
+            if (item != null)
+            {
+                CustomerOrder order = GetCart();
+                order.AddItem(item);
+                SaveCart(order);
+            }
+
+            return View("OrderDetails");
+
+        }
+
+        public IActionResult RemoveFromCart(int itemId)
+        {
+            Item item = DineOutContext.Item
+                .FirstOrDefault(p => p.ItemId == itemId);
+
+            if (item != null)
+            {
+                CustomerOrder order = GetCart();
+                order.RemoveLine(item);
+                SaveCart(order);
+            }
+
+            return View("OrderDetails");
+        }
+
+        private void SaveCart(CustomerOrder item)
+        {
+            HttpContext.Session.SetJson("Cart", item);
+
+        }
+
+        private CustomerOrder GetCart()
+        {
+            CustomerOrder order = HttpContext.Session.GetJson<CustomerOrder>("Cart") ?? new Cart();
+
+            return order;
         }
 
         //Display order summary
