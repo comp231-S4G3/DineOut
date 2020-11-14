@@ -1,0 +1,65 @@
+﻿@model AllModels
+@{
+	ViewData["Title"] = "OrderDetails";
+	Layout = "_Layout";
+}
+
+@*I'm strugling to know how to pass diferent models to this view. Tha's why I am having erros in the code.*@
+<h2>@Model.Restaurants</h2>
+
+<div class="">
+	<table class="table table-striped  ">
+		<thead>
+			<tr>
+				<th>Order Number</th>
+				<th>Date</th>
+				<th>Restaurant</th>
+				<th>Table #</th>
+				<th>Costumer</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>@Model.Orders</td>@*//orderID*@
+				<td>@Model.Orders</td>@*//orderDate*@
+				<td>@Model.Restaurants</td>@*retaurantName*@
+				<td>@Model.Orders</td>@*table.Num*@
+				<td>@Model.Orders</td>@*customerId*@
+			</tr>
+			       
+		</tbody>
+	</table>
+	<form action="EditOrder" method="post">
+		<input type="hidden" asp-for="Orders" />@*//orderID*@
+		<table>
+			@foreach (var item in Model.Order_Items)
+			{
+				<tr>
+					<td>Image:</td>
+					<td>@Model.Items</td>@*.Image*@
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td>@Model.Items</td>@*.Description*@
+				</tr>
+				<tr>
+					<td>Quantity:</td>
+					<td><input type="number" asp-for="@Model.Order_Items" /></td>@*.Quantity*@
+				</tr>
+				<tr>
+					<td>Total:</td>
+					<td>@Model.Items</td>@*.Price.toString("c")*@
+				</tr>
+				<tr>
+					<td>Add Notes:</td>
+					<td><textarea rows="4">@Model.Orders</textarea></td>@*.Notes*@
+				</tr>
+			}
+
+		</table>
+		<div class="marginTop">
+			<button class="btn btn-success" type="submit">Save</button>
+			<a class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</a>
+		</div>
+	</form>
+</div>

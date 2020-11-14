@@ -1,4 +1,5 @@
 ﻿using DineOut.Models;
+using DineOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -123,5 +124,63 @@ namespace DineOut.Controllers
             Console.WriteLine(item);
             return View("Edit", item);
         }
+        //Action Created by Ederson for OrderDetails OwnerSide
+        public ViewResult OrderDetails(int orderId)
+        {
+            orderId = 1; // orderId hard coded fot testing proposes
+            OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo(); // this a new view model 
+            List<Item> items = new List<Item>();
+            orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
+            orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
+            orderDetailsInfo.orderStatus = DineOutContext.OrderStatus.Find(orderDetailsInfo.order.StatusId);
+
+            foreach (OrderItem orderItem in orderDetailsInfo.OrderItems)
+            {
+                orderItem.Item = DineOutContext.Item.Find(orderItem.ItemId);
+            }
+            return View(orderDetailsInfo);
+
+
+        }
+
+        //Update the order status
+        [HttpPost]
+        public IActionResult ChangeStatus(int orderId)
+        {
+            // orderId and COMPLETED are hard coded fot testing proposes
+            const int COMPLETED = 2;
+            orderId = 1;
+
+            if (ModelState.IsValid)
+            {
+                Order order = DineOutContext.Order.Find(orderId);
+
+                //If the status is already "Completed", return to the same view without any changes 
+                if (order.StatusId == COMPLETED)
+                {
+                    return RedirectToAction("OrderDetails");
+                }
+                else
+                    order.StatusId += 1;
+
+                //If the status moved to "Completed", invoke payment method
+                if (order.StatusId == COMPLETED)
+                {
+                    //Insert Invoking payment method here
+                }
+
+                DineOutContext.Order.Update(order);
+                DineOutContext.SaveChanges();
+
+                TempData["message"] = "Order Status is updated.";
+                return RedirectToAction("OrderDetails");
+            }
+            else
+            {
+                return RedirectToAction("OrderDetails");
+            }
+        }
+
+        //Create Profile Action bellow
     }
 }
