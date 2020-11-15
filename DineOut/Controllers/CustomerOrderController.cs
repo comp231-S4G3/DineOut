@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
+using DineOut.ViewModels;
 using DineOut.Infrastructure;
 
 namespace DineOut.Controllers
@@ -13,10 +14,30 @@ namespace DineOut.Controllers
         DineOutContext DineOutContext = new DineOutContext();
 
         //Display selected orderable menu 
-        public ViewResult OrderDetails(int menu_id)
+        /*public ViewResult OrderDetails(int menu_id)
         {
             return View(DineOutContext.Menu
                 .Where(p => p.MenuId == menu_id));
+        }*/
+
+        public IActionResult OrderDetails(/*int menu_id, int customer_id*/)
+        {
+            //menu_id and customer_id is hard coded for testing purpose
+            int menu_id = 1;
+            //customer_id = 1;
+
+            CustomerOrderViewModel customerOrderView = new CustomerOrderViewModel();
+            
+            customerOrderView.Menu = DineOutContext.Menu.Find(menu_id);
+            customerOrderView.Items = DineOutContext.Item
+                .ToList().FindAll(x => x.MenuId == menu_id);
+            customerOrderView.Restaurant = DineOutContext.Restaurant
+                .Find(customerOrderView.Menu.RestaurantId);
+            foreach (Item item in customerOrderView.Items)
+            {
+                customerOrderView.Item = DineOutContext.Item.Find(item.ItemId);
+            }
+            return View(customerOrderView);
         }
 
         //Create a new order
@@ -48,60 +69,63 @@ namespace DineOut.Controllers
         }*/
 
         //Add to CustomerOrder Model
-        public IActionResult AddToOrderItem(int itemId)
+        public IActionResult AddToCustomerOrder(int itemId)
         {
             Item item = DineOutContext.Item
                 .FirstOrDefault(p => p.ItemId == itemId);
 
             if (item != null)
             {
-                CustomerOrder orderItem = GetOrderItem();
-                orderItem.AddItem(item, 1);
-                SaveOrderItem(orderItem);
+                CustomerOrder customerOrder = GetCustomerOrder();
+                customerOrder.AddItem(item, 1);
+                SaveCustomerOrder(customerOrder);
             }
 
             //How do I return a view with reflecting current order status (quentity)?
-            return View("OrderDetails");
+            return View("OrderSummary");
 
         }
 
-        public IActionResult RemoveFromOrderItem(int itemId)
+        public IActionResult RemoveFromCustomerOrder(int itemId)
         {
             Item item = DineOutContext.Item
                 .FirstOrDefault(p => p.ItemId == itemId);
 
             if (item != null)
             {
-                CustomerOrder orderItem = GetOrderItem();
-                orderItem.RemoveLine(item);
-                SaveOrderItem(orderItem);
+                CustomerOrder customerOrder = GetCustomerOrder();
+                customerOrder.RemoveLine(item);
+                SaveCustomerOrder(customerOrder);
             }
 
             //How do I return a view with reflecting current order status (quentity)?
-            return View("OrderDetails");
+            return View("OrderSummary");
         }
 
-        private void SaveOrderItem(CustomerOrder item)
+        private void SaveCustomerOrder(CustomerOrder customerOrder)
         {
-            HttpContext.Session.SetJson("OrderItem", item);
+            HttpContext.Session.SetJson("CustomerOrder", customerOrder);
 
         }
 
-        private CustomerOrder GetOrderItem()
+        private CustomerOrder GetCustomerOrder()
         {
             CustomerOrder order =
-                HttpContext.Session.GetJson<CustomerOrder>("OrderItem")
+                HttpContext.Session.GetJson<CustomerOrder>("CustomerOrder")
                 ?? new CustomerOrder();
 
             return order;
         }
 
         //Display order summary
-        /*public IActionResult OrderSummary(int orderId)
+        public IActionResult OrderSummary()
         {
-            return View(dineOutContext.Order
-                .Where(p => p.OrderId == orderId));
-        }*/
+            //return View(DineOutContext.Order.Where(p => p.OrderId == orderId));
+            return View(new CustomerOrderViewModel
+            {
+                CustomerOrder = GetCustomerOrder()
+            });
+        }
 
 
 
