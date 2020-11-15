@@ -6,32 +6,36 @@
 }
 
 
-<table>
+<table class="table table-sm table-bordered text-center">
     <thead>
         <tr>
             <th>ID</th>
             <th>Table #</th>
             <th>Costumer</th>
             <th>Date</th>
-            <th>Ready for Pick Up</th>
-            <th>Order Complete</th>
+            <th colspan="2">Status</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var order in Model)
         {
             <tr>
-                <td>@order.OrderId</td>
+                <td>
+                    <a asp-action="OrderDetails">
+                        @order.OrderId
+                    </a>
+                </td>
                 <td>@order.TableNum</td>
+                <td>@order.CustomerId</td>
                 <td>@order.CreatedOn</td>
                 <td>
-                    <form asp-action="List" method="post">
-                        <button type="submit">Ready</button>
+                    <form asp-action="CurrentOrders" method="post">
+                        <button class="btn btn-danger" type="submit">Ready</button>
                     </form>
                 </td>
                 <td>
-                    <form asp-action="List" method="post">
-                        <button type="submit">Complete</button>
+                    <form asp-action="Menu" method="post">
+                        <button class="btn btn-success" type="submit">Complete</button>
                     </form>
                 </td>
             </tr>
