@@ -63,84 +63,73 @@
 
 
 	@*Ederson's Original work*@
-	<div style="margin-top:15px; margin-right:80%;">
-		<form action="/" method="post">
-			<div class="form-group">
-				<label asp-for="@Model.order.StatusId">Change Status:   </label>
-				<select class="form-control" asp-for="@Model.order.StatusId">
-					<option value="empty"></option>
-					<option value="Accepted">Accepted</option>
-					<option value="Ongoing">Ongoing</option>
-					<option value="Ready">Ready</option>
-					<option value="Received">Received</option>
-					<option value="Completed">Completed</option>
+<div style="margin-top:15px; margin-right:80%;">
+    
+    <form action="ChangeStatus" method="post">
+        <input type="hidden" asp-for="@Model.order.OrderId" />
+        <div class="form-group">
+            <label>Change Status:   </label>
+            <select class="form-control" asp-for="@Model.order.StatusId">
+                <option value="empty"></option>
+                <option value="1">Accepted</option>
+                <option value="2">Ongoing</option>
+                <option value="3">Ready</option>
+                <option value="4">Received</option>
+                <option value="5">Completed</option>
 
-				</select>
-			</div>
-			<button type="submit" class="btn btn-success">Submit</button>
-		</form>
+            </select>
+        </div>
+        @if (Model.order.StatusId != 5)
+        {
+            <button type="submit" class="btn btn-success">Process Order</button>
+        }
+    </form>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		@*<div style="margin-top:15px">
-			<table class="table table-striped orderDetailsTable">
-				<thead>
-					<tr>
-						<th colspan="2">Order Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<form asp-action="ChangeStatus" method="post">
-								<input type="hidden"
-									   asp-for="@Model.order.StatusId" />
-								<button type="submit" class="btn btn-success">Process Order</button>
-							</form>
-						</td>
-						<td>@Model.orderStatus.Status</td>
-					</tr>
-				</tbody>
-			</table>*@
+    @*<div style="margin-top:15px">
+        <table class="table table-striped orderDetailsTable">
+            <thead>
+                <tr>
+                    <th colspan="2">Order Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <form asp-action="ChangeStatus" method="post">
+                            <input type="hidden"
+                                   asp-for="@Model.order.StatusId" />
+                            <button type="submit" class="btn btn-success">Process Order</button>
+                        </form>
+                    </td>
+                    <td>@Model.orderStatus.Status</td>
+                </tr>
+            </tbody>
+        </table>*@
 
 
-		<!--
-			Tomoki's original work
-				<table class="table table-striped orderDetailsTable">
-				<thead>
-					<tr>
-						<th colspan="2">Order Status</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>@*Model.Orders</td>@*OrderStatus*@
-						<td>
-							<form asp-action="ChangeStatus" method="post">
-								<input type="hidden"
-									   asp-for="Orders[0].OrderId" />
-								<button type="submit" class="btn btn-success">Process Order</button>
-							</form>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-		-->
-	</div>
+    <!--
+        Tomoki's original work
+            <table class="table table-striped orderDetailsTable">
+            <thead>
+                <tr>
+                    <th colspan="2">Order Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@*Model.Orders</td>@*OrderStatus*@
+                    <td>
+                        <form asp-action="ChangeStatus" method="post">
+                            <input type="hidden"
+                                   asp-for="Orders[0].OrderId" />
+                            <button type="submit" class="btn btn-success">Process Order</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    -->
+</div>
 
 </div>
 

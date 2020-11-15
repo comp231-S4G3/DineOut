@@ -1,50 +1,49 @@
-﻿@model IEnumerable<Item>
-@*define the model here*@
+﻿@model DineOut.ViewModels.CustomerOrderViewModel
 @{
-	ViewData["Title"] = "Order";
-	Layout = "_Layout";
+    ViewData["Title"] = "Create Order";
+    Layout = "_Layout";
 }
 
+<h1>@Model.Restaurant.RestaurantName</h1>
+<h2>@Model.Menu.Title</h2>
+@foreach (var item in Model.Items)
+{
+    <div class="card card-outline-primary m-1 p-1">
+        <div class="bg-faded p-1">
+            <h3>
+                @item.ItemName
+            </h3>
+        </div>
+        <div class="bg-faded p-1">
+            @item.Image
+        </div>
+        <div class="bg-faded p-1">
+            <h4>
+                Description: @item.Description
+            </h4>
+        </div>
+        <div class="bg-faded p-1">
+            <h4>
+                Price: @item.Price.ToString("c")
+            </h4>
+        </div>
 
-<h2>@*@Model.Restaurants*@</h2> @*RestaurantName*@
+        <form asp-action="AddToCustomerOrder" method="post" id="@item.ItemId">
+            <input type="hidden" asp-for="@item.ItemId" />
+            <div class="marginTop">
+                <button class="btn btn-success" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+}
 
-
-<form action="MakeOrder" method="post">
-	<input type="hidden" @*asp-for="@Model.MenuId"*@ />@*//orderID*@
-	<table>
-		@foreach (var item in Model)
-		{
-
-			<tr>
-				<td>Image:</td>
-				<td></td>
-				@*.Image*@
-			</tr>
-			<tr>
-				<td>Description:</td>
-				<td></td>
-				@*.Description*@
-			</tr>
-			<tr>
-				<td>Price:</td>
-				<td></td>
-				@*.Price.toString("c")*@
-			</tr>
-			<tr>
-				<td>Quantity:</td>
-				<td><input type="number" @*asp-for="@Model.Order_Items"*@ /></td>
-				@*.Quantity*@
-			</tr>
-
-		}
-
-	</table>
-	<div>
-		<label @*asp-for="*@>Add Notes</label>
-		<textarea rows="4"></textarea>@*.Notes*@
-	</div>
-	<div class="marginTop">
-		<button class="btn btn-success" type="submit">Save</button>
-		<a class="btn btn-danger" asp-controller="Home" asp-action="Index">Cancel</a>
-	</div>
-</form>
+<div class="marginTop">
+    <!--<form asp-action="OrderSummary" method="post">
+        <input type="hidden" asp-for="@*Model.Order.OrderId*@" />
+        <div class="marginTop">
+            <button class="btn btn-success" type="submit">Order Summary</button>
+        </div>
+    </form>-->
+    <a class="btn btn-danger" asp-controller="Home"
+       asp-action="Index">Cancel Order</a>
+</div>

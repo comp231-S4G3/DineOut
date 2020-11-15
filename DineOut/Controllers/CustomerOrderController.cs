@@ -4,25 +4,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
-using Microsoft.AspNetCore.Authentication;
+using DineOut.ViewModels;
+using DineOut.Infrastructure;
 
 namespace DineOut.Controllers
 {
     public class CustomerOrderController : Controller
     {
-        DineOutContext dineOutContext = new DineOutContext();
+        DineOutContext DineOutContext = new DineOutContext();
 
         //Display selected orderable menu 
-        public ViewResult Order(int menu_id)
+        /*public ViewResult OrderDetails(int menu_id)
         {
-            AllModels allModels = new AllModels();
-
-            return View(dineOutContext.Menu
+            return View(DineOutContext.Menu
                 .Where(p => p.MenuId == menu_id));
+        }*/
+
+        public IActionResult OrderDetails(/*int menu_id, int customer_id*/)
+        {
+            //menu_id and customer_id is hard coded for testing purpose
+            int menu_id = 1;
+            //customer_id = 1;
+
+            CustomerOrderViewModel customerOrderView = new CustomerOrderViewModel();
+            
+            customerOrderView.Menu = DineOutContext.Menu.Find(menu_id);
+            customerOrderView.Items = DineOutContext.Item
+                .ToList().FindAll(x => x.MenuId == menu_id);
+            customerOrderView.Restaurant = DineOutContext.Restaurant
+                .Find(customerOrderView.Menu.RestaurantId);
+            foreach (Item item in customerOrderView.Items)
+            {
+                customerOrderView.Item = DineOutContext.Item.Find(item.ItemId);
+            }
+            return View(customerOrderView);
         }
 
         //Create a new order
-        [HttpPost]
+        /*[HttpPost]
         public IActionResult CreateOrder(Order order)
         {
             //Define how do we get customer Id when we get  to the controller
@@ -36,9 +55,9 @@ namespace DineOut.Controllers
                 nOrder.CustomerId = customerId;
                 nOrder.RestaurantId = restaurantId;
 
-                dineOutContext.Order.Add(order);
+                DineOutContext.Order.Add(order);
 
-                Order newOrder = dineOutContext.Order.Find(order);
+                Order newOrder = DineOutContext.Order.Find(order);
                 //Is it the right way to set an opening page and the value at the same time?
                 return View("OrderSummary", newOrder.OrderId);
             }
@@ -47,14 +66,66 @@ namespace DineOut.Controllers
                 TempData["message"] = "Sorry, there is an error. Plese try it again.";
                 return View("OrderDetails");
             }
+        }*/
+
+        //Add to CustomerOrder Model
+        public IActionResult AddToCustomerOrder(int itemId)
+        {
+            Item item = DineOutContext.Item
+                .FirstOrDefault(p => p.ItemId == itemId);
+
+            if (item != null)
+            {
+                CustomerOrder customerOrder = GetCustomerOrder();
+                customerOrder.AddItem(item, 1);
+                SaveCustomerOrder(customerOrder);
+            }
+
+            //How do I return a view with reflecting current order status (quentity)?
+            return View("OrderSummary");
+
+        }
+
+        public IActionResult RemoveFromCustomerOrder(int itemId)
+        {
+            Item item = DineOutContext.Item
+                .FirstOrDefault(p => p.ItemId == itemId);
+
+            if (item != null)
+            {
+                CustomerOrder customerOrder = GetCustomerOrder();
+                customerOrder.RemoveLine(item);
+                SaveCustomerOrder(customerOrder);
+            }
+
+            //How do I return a view with reflecting current order status (quentity)?
+            return View("OrderSummary");
+        }
+
+        private void SaveCustomerOrder(CustomerOrder customerOrder)
+        {
+            HttpContext.Session.SetJson("CustomerOrder", customerOrder);
+
+        }
+
+        private CustomerOrder GetCustomerOrder()
+        {
+            CustomerOrder order =
+                HttpContext.Session.GetJson<CustomerOrder>("CustomerOrder")
+                ?? new CustomerOrder();
+
+            return order;
         }
 
         //Display order summary
-        /*public IActionResult OrderSummary(int orderId)
+        public IActionResult OrderSummary()
         {
-            return View(dineOutContext.Order
-                .Where(p => p.OrderId == orderId));
-        }*/
+            //return View(DineOutContext.Order.Where(p => p.OrderId == orderId));
+            return View(new CustomerOrderViewModel
+            {
+                CustomerOrder = GetCustomerOrder()
+            });
+        }
 
 
 
