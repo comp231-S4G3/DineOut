@@ -5,13 +5,13 @@
 }
 
 <div>
-    <h3>@ViewBag.Greetings !</h3>
+    <h3>@ViewBag.Greetings</h3>
 </div>
 
 <div>
 
 </div>
-<table class="table table-bordered">
+<table class="table table-sm table-bordered">
     <thead>
         <tr>
             <th>ID</th>
@@ -30,10 +30,10 @@
                 <td>
                     <form asp-action="Delete" method="post">
                         <input type="hidden" name="itemID" value="@item.ItemId" />
-                        <a asp-action="Update_Item" asp-route-itemId="@item.ItemId" asp-route-menuId="@item.MenuId">
+                        <a class="btn btn-sm btn-info" asp-action="Update_Item" asp-route-itemId="@item.ItemId" asp-route-menuId="@item.MenuId">
                             Edit
                         </a>
-                        <button type="button" title="Delete Item" onclick="location.href='@Url.Action("Delete_Item", new { menu_id = 5, item_id = item.ItemId})'">
+                        <button type="button" title="Delete Item" class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete_Item", new { menu_id = 5, item_id = item.ItemId})'">
                             Delete
                         </button>
                     </form>
