@@ -140,7 +140,7 @@ namespace DineOut.Controllers
         //Action Created by Ederson for OrderDetails OwnerSide
         public ViewResult OrderDetails(int orderId)
         {
-            orderId = 1; // orderId hard coded fot testing proposes
+            orderId = 2; // orderId hard coded fot testing proposes
             
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
@@ -158,31 +158,22 @@ namespace DineOut.Controllers
 
         //Update the order status
         [HttpPost]
-        public IActionResult ChangeStatus(int orderId)
+        public IActionResult ChangeStatus(Order order)
         {
-            // orderId and COMPLETED are hard coded fot testing proposes
-            const int COMPLETED = 2;
-            orderId = 1;
+            const int COMPLETED = 5;
+
+            orderDetailsInfo.order = DineOutContext.Order.Find(order.OrderId);
+            orderDetailsInfo.order.StatusId = order.StatusId;
 
             if (ModelState.IsValid)
             {
-                Order order = DineOutContext.Order.Find(orderId);
-
-                //If the status is already "Completed", return to the same view without any changes 
-                if (order.StatusId == COMPLETED)
-                {
-                    return RedirectToAction("OrderDetails");
-                }
-                else
-                    order.StatusId += 1;
-
                 //If the status moved to "Completed", invoke payment method
-                if (order.StatusId == COMPLETED)
+                if (orderDetailsInfo.order.StatusId == COMPLETED)
                 {
                     //Insert Invoking payment method here
                 }
 
-                DineOutContext.Order.Update(order);
+                DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
 
                 TempData["message"] = "Order Status is updated.";
@@ -190,7 +181,7 @@ namespace DineOut.Controllers
             }
             else
             {
-                return RedirectToAction("OrderDetails");
+                return View(orderDetailsInfo);
             }
         }
 
