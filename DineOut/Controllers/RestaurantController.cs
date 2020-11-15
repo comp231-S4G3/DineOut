@@ -11,26 +11,39 @@ namespace DineOut.Controllers
     public class RestaurantController : Controller
     {
         DineOutContext DineOutContext = new DineOutContext();
+        OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
+        List<Order> orders = new List<Order>();
 
         public RestaurantController ()
         {
             
         }
 
-
-        //This belongs to Order Controller
-        //Added here, so we do not forget
-        /*public IActionResult CurrentOrders() 
+        public IActionResult Orders()
         {
-            return View();
-        }*/
-
-        //This belongs to Order Controller
-        //Added here, so we do not forget
-        /*public IActionResult CompletedOrders()
+            return View(DineOutContext.Order.OrderBy(o => o.OrderId));
+        }
+        
+        public IActionResult CompletedOrders(int statusOrder) 
         {
-            return View();
-        }*/
+            statusOrder = 5; //A status Order of 5 is considered completed
+            orders = DineOutContext.Order
+                .OrderBy(o => o.OrderId)
+                .ToList()
+                .FindAll(o => o.StatusId == statusOrder);
+            return View(orders);
+        }
+
+        public IActionResult CurrentOrders()
+        {
+            //This will populate Orders that are of any statuses but 5
+            //Which means Orders that are still open and/or current
+            orders = DineOutContext.Order
+                .OrderBy(o => o.OrderId)
+                .ToList()
+                .FindAll(o => o.StatusId != 5); 
+            return View(orders);
+        }
 
         // Test View
         public IActionResult Menu()
@@ -128,7 +141,7 @@ namespace DineOut.Controllers
         public ViewResult OrderDetails(int orderId)
         {
             orderId = 1; // orderId hard coded fot testing proposes
-            OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo(); // this a new view model 
+            
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
             orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
