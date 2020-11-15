@@ -4,7 +4,8 @@
 
 <br />
 <br />
-
+<br />
+<br />
 @using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
 {
     <input type="text" name="inputText" />
@@ -12,9 +13,7 @@
 
 }
 
-
-<br />
-@using (Html.BeginForm("QrGenerator", "Qr", FormMethod.Post))
+@using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
 {
 
     <input type="submit" value="Generate Qr Code from Menu database " />

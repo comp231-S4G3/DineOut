@@ -3,7 +3,6 @@ using DineOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Printing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,20 +11,39 @@ namespace DineOut.Controllers
     public class RestaurantController : Controller
     {
         DineOutContext DineOutContext = new DineOutContext();
+        OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
+        List<Order> orders = new List<Order>();
 
-        //This belongs to Order Controller
-        //Added here, so we do not forget
-        /*public IActionResult CurrentOrders() 
+        public RestaurantController ()
         {
-            return View();
-        }*/
+            
+        }
 
-        //This belongs to Order Controller
-        //Added here, so we do not forget
-        /*public IActionResult CompletedOrders()
+        public IActionResult Orders()
         {
-            return View();
-        }*/
+            return View(DineOutContext.Order.OrderBy(o => o.OrderId));
+        }
+        
+        public IActionResult CompletedOrders(int statusOrder) 
+        {
+            statusOrder = 5; //A status Order of 5 is considered completed
+            orders = DineOutContext.Order
+                .OrderBy(o => o.OrderId)
+                .ToList()
+                .FindAll(o => o.StatusId == statusOrder);
+            return View(orders);
+        }
+
+        public IActionResult CurrentOrders()
+        {
+            //This will populate Orders that are of any statuses but 5
+            //Which means Orders that are still open and/or current
+            orders = DineOutContext.Order
+                .OrderBy(o => o.OrderId)
+                .ToList()
+                .FindAll(o => o.StatusId != 5); 
+            return View(orders);
+        }
 
         // Test View
         public IActionResult Menu()
@@ -123,10 +141,11 @@ namespace DineOut.Controllers
         public ViewResult OrderDetails(int orderId)
         {
             orderId = 1; // orderId hard coded fot testing proposes
-            OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo(); // this a new view model 
+            
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
             orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
+            orderDetailsInfo.orderStatus = DineOutContext.OrderStatus.Find(orderDetailsInfo.order.StatusId);
 
             foreach (OrderItem orderItem in orderDetailsInfo.OrderItems)
             {
@@ -136,5 +155,45 @@ namespace DineOut.Controllers
 
 
         }
+
+        //Update the order status
+        [HttpPost]
+        public IActionResult ChangeStatus(int orderId)
+        {
+            // orderId and COMPLETED are hard coded fot testing proposes
+            const int COMPLETED = 2;
+            orderId = 1;
+
+            if (ModelState.IsValid)
+            {
+                Order order = DineOutContext.Order.Find(orderId);
+
+                //If the status is already "Completed", return to the same view without any changes 
+                if (order.StatusId == COMPLETED)
+                {
+                    return RedirectToAction("OrderDetails");
+                }
+                else
+                    order.StatusId += 1;
+
+                //If the status moved to "Completed", invoke payment method
+                if (order.StatusId == COMPLETED)
+                {
+                    //Insert Invoking payment method here
+                }
+
+                DineOutContext.Order.Update(order);
+                DineOutContext.SaveChanges();
+
+                TempData["message"] = "Order Status is updated.";
+                return RedirectToAction("OrderDetails");
+            }
+            else
+            {
+                return RedirectToAction("OrderDetails");
+            }
+        }
+
+        //Create Profile Action bellow
     }
 }

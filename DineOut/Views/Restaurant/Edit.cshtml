@@ -5,40 +5,41 @@
     Layout = "_RestaurantLayout";
 }
 
-<form asp-action="Add_Update_Item" method="post">
-    <input type="hidden" asp-for="ItemId" />
+<div class="d-flex justify-content-center">
+    <form asp-action="Add_Update_Item" method="post">
+        <input type="hidden" asp-for="ItemId" />
 
-    <div>
-        <label asp-for="MenuId"></label>
-        <div><input asp-for="MenuId" value="5" readonly/></div>
-    </div>
-    <div>
-        <label asp-for="ItemName"></label>
-        <div><input asp-for="ItemName" /></div>
-    </div>
-    <div>
-        <label asp-for="Description"></label>
-        <div><input asp-for="Description" /></div>
-    </div>
-    <div>
-        <label asp-for="Ingredients"></label>
-        <div><input asp-for="Ingredients" /></div>
-    </div>
-    <div>
-        <label asp-for="Price"></label>
-        <div><input asp-for="Price" /></div>
-    </div>
-    <div>
-        <label asp-for="Image"></label>
-        <div><input asp-for="Image" /></div>
-    </div>
-    <div>
-        <label asp-for="Availability"></label>
-        <div><input asp-for="Availability" /></div>
-    </div>
-    <div>
-        <button type="submit">Save</button>
-        <a asp-action="Index">Cancel</a>
-    </div>
-
-</form>
+        <div style="margin:10px">
+            <label class="font-weight-bold" asp-for="MenuId"></label>
+            <div><input asp-for="MenuId" /></div>
+        </div>
+        <div style="margin:10px">
+            <label class="font-weight-bold" asp-for="ItemName"></label>
+            <div><input asp-for="ItemName" /></div>
+        </div>
+        <div style="margin:10px">
+            <label class="font-weight-bold" asp-for="Description"></label>
+            <div><textarea asp-for="Description"></textarea></div>
+        </div>
+        <div style="margin:10px">
+            <label class="font-weight-bold" asp-for="Ingredients"></label>
+            <div><textarea asp-for="Ingredients"></textarea></div>
+        </div>
+        <div style="margin:10px">
+            <label class="font-weight-bold" asp-for="Price"></label>
+            <div><input asp-for="Price" /></div>
+        </div>
+        <div style="margin:10px">
+            <label class="font-weight-bold"asp-for="Image"></label>
+            <div><input asp-for="Image" /></div>
+        </div>
+        <div style="margin:10px">
+            <div><input class="text-lg-right" asp-for="Availability" />
+            <label class="font-weight-bold" style="font-size:medium; color:dodgerblue">Available</label></div>
+        </div>
+        <div style="margin:10px">
+            <button class="btn btn-success" type="submit">Save</button>
+            <a class="btn btn-light" asp-action="Menu">Cancel</a>
+        </div>
+    </form>
+</div>
