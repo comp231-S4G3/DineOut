@@ -3,9 +3,18 @@
 @{ 
     ViewBag.Title = "Order List";
     Layout = "_RestaurantLayout";
+    string[] orderStatus = {"", "Accepted", "Ongoing", "Ready", "Received", "Completed"};
 }
 
-
+@if (Context.Request.Query["message"].Count > 0 && Context.Request.Query["message"].ToString().Length > 0)
+{
+    <div class="alert alert-primary" role="alert">
+        Message: @Context.Request.Query["message"]
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 <table class="table table-sm table-bordered text-center">
     <thead>
         <tr>
@@ -29,8 +38,10 @@
                 <td>@order.CustomerId</td>
                 <td>@order.CreatedOn</td>
                 <td>
-                    <form asp-action="CurrentOrders" method="post">
-                        <button class="btn btn-danger" type="submit">Ready</button>
+                    <form asp-action="ChangeStatus" method="post">
+                        <input asp-for="@order.OrderId" hidden/>
+                        <input asp-for="@order.StatusId" value="@(order.StatusId + 1)" hidden/>
+                        <button class="btn btn-danger" type="submit">@orderStatus[order.StatusId]</button>
                     </form>
                 </td>
                 <td>

@@ -1,0 +1,106 @@
+﻿@model DineOut.ViewModels.CustomerOrderViewModel
+@{ ViewData["Title"] = "Order Summary";
+    Layout = "_Layout"; }
+
+<h2>Order Summary</h2>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Restaurant</th>
+            <th>Date</th>
+            <th>Table #</th>
+            <th>Costumer</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.Order.OrderId</td>
+            <td>@Model.Restaurant.RestaurantName</td>
+            <td>@Model.Order.CreatedOn</td>
+            <td>@Model.Order.TableNum</td>
+            <td>@Model.Order.CustomerId</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped orderDetailsTable ">
+    <thead>
+        <tr>
+            <th>Item:</th>
+            <th>Price</th>
+            <th>Quantity</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.OrderItems)
+        {
+            <tr>
+                <td>@item.Item.ItemName</td>
+                <td>@item.Item.Price.ToString("c")</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="2" class="">
+                Total:
+                @*@Model.CustomerOrder.ComputeTotalValue().ToString("c")*@
+                @Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="">
+    <form asp-action="OrderDetails" method="post">
+        <input type="hidden" asp-for="@Model.Order.OrderId" />
+        <div>
+            <label class="font-weight-bold">Special Note: </label>
+            <input asp-for="@Model.Order.Note" />
+        </div>
+        <div class="marginTop">
+            <button class="btn btn-success" type="submit">Continue shopping</button>
+        </div>
+    </form>
+    <div class="font-weight-bold">
+        <a class="btn btn-danger" asp-controller="Home"
+           asp-action="Index">Cancel Order</a>
+    </div>
+</div>
+
+
+
+@*Line 7
+    <thead>
+        <tr>
+            <th>Quantity</th>
+            <th>Item</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var line in Model.CustomerOrder.Lines)
+        {
+            <tr>
+                <td class="text-center">@line.Quantity</td>
+                <td class="text-left">@line.Item.ItemName</td>
+                <td class="text-right">@line.Item.Price.ToString("c")</td>
+                <td class="text-right">
+                    @((line.Quantity * line.Item.Price).ToString("c"))
+                </td>
+                <td>
+                    <form asp-action="RemoveFromCustomerOrder" method="post">
+                        <input type="hidden" name="ItemId"
+                               value="@line.Item.ItemId" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Remove
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>*@
