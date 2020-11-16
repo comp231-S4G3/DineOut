@@ -55,17 +55,11 @@
 <div class="marginTop">
     <form asp-action="OrderSummary" method="post">
         <input type="hidden" asp-for="@Model.Order.OrderId" />
-
-        <div>
-            <label class="font-weight-bold"
-                   asp-for="@Model.Order.Note"></label>
-            <input asp-for="@Model.Order.Note" />
-        </div>
         <div class="marginTop">
             <button class="btn btn-success" type="submit">Order Summary</button>
         </div>
     </form>
-    <div class="font-weight-bold">
+    <div class="btn btn-danger">
         <a class="btn btn-danger" asp-controller="Home"
            asp-action="Index">Cancel Order</a>
     </div>
