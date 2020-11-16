@@ -3,8 +3,12 @@ using DineOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace DineOut.Controllers
 {
@@ -175,14 +179,57 @@ namespace DineOut.Controllers
 
                 DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
+                SendMail(order);
+            }
 
-                TempData["message"] = "Order Status is updated.";
-                return RedirectToAction("OrderDetails");
-            }
-            else
+            UriBuilder uriBuilder = new UriBuilder(Request.GetTypedHeaders().Referer);
+            NameValueCollection queryString = HttpUtility.ParseQueryString(uriBuilder.Query);
+            queryString["message"] = "Order Status is updated.";
+            uriBuilder.Query = queryString.ToString();
+            return Redirect(uriBuilder.ToString());
+        }
+
+        private void SendMail(Order order)
+        {
+            string subject = "";
+            string body = "";
+            switch (order.StatusId)
             {
-                return View(orderDetailsInfo);
+                case 1:
+                    subject = "Your Order Is Accepted.";
+                    body = "Please wait for your order be process.";
+                    break;
+                case 2:
+                    subject = "Your Food Is Processing";
+                    body = "Please wait for your food be ready.";
+                    break;
+                case 3:
+                    subject = "Your Food Is Ready For Pick Up";
+                    body = "Please pick it up at service table.";
+                    break;
+                case 4:
+                    subject = "Your Food Is Received";
+                    body = "Have a nice meal.";
+                    break;
+                case 5:
+                    subject = "Your Order Is Completed";
+                    body = "Welcome next time.";
+                    break;
+                default:
+                    break;
             }
+            string to = "Dineout2021@gmail.com";
+            string from = "Dineout2021@gmail.com";
+            MailMessage message = new MailMessage(from, to);
+            message.IsBodyHtml = true;
+            message.Subject = subject;
+            message.Body = body;
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("Dineout2021@gmail.com", "l23456789@");
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.Send(message);
         }
 
         //Create Profile Action bellow
