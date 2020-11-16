@@ -12,7 +12,7 @@ namespace DineOut.Controllers
     public class CustomerOrderController : Controller
     {
         DineOutContext DineOutContext = new DineOutContext();
-        CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
+        //CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
 
         public IActionResult OrderDetails(/*int menuId, int customerId*/)
         {
@@ -44,12 +44,12 @@ namespace DineOut.Controllers
         {
             //Demo customerId (Should be relpased with newOrder.Customer.CustomerId later)
             int customerId = 1;
+            CustomerOrderViewModel orderData = new CustomerOrderViewModel();
             OrderItem orderItem = new OrderItem();
-            CustomerOrderViewModel customerOrderView
-                = new CustomerOrderViewModel();
+            //CustomerOrderViewModel customerOrderView= new CustomerOrderViewModel();
 
             orderItem.ItemId = order.Item.ItemId;//set ItemId
-            if(order.OrderItem.OrderItemId != 0)
+            if (order.OrderItem.OrderItemId != 0)
                 orderItem.OrderItemId = order.OrderItem.OrderItemId;//set OrderItemId
 
             if (ModelState.IsValid)
@@ -73,21 +73,21 @@ namespace DineOut.Controllers
                     DineOutContext.Order_Item.Update(orderItem);
                 }
 
-                customerOrderView.Order.OrderId = orderItem.OrderId;
-                customerOrderView.Menu = DineOutContext.Menu
+                orderData.Order.OrderId = orderItem.OrderId;
+                orderData.Menu = DineOutContext.Menu
                     .Find(order.Item.MenuId);
-                customerOrderView.Items = DineOutContext.Item
+                orderData.Items = DineOutContext.Item
                     .ToList().FindAll(x => x.MenuId == order.Item.MenuId);
-                customerOrderView.Restaurant = DineOutContext.Restaurant
-                    .Find(customerOrderView.Menu.RestaurantId);
-                foreach (Item item in customerOrderView.Items)
+                orderData.Restaurant = DineOutContext.Restaurant
+                    .Find(orderData.Menu.RestaurantId);
+                foreach (Item item in orderData.Items)
                 {
-                    customerOrderView.Item = DineOutContext.Item
+                    orderData.Item = DineOutContext.Item
                         .Find(item.ItemId);
                 }
 
                 TempData["message"] = "Item is added";
-                return View(customerOrderView);
+                return View(orderData);
             }
             else
             {
@@ -146,13 +146,30 @@ namespace DineOut.Controllers
         }
 
         //Display order summary
-        public IActionResult OrderSummary()
+        public IActionResult OrderSummary(int orderId)
         {
+            //For testing purpose
+            orderId = 2;
+            List<Item> items = new List<Item>();
+            CustomerOrderViewModel orderData = new CustomerOrderViewModel();
+
+            orderData.Order = DineOutContext.Order.Find(orderId);
+            orderData.OrderItems = DineOutContext.Order_Item
+                .ToList().FindAll(x => x.OrderId == orderId);
+            orderData.Restaurant = DineOutContext.Restaurant
+                    .Find(orderData.Order.RestaurantId);
+            foreach (OrderItem orderItem in orderData.OrderItems)
+            {
+                orderItem.Item = DineOutContext.Item
+                    .Find(orderItem.ItemId);
+            }
+
+            return View(orderData);
             //return View(DineOutContext.Order.Where(p => p.OrderId == orderId));
-            return View(new CustomerOrderViewModel
+            /*return View(new CustomerOrderViewModel
             {
                 CustomerOrder = GetCustomerOrder()
-            });
+            });*/
         }
 
 
