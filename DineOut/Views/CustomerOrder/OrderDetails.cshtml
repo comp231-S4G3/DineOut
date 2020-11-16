@@ -4,8 +4,14 @@
     Layout = "_Layout";
 }
 
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success mt-1">@TempData["message"]</div>
+}
+
 <h1>@Model.Restaurant.RestaurantName</h1>
 <h2>@Model.Menu.Title</h2>
+
 @foreach (var item in Model.Items)
 {
     <div class="card card-outline-primary m-1 p-1">
@@ -28,8 +34,17 @@
             </h4>
         </div>
 
-        <form asp-action="AddToCustomerOrder" method="post" id="@item.ItemId">
+        <form asp-action="AddItem" method="post" id="@item.ItemId">
             <input type="hidden" asp-for="@item.ItemId" />
+            <input type="hidden" asp-for="@item.MenuId" />
+            <input type="hidden" asp-for="@Model.Order.OrderId" />
+            <input type="hidden" asp-for="@Model.Customer.CustomerId" />
+            <input type="hidden" asp-for="@Model.OrderItem.OrderItemId" />
+            <div style="margin:10px">
+                <label class="font-weight-bold"
+                       asp-for="@Model.OrderItem.Quantity"></label>
+                <div><input asp-for="@Model.OrderItem.Quantity" /></div>
+            </div>
             <div class="marginTop">
                 <button class="btn btn-success" type="submit">Add</button>
             </div>
@@ -38,12 +53,20 @@
 }
 
 <div class="marginTop">
-    <!--<form asp-action="OrderSummary" method="post">
-        <input type="hidden" asp-for="@*Model.Order.OrderId*@" />
+    <form asp-action="OrderSummary" method="post">
+        <input type="hidden" asp-for="@Model.Order.OrderId" />
+
+        <div>
+            <label class="font-weight-bold"
+                   asp-for="@Model.Order.Note"></label>
+            <input asp-for="@Model.Order.Note" />
+        </div>
         <div class="marginTop">
             <button class="btn btn-success" type="submit">Order Summary</button>
         </div>
-    </form>-->
-    <a class="btn btn-danger" asp-controller="Home"
-       asp-action="Index">Cancel Order</a>
+    </form>
+    <div class="font-weight-bold">
+        <a class="btn btn-danger" asp-controller="Home"
+           asp-action="Index">Cancel Order</a>
+    </div>
 </div>
