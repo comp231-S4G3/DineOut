@@ -44,12 +44,13 @@ namespace DineOut.Controllers
         }
 
 
-
+        // Not yet implemented
         public IActionResult OrderByDate()
         {
             var orderDate = DineOutContext.Order.OrderByDescending(r => r.CreatedOn).ToList();
             return View("Orders", orderDate);
         }
+        // Not yet implemented
         public IActionResult OrderByItemPeriod(string time_period)
         {
             DateTime startDate;
@@ -75,8 +76,8 @@ namespace DineOut.Controllers
             Console.WriteLine(searchedString);
             try
             {
-                var orderByID = DineOutContext.Order.Where(r => r.OrderId == Convert.ToInt32(searchedString)).FirstOrDefault();
-                return View("Orders");
+                var orderByID = DineOutContext.Order.Where(r => r.OrderId == Convert.ToInt32(searchedString)).ToList();
+                return View("Orders", orderByID);
             } 
             catch
             {
