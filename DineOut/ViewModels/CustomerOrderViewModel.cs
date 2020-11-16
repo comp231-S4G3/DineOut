@@ -12,6 +12,7 @@ namespace DineOut.ViewModels
         public Item Item { get; set; }
         public Order Order { get; set; }
         public OrderItem OrderItem { get; set; }
+        public List<OrderItem> OrderItems { get; set; }
         public Restaurant Restaurant { get; set; }
         public Menu Menu { get; set; }
         public Customer Customer { get; set; }
