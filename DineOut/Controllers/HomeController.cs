@@ -9,13 +9,14 @@ using System.IO;
 using QRCoder;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Microsoft.EntityFrameworkCore;
 
 namespace DineOut.Controllers
 {
     public class HomeController : Controller
     {
         DineOutContext DineOutContext = new DineOutContext();
-        
+
         public IActionResult Index()
         {
             var restaurants = DineOutContext.Restaurant.ToList();
@@ -84,6 +85,42 @@ namespace DineOut.Controllers
 
             }
             return View();
+        }
+
+
+        public IActionResult QrGeneratorFromMenu()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult QrGeneratorFromMenu(String menu)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                string url = "http://localhost:50682/Restaurant/Menu" + "/" + getMenuId(3);
+                QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
+                QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(url ,QRCodeGenerator.ECCLevel.Q);
+                QRCode oQRCode = new QRCode(oQRCodeData);
+
+                using (Bitmap oBitmap = oQRCode.GetGraphic(20))
+                {
+                    oBitmap.Save(ms, ImageFormat.Png);
+                    ViewBag.QRCode = "data:image/png;base64," + Convert.ToBase64String(ms.ToArray());
+
+                }
+
+            }
+            return View();
+        }
+
+        public string getMenuId(int resturant_id)
+        {
+     
+            DbSet<Restaurant> Restaurant = DineOutContext.Restaurant;
+            DbSet<Menu> Menu = DineOutContext.Menu;
+            var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == resturant_id).FirstOrDefault().MenuId;
+            return menud_id.ToString();
         }
     }
 }
