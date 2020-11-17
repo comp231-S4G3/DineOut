@@ -9,18 +9,23 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Security.Claims;
+using DineOut.Common;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DineOut.Controllers
 {
     public class RestaurantController : Controller
     {
+        AzureConnection AzureConnection = new AzureConnection();
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
         List<Order> orders = new List<Order>();
-
+    
         public RestaurantController ()
         {
-            
+
         }
 
         public IActionResult Orders()
@@ -109,24 +114,58 @@ namespace DineOut.Controllers
             TempData["message"] = $"Title updated!";
             return RedirectToAction("Menu");
         }
-
-        public IActionResult Add_Update_Item(Item item)
+        [ValidateAntiForgeryToken]
+        public IActionResult Add_Update_Item(ItemViewModel itemViewModel)
         {
-            if (item.ItemId == 0)
+            if (itemViewModel.ItemId == 0)
             {
-                Console.WriteLine(item);
+                itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
                 DineOutContext.Add(item);
                 DineOutContext.SaveChanges();
             }
             else
             {
-                Console.WriteLine(item);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
+
                 DineOutContext.Update(item);
                 DineOutContext.SaveChanges();
                 
             }
             return RedirectToAction("Menu");
         }
+        private string uploadImage(IFormFile image)
+        {
+        
+
+            string url = "https://dineout5.blob.core.windows.net/images";
+            string extension = Path.GetExtension(image.FileName);
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Day.ToString();
+            string nowTime = DateTime.Now.ToString("yymmssffff");
+
+            string path = $@"{year}\{month}\{day}\";
+            string fileName = nowTime + image.FileName;
+            string imagePathAndFileName = path + fileName;
+
+
+            using (var memoryStream = new MemoryStream())
+            {
+                var task = image.CopyToAsync(memoryStream);
+                task.Wait();
+                memoryStream.Position = 0;
+                AzureConnection.UploadImageMemoryStream(imagePathAndFileName, memoryStream);
+            }
+
+            var imageUrlPath = $@"{url}/{year}/{month}/{day}/{fileName}";
+            return imageUrlPath;
+            
+        }
+
+    
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
             var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
