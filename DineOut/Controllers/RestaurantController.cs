@@ -3,27 +3,35 @@ using DineOut.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Net;
+using System.Net.Mail;
+using System.Web;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Security.Claims;
+using DineOut.Common;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DineOut.Controllers
 {
     public class RestaurantController : Controller
     {
+        AzureConnection AzureConnection = new AzureConnection();
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
         List<Order> orders = new List<Order>();
-
+    
         public RestaurantController ()
         {
-            
+
         }
 
         public IActionResult Orders()
         {
             return View(DineOutContext.Order.OrderBy(o => o.OrderId));
         }
-        
         public IActionResult CompletedOrders(int statusOrder) 
         {
             statusOrder = 5; //A status Order of 5 is considered completed
@@ -33,7 +41,6 @@ namespace DineOut.Controllers
                 .FindAll(o => o.StatusId == statusOrder);
             return View(orders);
         }
-
         public IActionResult CurrentOrders()
         {
             //This will populate Orders that are of any statuses but 5
@@ -44,6 +51,52 @@ namespace DineOut.Controllers
                 .FindAll(o => o.StatusId != 5); 
             return View(orders);
         }
+
+
+        // Not yet implemented
+        public IActionResult OrderByDate()
+        {
+            var orderDate = DineOutContext.Order.OrderByDescending(r => r.CreatedOn).ToList();
+            return View("Orders", orderDate);
+        }
+        // Not yet implemented
+        public IActionResult OrderByItemPeriod(string time_period)
+        {
+            DateTime startDate;
+            DateTime endDate;
+            if (time_period == "last week")
+            {
+                startDate = DateTime.Today;
+                endDate = DateTime.Today.AddDays(-7);
+            }
+            else if (time_period == "last month")
+            {
+                startDate = DateTime.Today;
+                endDate = DateTime.Today.AddDays(-7);
+            }
+
+            //var orderTimePeriod = from row in DineOutContext.Order where row.CreatedOn > startDate
+            return View("Orders");
+        }
+
+
+        public IActionResult SearchString(string searchedString)
+        {
+            Console.WriteLine(searchedString);
+            try
+            {
+                var orderByID = DineOutContext.Order.Where(r => r.OrderId == Convert.ToInt32(searchedString)).ToList();
+                return View("Orders", orderByID);
+            } 
+            catch
+            {
+                return View("Menu");
+            } 
+        }
+
+
+
+
 
         // Test View
         public IActionResult Menu()
@@ -105,24 +158,58 @@ namespace DineOut.Controllers
             TempData["message"] = $"Title updated!";
             return RedirectToAction("Menu");
         }
-
-        public IActionResult Add_Update_Item(Item item)
+        [ValidateAntiForgeryToken]
+        public IActionResult Add_Update_Item(ItemViewModel itemViewModel)
         {
-            if (item.ItemId == 0)
+            if (itemViewModel.ItemId == 0)
             {
-                Console.WriteLine(item);
+                itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
                 DineOutContext.Add(item);
                 DineOutContext.SaveChanges();
             }
             else
             {
-                Console.WriteLine(item);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
+
                 DineOutContext.Update(item);
                 DineOutContext.SaveChanges();
                 
             }
             return RedirectToAction("Menu");
         }
+        private string uploadImage(IFormFile image)
+        {
+        
+
+            string url = "https://dineout5.blob.core.windows.net/images";
+            string extension = Path.GetExtension(image.FileName);
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Day.ToString();
+            string nowTime = DateTime.Now.ToString("yymmssffff");
+
+            string path = $@"{year}\{month}\{day}\";
+            string fileName = nowTime + image.FileName;
+            string imagePathAndFileName = path + fileName;
+
+
+            using (var memoryStream = new MemoryStream())
+            {
+                var task = image.CopyToAsync(memoryStream);
+                task.Wait();
+                memoryStream.Position = 0;
+                AzureConnection.UploadImageMemoryStream(imagePathAndFileName, memoryStream);
+            }
+
+            var imageUrlPath = $@"{url}/{year}/{month}/{day}/{fileName}";
+            return imageUrlPath;
+            
+        }
+
+    
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
             var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
@@ -140,7 +227,7 @@ namespace DineOut.Controllers
         //Action Created by Ederson for OrderDetails OwnerSide
         public ViewResult OrderDetails(int orderId)
         {
-            orderId = 1; // orderId hard coded fot testing proposes
+            orderId = 2; // orderId hard coded fot testing proposes
             
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
@@ -158,40 +245,74 @@ namespace DineOut.Controllers
 
         //Update the order status
         [HttpPost]
-        public IActionResult ChangeStatus(int orderId)
+        public IActionResult ChangeStatus(Order order)
         {
-            // orderId and COMPLETED are hard coded fot testing proposes
-            const int COMPLETED = 2;
-            orderId = 1;
+            const int COMPLETED = 5;
+
+            orderDetailsInfo.order = DineOutContext.Order.Find(order.OrderId);
+            orderDetailsInfo.order.StatusId = order.StatusId;
 
             if (ModelState.IsValid)
             {
-                Order order = DineOutContext.Order.Find(orderId);
-
-                //If the status is already "Completed", return to the same view without any changes 
-                if (order.StatusId == COMPLETED)
-                {
-                    return RedirectToAction("OrderDetails");
-                }
-                else
-                    order.StatusId += 1;
-
                 //If the status moved to "Completed", invoke payment method
-                if (order.StatusId == COMPLETED)
+                if (orderDetailsInfo.order.StatusId == COMPLETED)
                 {
                     //Insert Invoking payment method here
                 }
 
-                DineOutContext.Order.Update(order);
+                DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
+                SendMail(order);
+            }
 
-                TempData["message"] = "Order Status is updated.";
-                return RedirectToAction("OrderDetails");
-            }
-            else
+            UriBuilder uriBuilder = new UriBuilder(Request.GetTypedHeaders().Referer);
+            NameValueCollection queryString = HttpUtility.ParseQueryString(uriBuilder.Query);
+            queryString["message"] = "Order Status is updated.";
+            uriBuilder.Query = queryString.ToString();
+            return Redirect(uriBuilder.ToString());
+        }
+
+        private void SendMail(Order order)
+        {
+            string subject = "";
+            string body = "";
+            switch (order.StatusId)
             {
-                return RedirectToAction("OrderDetails");
+                case 1:
+                    subject = "Your Order Is Accepted.";
+                    body = "Please wait for your order be process.";
+                    break;
+                case 2:
+                    subject = "Your Food Is Processing";
+                    body = "Please wait for your food be ready.";
+                    break;
+                case 3:
+                    subject = "Your Food Is Ready For Pick Up";
+                    body = "Please pick it up at service table.";
+                    break;
+                case 4:
+                    subject = "Your Food Is Received";
+                    body = "Have a nice meal.";
+                    break;
+                case 5:
+                    subject = "Your Order Is Completed";
+                    body = "Welcome next time.";
+                    break;
+                default:
+                    break;
             }
+            string to = "Dineout2021@gmail.com";
+            string from = "Dineout2021@gmail.com";
+            MailMessage message = new MailMessage(from, to);
+            message.IsBodyHtml = true;
+            message.Subject = subject;
+            message.Body = body;
+            SmtpClient client = new SmtpClient("smtp.gmail.com");
+            client.UseDefaultCredentials = false;
+            client.Credentials = new NetworkCredential("Dineout2021@gmail.com", "l23456789@");
+            client.Port = 587;
+            client.EnableSsl = true;
+            client.Send(message);
         }
 
         //Create Profile Action bellow

@@ -1,4 +1,4 @@
-﻿@model Item
+﻿@model DineOut.ViewModels.ItemViewModel
 
 @{ 
     ViewBag.Title = "Edit";
@@ -6,8 +6,8 @@
 }
 
 <div class="d-flex justify-content-center">
-    <form asp-action="Add_Update_Item" method="post">
-        <input type="hidden" asp-for="ItemId" />
+    <form asp-action="Add_Update_Item" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="ItemId"  />
 
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="MenuId"></label>
@@ -31,7 +31,7 @@
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold"asp-for="Image"></label>
-            <div><input asp-for="Image" /></div>
+            <div><input type="file" asp-for="Image" /></div>
         </div>
         <div style="margin:10px">
             <div><input class="text-lg-right" asp-for="Availability" />

@@ -19,13 +19,13 @@ namespace DineOut.Controllers
 
         public IActionResult Index()
         {
-            var restaurants = DineOutContext.Restaurant.ToList();
+           /* var restaurants = DineOutContext.Restaurant.ToList();
             var customers = DineOutContext.Customer.ToList();
             var orders = DineOutContext.Order.ToList();
             var orderStatus = DineOutContext.OrderStatus.ToList();
             var menus = DineOutContext.Menu.ToList();
             var items = DineOutContext.Item.ToList();
-            var order_Items = DineOutContext.Order_Item.ToList();
+            var order_Items = DineOutContext.Order_Item.ToList();*/
             return View();
         }
 
