@@ -30,7 +30,16 @@
             <td><Img width="100" height="100"  src="@item.Image"/></td>
             <td>@item.ItemName</td>
             <td>@item.Price.ToString("c")</td>
-            <td>@item.Availability</td>
+            <td>
+                @if (item.Availability)
+                {
+                    @: Yes
+                }
+                else
+                {
+                    @: No
+                }
+            </td>
             <td>
                 <form asp-action="Delete" method="post">
                     <input type="hidden" name="itemID" value="@item.ItemId" />
