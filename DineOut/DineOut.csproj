@@ -34,6 +34,8 @@
     <Folder Include="Tests\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Infrastructure\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Views\Shared\Components\ItemSummary\" />
   </ItemGroup>
 
   <ItemGroup>
