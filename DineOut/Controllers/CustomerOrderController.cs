@@ -12,30 +12,30 @@ namespace DineOut.Controllers
     public class CustomerOrderController : Controller
     {
         DineOutContext DineOutContext = new DineOutContext();
-        //CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
+        CustomerOrderViewModel CustomerOrderViewModel = new CustomerOrderViewModel();
 
-        public IActionResult OrderDetails(/*int menuId, int customerId*/)
+        public IActionResult OrderDetails(int menuId, int customerId)
         {
             //menu_id and customer_id is hard coded for testing purpose
-            int menuId = 1;
-            int customerId = 1;
+            menuId = 1;
+            customerId = 1;
 
-            CustomerOrderViewModel customerOrderView = new CustomerOrderViewModel();
+            //CustomerOrderViewModel customerOrderView = new CustomerOrderViewModel();
             Order nOrder = new Order();
             nOrder.CustomerId = customerId; //newOrder.Customer.CustomerId
 
             DineOutContext.Order.Add(nOrder);
-            customerOrderView.Order = DineOutContext.Order.Find(customerId);
-            customerOrderView.Menu = DineOutContext.Menu.Find(menuId);
-            customerOrderView.Items = DineOutContext.Item
+            CustomerOrderViewModel.Order = DineOutContext.Order.Find(customerId);
+            CustomerOrderViewModel.Menu = DineOutContext.Menu.Find(menuId);
+            CustomerOrderViewModel.Items = DineOutContext.Item
                 .ToList().FindAll(x => x.MenuId == menuId);
-            customerOrderView.Restaurant = DineOutContext.Restaurant
-                .Find(customerOrderView.Menu.RestaurantId);
-            foreach (Item item in customerOrderView.Items)
+            CustomerOrderViewModel.Restaurant = DineOutContext.Restaurant
+                .Find(CustomerOrderViewModel.Menu.RestaurantId);
+            foreach (Item item in CustomerOrderViewModel.Items)
             {
-                customerOrderView.Item = DineOutContext.Item.Find(item.ItemId);
+                CustomerOrderViewModel.Item = DineOutContext.Item.Find(item.ItemId);
             }
-            return View(customerOrderView);
+            return View(CustomerOrderViewModel);
         }
 
         //Create a new order
