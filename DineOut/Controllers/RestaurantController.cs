@@ -9,25 +9,29 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Security.Claims;
+using DineOut.Common;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DineOut.Controllers
 {
     public class RestaurantController : Controller
     {
+        AzureConnection AzureConnection = new AzureConnection();
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
         List<Order> orders = new List<Order>();
-
+    
         public RestaurantController ()
         {
-            
+
         }
 
         public IActionResult Orders()
         {
             return View(DineOutContext.Order.OrderBy(o => o.OrderId));
         }
-        
         public IActionResult CompletedOrders(int statusOrder) 
         {
             statusOrder = 5; //A status Order of 5 is considered completed
@@ -37,7 +41,6 @@ namespace DineOut.Controllers
                 .FindAll(o => o.StatusId == statusOrder);
             return View(orders);
         }
-
         public IActionResult CurrentOrders()
         {
             //This will populate Orders that are of any statuses but 5
@@ -48,6 +51,52 @@ namespace DineOut.Controllers
                 .FindAll(o => o.StatusId != 5); 
             return View(orders);
         }
+
+
+        // Not yet implemented
+        public IActionResult OrderByDate()
+        {
+            var orderDate = DineOutContext.Order.OrderByDescending(r => r.CreatedOn).ToList();
+            return View("Orders", orderDate);
+        }
+        // Not yet implemented
+        public IActionResult OrderByItemPeriod(string time_period)
+        {
+            DateTime startDate;
+            DateTime endDate;
+            if (time_period == "last week")
+            {
+                startDate = DateTime.Today;
+                endDate = DateTime.Today.AddDays(-7);
+            }
+            else if (time_period == "last month")
+            {
+                startDate = DateTime.Today;
+                endDate = DateTime.Today.AddDays(-7);
+            }
+
+            //var orderTimePeriod = from row in DineOutContext.Order where row.CreatedOn > startDate
+            return View("Orders");
+        }
+
+
+        public IActionResult SearchString(string searchedString)
+        {
+            Console.WriteLine(searchedString);
+            try
+            {
+                var orderByID = DineOutContext.Order.Where(r => r.OrderId == Convert.ToInt32(searchedString)).ToList();
+                return View("Orders", orderByID);
+            } 
+            catch
+            {
+                return View("Menu");
+            } 
+        }
+
+
+
+
 
         // Test View
         public IActionResult Menu()
@@ -109,24 +158,58 @@ namespace DineOut.Controllers
             TempData["message"] = $"Title updated!";
             return RedirectToAction("Menu");
         }
-
-        public IActionResult Add_Update_Item(Item item)
+        [ValidateAntiForgeryToken]
+        public IActionResult Add_Update_Item(ItemViewModel itemViewModel)
         {
-            if (item.ItemId == 0)
+            if (itemViewModel.ItemId == 0)
             {
-                Console.WriteLine(item);
+                itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
                 DineOutContext.Add(item);
                 DineOutContext.SaveChanges();
             }
             else
             {
-                Console.WriteLine(item);
+                Console.WriteLine(itemViewModel);
+                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
+
                 DineOutContext.Update(item);
                 DineOutContext.SaveChanges();
                 
             }
             return RedirectToAction("Menu");
         }
+        private string uploadImage(IFormFile image)
+        {
+        
+
+            string url = "https://dineout5.blob.core.windows.net/images";
+            string extension = Path.GetExtension(image.FileName);
+            string year = DateTime.Now.Year.ToString();
+            string month = DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Day.ToString();
+            string nowTime = DateTime.Now.ToString("yymmssffff");
+
+            string path = $@"{year}\{month}\{day}\";
+            string fileName = nowTime + image.FileName;
+            string imagePathAndFileName = path + fileName;
+
+
+            using (var memoryStream = new MemoryStream())
+            {
+                var task = image.CopyToAsync(memoryStream);
+                task.Wait();
+                memoryStream.Position = 0;
+                AzureConnection.UploadImageMemoryStream(imagePathAndFileName, memoryStream);
+            }
+
+            var imageUrlPath = $@"{url}/{year}/{month}/{day}/{fileName}";
+            return imageUrlPath;
+            
+        }
+
+    
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
             var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
