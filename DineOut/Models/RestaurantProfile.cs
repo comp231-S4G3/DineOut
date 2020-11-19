@@ -11,7 +11,7 @@ namespace DineOut.Models
     {
         [Key]
         [Column("restaurant_profile_id")]
-        public int CustomerId { get; set; }
+        public int RestaurantProfileId { get; set; }
         [Column("name")]
         public string Name { get; set; }
         [Column("email")]
