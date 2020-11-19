@@ -22,8 +22,8 @@ namespace DineOut.Controllers
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
         List<Order> orders = new List<Order>();
-    
-        public RestaurantController ()
+
+        public RestaurantController()
         {
 
         }
@@ -32,7 +32,7 @@ namespace DineOut.Controllers
         {
             return View(DineOutContext.Order.OrderBy(o => o.OrderId));
         }
-        public IActionResult CompletedOrders(int statusOrder) 
+        public IActionResult CompletedOrders(int statusOrder)
         {
             statusOrder = 5; //A status Order of 5 is considered completed
             orders = DineOutContext.Order
@@ -48,7 +48,7 @@ namespace DineOut.Controllers
             orders = DineOutContext.Order
                 .OrderBy(o => o.OrderId)
                 .ToList()
-                .FindAll(o => o.StatusId != 5); 
+                .FindAll(o => o.StatusId != 5);
             return View(orders);
         }
 
@@ -87,11 +87,11 @@ namespace DineOut.Controllers
             {
                 var orderByID = DineOutContext.Order.Where(r => r.OrderId == Convert.ToInt32(searchedString)).ToList();
                 return View("Orders", orderByID);
-            } 
+            }
             catch
             {
                 return View("Menu");
-            } 
+            }
         }
 
 
@@ -140,7 +140,7 @@ namespace DineOut.Controllers
                 return RedirectToAction("Menu");
             }
         }
-        
+
         public IActionResult Update_Menu(int restaurant_id, int menu_id, string menu_title)
         {
             var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id)
@@ -176,13 +176,13 @@ namespace DineOut.Controllers
 
                 DineOutContext.Update(item);
                 DineOutContext.SaveChanges();
-                
+
             }
             return RedirectToAction("Menu");
         }
         private string uploadImage(IFormFile image)
         {
-        
+
 
             string url = "https://dineout5.blob.core.windows.net/images";
             string extension = Path.GetExtension(image.FileName);
@@ -206,10 +206,10 @@ namespace DineOut.Controllers
 
             var imageUrlPath = $@"{url}/{year}/{month}/{day}/{fileName}";
             return imageUrlPath;
-            
+
         }
 
-    
+
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
             var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
@@ -217,7 +217,7 @@ namespace DineOut.Controllers
             DineOutContext.SaveChanges();
             return RedirectToAction("Menu");
         }
-        
+
         public IActionResult Update_Item(int itemId, int menuId)
         {
             var item = DineOutContext.Item.Where(r => r.MenuId == menuId).Where(r => r.ItemId == itemId).FirstOrDefault();
@@ -228,7 +228,7 @@ namespace DineOut.Controllers
         public ViewResult OrderDetails(int orderId)
         {
             orderId = 2; // orderId hard coded fot testing proposes
-            
+
             List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
             orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
@@ -316,5 +316,10 @@ namespace DineOut.Controllers
         }
 
         //Create Profile Action bellow
+        public ViewResult Profile()
+        {
+
+            return View();
+        }
     }
 }
