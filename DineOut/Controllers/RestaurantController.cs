@@ -28,6 +28,11 @@ namespace DineOut.Controllers
 
         }
 
+        public IActionResult OwnerLogin() => View();
+
+        public IActionResult OwnerRegistration() => View();
+
+
         public IActionResult Orders()
         {
             return View(DineOutContext.Order.OrderBy(o => o.OrderId));
