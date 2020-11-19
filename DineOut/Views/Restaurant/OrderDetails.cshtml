@@ -1,135 +1,79 @@
 ﻿@model DineOut.ViewModels.OrderDetailsInfo
-@{ ViewData["Title"] = "Order Details";
-                Layout = "_RestaurantLayout"; }
 
+@{
+    ViewData["Title"] = "Order Details";
+    Layout = "_RestaurantLayout";
+ }
 
 <h2>Order Details</h2>
 
-
 <div class="">
-	<table class="table table-striped  ">
-		<thead>
-			<tr>
-				<th>Order Number</th>
-				<th>Date</th>
-				<th>Table #</th>
-				<th>Costumer</th>
-				<th>Note</th>
-				<th>Order Status</th>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Order Number</th>
+                <th>Date</th>
+                <th>Table #</th>
+                <th>Costumer</th>
+                <th>Note</th>
+                <th>Order Status</th>
+            </tr>
+        </thead>
+        <tbody>
 
+            <tr>
+                <td>@Model.order.OrderId</td>
+                <td>@Model.order.CreatedOn</td>
+                <td>@Model.order.TableNum</td>
+                <td>@Model.order.CustomerId</td>
+                <td>@Model.order.Note</td>
+                <td>@Model.orderStatus.Status</td>
+            </tr>
 
+        </tbody>
+    </table>
+    <table class="table table-striped orderDetailsTable">
+        <thead>
+            <tr>
+                <th>Item:</th>
+                <th>Price</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
 
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr>
-				<td>@Model.order.OrderId</td>
-				<td>@Model.order.CreatedOn</td>
-				<td>@Model.order.TableNum</td>
-				<td>@Model.order.CustomerId</td>
-				<td>@Model.order.Note</td>
-				<td>@Model.orderStatus.Status</td>
-			</tr>
-
-		</tbody>
-	</table>
-	<table class="table table-striped orderDetailsTable ">
-		<thead>
-			<tr>
-				<th>Item:</th>
-				<th>Price</th>
-				<th>Quantity</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			@foreach (var item in Model.OrderItems)
-			{
-				<tr>
-					<td>@item.Item.ItemName</td>
-					<td>@item.Item.Price.ToString("c")</td>
-					<td>@item.Quantity</td>
-				</tr>
-}
-		</tbody>
-	</table>
-	<div>
-		<a class="btn btn-danger" asp-action="OrderList">Back to Order List</a>
-	</div>
-
-	@*the status functionality goes below this line*@
-
-
-
-	@*Ederson's Original work*@
-<div style="margin-top:15px; margin-right:80%;">
-    
-    <form action="ChangeStatus" method="post">
-        <input type="hidden" asp-for="@Model.order.OrderId" />
-        <div class="form-group">
-            <label>Change Status:   </label>
-            <select class="form-control" asp-for="@Model.order.StatusId">
-                <option value="empty"></option>
-                <option value="1">Accepted</option>
-                <option value="2">Ongoing</option>
-                <option value="3">Ready</option>
-                <option value="4">Received</option>
-                <option value="5">Completed</option>
-
-            </select>
-        </div>
-        @if (Model.order.StatusId != 5)
-        {
-            <button type="submit" class="btn btn-success">Process Order</button>
-        }
-    </form>
-
-    @*<div style="margin-top:15px">
-        <table class="table table-striped orderDetailsTable">
-            <thead>
+            @foreach (var item in Model.OrderItems)
+            {
                 <tr>
-                    <th colspan="2">Order Status</th>
+                    <td>@item.Item.ItemName</td>
+                    <td>@item.Item.Price.ToString("c")</td>
+                    <td>@item.Quantity</td>
                 </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <form asp-action="ChangeStatus" method="post">
-                            <input type="hidden"
-                                   asp-for="@Model.order.StatusId" />
-                            <button type="submit" class="btn btn-success">Process Order</button>
-                        </form>
-                    </td>
-                    <td>@Model.orderStatus.Status</td>
-                </tr>
-            </tbody>
-        </table>*@
+            }
+        </tbody>
+    </table>
+    <div>
+        <a class="btn btn-danger" asp-action="Orders">Back to Order List</a>
+    </div>
+    <div style="margin-top:15px; margin-right:80%;">
 
-
-    <!--
-        Tomoki's original work
-            <table class="table table-striped orderDetailsTable">
-            <thead>
-                <tr>
-                    <th colspan="2">Order Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@*Model.Orders</td>@*OrderStatus*@
-                    <td>
-                        <form asp-action="ChangeStatus" method="post">
-                            <input type="hidden"
-                                   asp-for="Orders[0].OrderId" />
-                            <button type="submit" class="btn btn-success">Process Order</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    -->
+        <form action="ChangeStatus" method="post">
+            <input type="hidden" asp-for="@Model.order.OrderId" />
+            <div class="form-group">
+                <label>Change Status:   </label>
+                <select class="form-control" asp-for="@Model.order.StatusId">
+                    <option value="empty"></option>
+                    <option value="1">Accepted</option>
+                    <option value="2">Ongoing</option>
+                    <option value="3">Ready</option>
+                    <option value="4">Received</option>
+                    <option value="5">Completed</option>
+                </select>
+            </div>
+            @if (Model.order.StatusId != 5)
+            {
+                <button type="submit" class="btn btn-success">Process Order</button>
+            }
+        </form>
+    </div>
 </div>
-
-</div>
-
