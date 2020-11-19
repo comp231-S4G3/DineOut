@@ -22,6 +22,8 @@ namespace DineOut.Models
         {
             return RestaurantName;
         }
+        [Column("restaurant_profile_id")]
+        public int RestaurantProfileId { get; set; }
 
     }
 }
