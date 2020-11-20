@@ -1,0 +1,35 @@
+﻿@model DineOut.Models.Customer
+@{
+    ViewBag.Title = "Registration";
+    Layout = "_IdentityLayout";
+}
+
+<form asp-action="Register" asp-controller="Customer" method="post"
+      class="form-row" role="form">
+    <table class="table">
+        <tr>
+            <td><label for="Email">Email</label></td>
+            <td><input type="email" asp-for="@Model.Email" /></td>
+        </tr>
+        <tr>
+            <td><label for="Password">Password</label></td>
+            <td><input type="password" placeholder="Enter unique password" /></td>
+        </tr>
+        <tr>
+            <td><label for="Password">Re-enter Password</label></td>
+            <td><input type="password" asp-for="@Model.PasswordHash" placeholder="Enter unique password" /></td>
+        </tr>
+        <tr>
+            <td><label for="FirstName">Name</label></td>
+            <td><input type="text" asp-for="@Model.Name"  /></td>
+        </tr>
+    </table>
+
+    <div>
+        <button type="submit" class="btn btn-sm btn-success">Create your new DineOut Account</button>
+        <button type="reset" class="btn btn-sm btn-secondary">Clear Form</button>
+    </div>
+</form>
+
+
+
