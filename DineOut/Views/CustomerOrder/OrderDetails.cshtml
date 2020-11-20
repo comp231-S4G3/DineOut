@@ -19,6 +19,7 @@
     <div class="card card-outline-primary m-1 p-1">
         <div class="bg-faded p-1">
             <h3>
+                @item.ItemId
                 @item.ItemName
             </h3>
         </div>
@@ -37,14 +38,14 @@
         </div>
 
         <form asp-action="AddItem" method="post">
-            <input type="hidden" asp-for="@item.ItemId" />
-            <input type="hidden" asp-for="@item.MenuId" />
             <div style="margin:10px">
                 <label class="font-weight-bold"
                        asp-for="@Model.OrderItem.Quantity"></label>
                 <div><input name="quantity" asp-for="@Model.OrderItem.Quantity" type="number" /></div>
             </div>
             <div class="marginTop">
+                <input type="hidden" name="item.ItemId" value="@item.ItemId" />
+                <input type="hidden" asp-for="@item.MenuId" />
                 <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
                 <input type="hidden" name="customerId" asp-for="@Model.Customer.CustomerId" />
                 @*<input type="hidden" name="OrderItemId" asp-for="@Model.OrderItem.OrderItemId" />*@
@@ -56,7 +57,9 @@
 
 <div class="marginTop">
     <form asp-action="OrderSummary" method="post">
-        <input type="hidden" asp-for="@Model.Order.OrderId" />
+        <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+        <input type="hidden" name="restaurantId" asp-for="@Model.Restaurant.RestaurantId" />
+        <input type="hidden" name="customerId" asp-for="@Model.Customer.CustomerId" />
         <div class="marginTop">
             <button class="btn btn-success" type="submit">Order Summary</button>
         </div>
