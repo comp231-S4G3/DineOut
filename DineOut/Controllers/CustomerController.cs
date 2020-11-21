@@ -9,10 +9,29 @@ namespace DineOut.Controllers
 {
     public class CustomerController : Controller
     {
+        DineOutContext DineOutContext = new DineOutContext();
+
         public IActionResult Index()
         {
-            return View();
+            var restaurants = DineOutContext.Restaurant.ToList();
+            return View("Home", restaurants);
         }
+
+        public IActionResult SearchString(string searchedString)
+        {
+            var Restaurants = DineOutContext.Restaurant
+                .Where(r => r.RestaurantName.ToLower() == searchedString.ToLower()).ToList();
+
+            if (Restaurants.Count() == 0)
+            {
+                TempData["message"] = $"Sorry, \"{searchedString}\" was not found.";
+                return View("Home", Restaurants);
+            }
+            else
+                return View("Home", Restaurants);
+
+        }
+
         public IActionResult CustomerLogin() => View();
         public IActionResult CustomerRegistration() => View();
 
