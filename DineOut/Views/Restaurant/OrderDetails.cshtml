@@ -66,12 +66,10 @@
                     <option value="5">Completed</option>
                 </select>
             </div>
-            @if (Model.order.StatusId != 5)
-            {
-                <button type="submit" class="btn btn-success">Process Order</button>
-            }
+            <button type="submit" class="btn btn-success">Process Order</button>
         </form>
     </div>
+    <br />
     <div>
         <a class="btn btn-danger" asp-action="Orders">Back to Order List</a>
     </div>

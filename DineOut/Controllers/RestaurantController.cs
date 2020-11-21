@@ -255,16 +255,18 @@ namespace DineOut.Controllers
             const int COMPLETED = 5;
 
             orderDetailsInfo.order = DineOutContext.Order.Find(order.OrderId);
-            orderDetailsInfo.order.StatusId = order.StatusId;
 
             if (ModelState.IsValid)
             {
-                //If the status moved to "Completed", invoke payment method
-                if (orderDetailsInfo.order.StatusId == COMPLETED)
+                //Check if the status is already "Completed"
+                if (orderDetailsInfo.order.StatusId != COMPLETED
+                    && order.StatusId == COMPLETED)
                 {
                     //Insert Invoking payment method here
+
                 }
 
+                orderDetailsInfo.order.StatusId = order.StatusId;
                 DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
                 SendMail(order);
