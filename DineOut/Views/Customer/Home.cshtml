@@ -1,5 +1,39 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Restaurant>
 @{
+    ViewData["Title"] = "Customer Home";
+    Layout = "_CustomerLayout";
 }
+
+
+
+<div>
+
+</div>
+<table class="table table-sm table-bordered">
+    <thead>
+        <tr>
+            <th colspan="2">Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var restaurant in Model)
+        {
+            <tr>
+                <td>@restaurant.RestaurantName</td>
+                <td>
+                    <div class="text-center">
+                        @*change the action name later*@
+                        <a asp-action="ViewRestaurantMenu" class="btn btn-success">Select</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    @if (TempData["message"] != null)
+    {
+        <div class="alert alert-success mt-1">@TempData["message"]</div>
+    }
+</div>
