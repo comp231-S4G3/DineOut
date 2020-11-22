@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Order Summary";
     Layout = "_CustomerLayout";
- }
+}
 
 <h2>Order Summary</h2>
 <table class="table table-bordered table-striped">
@@ -42,9 +42,25 @@
             <tr>
                 <td>@item.Item.ItemName</td>
                 <td>@item.Item.Price.ToString("c")</td>
-                <td>@item.Quantity</td>
                 <td>
-                    <form asp-action="Delete" method="post">
+                    <form action="ChangeQuantity" method="post">
+                        <input type="hidden" name="itemId" asp-for="@item.Item.ItemId" />
+                        <input type="hidden" name="orderItemId" asp-for="@item.OrderItemId" />
+                        <div class="form-group" style="margin-top:10px; margin-right:80%;">
+                            <select class="form-control" name="quantity"
+                                    asp-for="@item.Quantity">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Change Quantity</button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="DeleteItem" method="post">
                         <input type="hidden" name="itemId" value="@item.ItemId" />
                         <input type="hidden" name="orderItemId" value="@item.OrderItemId" />
                         <button type="submit" title="Delete Item" class="btn btn-sm btn-danger"
@@ -61,7 +77,6 @@
         <tr>
             <td colspan="2" class="">
                 Total:
-                @*@Model.CustomerOrder.ComputeTotalValue().ToString("c")*@
                 @Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
             </td>
         </tr>
@@ -69,21 +84,25 @@
 </table>
 
 <div class="">
-    <form asp-action="OrderDetails" method="post">
-        <input type="hidden" asp-for="@Model.Order.OrderId" />
+    <form asp-action="BackToMenu" method="post">
+        <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
         <div>
             <label class="font-weight-bold">Special Note: </label>
-            <input asp-for="@Model.Order.Note" />
+            <input name="orderNote" asp-for="@Model.Order.Note" />
         </div>
         <div class="marginTop">
-            <button class="btn btn-success" type="submit">Continue shopping</button>
+            <button class="btn btn-success" type="submit">Continue Order</button>
         </div>
     </form>
     <div class="font-weight-bold">
-        <a class="btn btn-primary" asp-action="Checkout">Checkout</a>
+        <a class="btn btn-primary" asp-action="Checkout"
+           asp-route-customerId="@Model.Order.OrderId"
+           asp-route-totalPrice="@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity)">
+            Checkout
+        </a>
     </div>
     <div class="font-weight-bold">
-        <a class="btn btn-danger" asp-controller="Home"
-           asp-action="Index">Cancel Order</a>
+        <a class="btn btn-danger" asp-action="CancelOrder"
+           asp-route-orderId="@Model.Order.OrderId">Cancel Order</a>
     </div>
 </div>

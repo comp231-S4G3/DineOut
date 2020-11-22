@@ -123,6 +123,11 @@ namespace DineOut.Controllers
         //Display order summary
         public IActionResult OrderSummary(int orderId, int restaurantId, int customerId)
         {
+            //for testing purpose
+            orderId = 1;
+            restaurantId = 1;
+            customerId = 1;
+
             List<Item> items = new List<Item>();
             Order nOrder = new Order
             {
@@ -157,7 +162,68 @@ namespace DineOut.Controllers
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
             DineOutContext.Remove(item_delete);
             DineOutContext.SaveChanges();
+
             return RedirectToAction("OrderSummary");
+        }
+
+        public IActionResult ChangeQuantity(int itemId, int orderItemId, int quantity)
+        {
+            var itemUpdate = DineOutContext.Order_Item
+                .Where(r => r.OrderItemId == orderItemId)
+                .Where(r => r.ItemId == itemId).FirstOrDefault();
+            itemUpdate.Quantity = quantity;
+            DineOutContext.Update(itemUpdate);
+            DineOutContext.SaveChanges(); 
+
+            return RedirectToAction("OrderSummary");
+        }
+
+        public IActionResult BackToMenu(int orderId, string orderNote)
+        {
+            var order = DineOutContext.Order.Find(orderId);
+            order.Note = orderNote;
+            DineOutContext.Update(order);
+            DineOutContext.SaveChanges();
+
+            orderData.Order
+                = DineOutContext.Order.Find(order.OrderId);
+            orderData.Customer
+                = DineOutContext.Customer.Find(order.CustomerId);
+            orderData.Menu = DineOutContext.Menu.Find(order.RestaurantId);
+            orderData.Items = DineOutContext.Item
+                .ToList().FindAll(x => x.MenuId == orderData.Menu.MenuId);
+            orderData.Restaurant = DineOutContext.Restaurant
+                .Find(order.RestaurantId);
+            orderData.OrderItems = DineOutContext.Order_Item
+                .ToList().FindAll(x => x.OrderId == order.OrderId);
+
+            return View("OrderDetails", orderData);
+        }
+
+        public IActionResult Checkout(int customerId, double totalPrice)
+        {
+            var customerEmail = DineOutContext.Customer.Find(customerId).Email;
+            
+            //Set the payment function
+
+            return RedirectToAction();
+        }
+
+        public IActionResult CancelOrder(int orderId)
+        {
+            var order = DineOutContext.Order.Find(orderId);
+            //List<OrderItem> orderItems = new List<OrderItem>();
+            var orderItems = DineOutContext.Order_Item
+                .Where(x => x.OrderId == orderId).ToList();
+
+            //DineOutContext.Remove(order);
+            //foreach(var orderItem in orderItems)
+            //{
+            //    DineOutContext.Remove(orderItem);
+            //}
+            //DineOutContext.SaveChanges();
+
+            return RedirectToAction("Index", "Customer");
         }
     }
 }
