@@ -1,0 +1,68 @@
+﻿@model DineOut.Models.PaymentInformation
+@{
+    ViewBag.Title = "Payment Information";
+}
+
+
+
+
+<link rel="stylesheet" href="/lib/bootstrap/css/form1.css" />
+
+<diV id="allpage">
+    <h2 style="text-align:center">Please add your information</h2>
+    <form asp-action="makePayment" method="post" id="formstyle" class="p-a-1">
+        <div class="form-group">
+            <label asp-for="CardOwnerFirstName">FirstName</label>
+            <input asp-for="CardOwnerFirstName" class="form-control" id="CardOwnerFirstName" required="required" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="CardOwnerLastName">Last Name</label>
+            <input asp-for="CardOwnerLastName" class="form-control" id="CardOwnerLastName"  required="required"/>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="CardNumber"> CardNumber</label>
+            <input asp-for="CardNumber" class="form-control" id="CardNumber" required="required" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="ExpirationYear">ExpirationYear</label>
+            <input asp-for="ExpirationYear" class="form-control" id="ExpirationYear" required="required" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="ExpirationMonth">ExpirationMonth</label>
+            <input asp-for="ExpirationMonth " class="form-control" id="ExpirationMonth" required="required" />
+
+        </div>
+        <div class="form-group">
+            <label asp-for="CVV2">CVV2</label>
+            <input asp-for="CVV2" class="form-control" id="CVV2" required="required" />
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Buyer_Email">Email</label>
+            <input asp-for="Buyer_Email" class="form-control" id="Buyer_Email" required="required" />
+
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Amount">Amount</label>
+            <input asp-for="Amount" class="form-control" id="Amount" required="required" />
+
+        </div>
+        <div class="form-group">
+            
+            <input asp-for="Amount" class="form-control" id="Amount" type="hidden" />
+
+        </div>
+
+        <button type="submit" class="button" type="submit" value="Submit the new Recipe" style="width: 326px; height: 52px">Make a payment</button>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="button" type="reset" value="Clear form" style="width: 140px; height: 52px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input asp-action="Home" class="button" type="submit" value="Cancel" style="width: 140px; height: 52px">
+
+    </form>
+
+</diV>

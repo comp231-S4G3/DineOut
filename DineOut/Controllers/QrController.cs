@@ -29,7 +29,7 @@ namespace DineOut.Controllers
                // string resturanr_id 
 
 
-                string url = "http://dineout.com/Restaurant/Menu" + "/" + getMenuId(3);
+                string url = "https://dineout20201118022357.azurewebsites.net/Customer/ViewRestaurantMenu" + "/" + getMenuId(3);
                 QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
                 QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
                 QRCode oQRCode = new QRCode(oQRCodeData);
