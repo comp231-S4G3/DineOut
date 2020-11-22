@@ -230,11 +230,10 @@ namespace DineOut.Controllers
             return View("Edit", item);
         }
         //Action Created by Ederson for OrderDetails OwnerSide
-        public ViewResult OrderDetails(int orderId)
+        public ViewResult OrderDetails(int orderId) // optional parameter just for testing purpose
         {
-            orderId = 2; // orderId hard coded fot testing proposes
+           
 
-            List<Item> items = new List<Item>();
             orderDetailsInfo.order = DineOutContext.Order.Find(orderId);
             orderDetailsInfo.OrderItems = DineOutContext.Order_Item.ToList().FindAll(x => x.OrderId == orderId);
             orderDetailsInfo.orderStatus = DineOutContext.OrderStatus.Find(orderDetailsInfo.order.StatusId);

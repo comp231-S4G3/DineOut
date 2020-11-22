@@ -1,0 +1,38 @@
+﻿
+@model DineOut.ViewModels.Menu_RestaurantDetails
+
+@{
+	ViewData["Title"] = "Menu";
+	Layout = "_CustomerLayout";
+}
+
+<h2>@Model.Restaurant.RestaurantName's Menu</h2>
+
+<div class="container">
+	<a class="btn btn-sm btn-secondary" asp-action="Index">Back to the List</a>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th>Dish</th>
+				<th>Description</th>
+				<th>Ingredients</th>
+				<th>Price</th>
+				<th>Availability</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Items)
+			{
+				<tr>
+					<td><Img width="100" height="100" src="@item.Image" style="border-radius:50%; border-color:black; border:1px;" /></td>
+					<td>@item.ItemName</td>
+					<td>@item.Description</td>
+					<td>@item.Ingredients</td>
+					<td>@item.Price.ToString("c")</td>
+					<td>@item.Availability</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
