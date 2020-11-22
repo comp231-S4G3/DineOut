@@ -96,7 +96,9 @@
     </form>
     <div class="font-weight-bold">
         <a class="btn btn-primary" asp-action="Checkout"
-           asp-route-customerId="@Model.Order.OrderId"
+           asp-route-orderId="@Model.Order.OrderId"
+           asp-route-customerId="@Model.Order.CustomerId"
+           asp-route-orderNote="@Model.Order.Note"
            asp-route-totalPrice="@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity)">
             Checkout
         </a>

@@ -200,8 +200,14 @@ namespace DineOut.Controllers
             return View("OrderDetails", orderData);
         }
 
-        public IActionResult Checkout(int customerId, double totalPrice)
+        public IActionResult Checkout(int orderId, int customerId,
+            double totalPrice, string orderNote)
         {
+            var order = DineOutContext.Order.Find(orderId);
+            order.Note = orderNote;
+            DineOutContext.Update(order);
+            DineOutContext.SaveChanges();
+
             var customerEmail = DineOutContext.Customer.Find(customerId).Email;
             
             //Set the payment function
