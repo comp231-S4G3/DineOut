@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "Registration";
+    Layout = "_IdentityLayout";
+}
+
+<form asp-action="Menu" asp-controller="Restaurant" method="post"
+      class="form-row" role="form">
+    <table class="table">
+        <tr>
+            <td><label for="Email">Email</label></td>
+            <td><input type="email" id="Email" /></td>
+        </tr>
+        <tr>
+            <td><label for="Password">Password</label></td>
+            <td><input type="password" id="Password" placeholder="Enter unique password" /></td>
+        </tr>
+        <tr>
+            <td><label for="Password">Re-enter Password</label></td>
+            <td><input type="password" id="Password" placeholder="Enter unique password" /></td>
+        </tr>
+        <tr>
+            <td><label for="FirstName">First Name</label></td>
+            <td><input type="text" id="FirstName" /></td>
+        </tr>
+        <tr>
+            <td><label for="LastName">Last Name</label></td>
+            <td><input type="text" id="LastName" /></td>
+        </tr>
+        <tr>
+            <td><label for="Address">Address</label></td>
+            <td><input type="text" id="Address" /></td>
+        </tr>
+        <tr>
+            <td>
+                <label for="City">City</label>
+                <input type="text" id="City" />
+            </td>
+            <td>
+                <label for="PostalCode">Postal Code</label>
+                <input type="text" id="PostalCode" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <label for="Province">Province</label>
+                <select id="Province" name="Province">
+                    <option value="Alberta">AB</option>
+                    <option value="Ontario">ON</option>
+                    <option value="Quebec">QC</option>
+                    <option value="British Columbia">BC</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><br /></td>
+            <td><br /></td>
+        </tr>
+    </table>
+
+    <div>
+        <button type="submit" class="btn btn-sm btn-success">Create your new DineOut Account</button>
+        <button type="reset" class="btn btn-sm btn-secondary">Clear Form</button>
+    </div>
+</form>
+
+
+

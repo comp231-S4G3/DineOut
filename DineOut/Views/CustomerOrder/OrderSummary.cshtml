@@ -73,38 +73,3 @@
            asp-action="Index">Cancel Order</a>
     </div>
 </div>
-
-
-
-
-@*Line 7
-    <thead>
-        <tr>
-            <th>Quantity</th>
-            <th>Item</th>
-            <th class="text-right">Price</th>
-            <th class="text-right">Subtotal</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var line in Model.CustomerOrder.Lines)
-        {
-            <tr>
-                <td class="text-center">@line.Quantity</td>
-                <td class="text-left">@line.Item.ItemName</td>
-                <td class="text-right">@line.Item.Price.ToString("c")</td>
-                <td class="text-right">
-                    @((line.Quantity * line.Item.Price).ToString("c"))
-                </td>
-                <td>
-                    <form asp-action="RemoveFromCustomerOrder" method="post">
-                        <input type="hidden" name="ItemId"
-                               value="@line.Item.ItemId" />
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            Remove
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>*@
