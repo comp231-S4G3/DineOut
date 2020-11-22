@@ -149,5 +149,15 @@ namespace DineOut.Controllers
 
             return View(orderData);
         }
+
+        public IActionResult DeleteItem(int itemId, int orderItemId)
+        {
+            var item_delete = DineOutContext.Order_Item
+                .Where(r => r.OrderItemId == orderItemId)
+                .Where(r => r.ItemId == itemId).FirstOrDefault();
+            DineOutContext.Remove(item_delete);
+            DineOutContext.SaveChanges();
+            return RedirectToAction("OrderSummary");
+        }
     }
 }
