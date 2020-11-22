@@ -25,5 +25,6 @@ namespace DineOut.Models
         [Column("restaurant_profile_id")]
         public int RestaurantProfileId { get; set; }
 
+        public Menu Menu { get; set; }
     }
 }

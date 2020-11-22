@@ -30,7 +30,7 @@
         {
             <tr>
                 <td>
-                    <a asp-action="OrderDetails">
+                    <a asp-action="OrderDetails" asp-route-orderId="@order.OrderId">
                         @order.OrderId
                     </a>
                 </td>
