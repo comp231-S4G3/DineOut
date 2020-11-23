@@ -33,13 +33,9 @@
   <ItemGroup>
     <Folder Include="NewFolder\" />
     <Folder Include="Tests\" />
-<<<<<<< HEAD
-    <Folder Include="wwwroot\" />
-=======
     <Folder Include="Infrastructure\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\ItemSummary\" />
->>>>>>> 537244a5c944462bf131723e81a5bbb6bfe4b9c0
   </ItemGroup>
 
   <ItemGroup>
