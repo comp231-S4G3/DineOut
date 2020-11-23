@@ -1,0 +1,39 @@
+﻿@model DineOut.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Tile = "Profile";
+    Layout = "_RestaurantLayout";
+}
+
+<div>
+    <h3>Profile</h3>
+</div>
+
+<form asp-action="SaveChanges" method="post">
+    <input type="hidden" asp-for="@Model.restaurant.RestaurantId" />
+    <input type="hidden" asp-for="@Model.restaurantProfile.RestaurantProfileId" />
+    <div class="jumbotron d-flex justify-content-center" style="margin:auto; width:50% !important">
+        <table class="table table-borderless">
+            <tr>
+                <td class="font-weight-bold">@Model.restaurant.RestaurantName</td>
+                <td class="font-weight-bold">ID# @Model.restaurant.RestaurantId</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.restaurantProfile.Name">Name</label></td>
+                <td>@Model.restaurantProfile.Name</td>
+            </tr>
+            <tr>
+                <td><label asp-for="@Model.restaurantProfile.Email">Email</label></td>
+                <td><input asp-for="@Model.restaurantProfile.Email" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><small>Your account was created on @Model.restaurantProfile.CreatedOn.</small></td>
+            </tr>
+            <tr>
+                <td><button type="submit" class="btn btn-sm btn-success">Save Changes</button></td>
+                <td><a asp-action="Menu" class="btn btn-sm btn-secondary">Back to Menu</a></td>
+            </tr>
+        </table>
+    </div>
+</form>
+
