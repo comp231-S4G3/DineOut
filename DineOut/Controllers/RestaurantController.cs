@@ -21,11 +21,12 @@ namespace DineOut.Controllers
         AzureConnection AzureConnection = new AzureConnection();
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
+        ProfileViewModel profileInfo = new ProfileViewModel();
         List<Order> orders = new List<Order>();
 
         public RestaurantController()
         {
-
+            
         }
 
         public IActionResult OwnerLogin() => View();
@@ -57,6 +58,36 @@ namespace DineOut.Controllers
             return View(orders);
         }
 
+        public IActionResult Profile()
+        {
+            int restaurantId = 2;
+            int restaurantProfileId = 2;
+            //TempData["message"] = $"Your changes have been saved succesfully";
+            profileInfo.restaurant = DineOutContext.Restaurant.Find(restaurantId);
+            profileInfo.restaurantProfile = DineOutContext.RestaurantProfile.Find(restaurantProfileId);
+
+           
+            return View(profileInfo);
+        }
+
+        [HttpPost]
+        public IActionResult SaveChanges(RestaurantProfile restaurantProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                RestaurantProfile profileEntry = DineOutContext.RestaurantProfile
+                    .FirstOrDefault(r => r.RestaurantProfileId == restaurantProfile.RestaurantProfileId);
+                if (profileEntry != null)
+                {
+                    //profileEntry.Name = restaurantProfile.Name;
+                    profileEntry.Email = restaurantProfile.Email;
+                }
+                DineOutContext.SaveChanges();
+                TempData["message"] = $"Your profile has been updated!";
+
+            }
+            return RedirectToAction("Menu");
+        }
 
         // Not yet implemented
         public IActionResult OrderByDate()
@@ -106,7 +137,7 @@ namespace DineOut.Controllers
         // Test View
         public IActionResult Menu()
         {
-            int restaurant_id = 3;
+            int restaurant_id = 2;
             var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
             var items = DineOutContext.Item.Where(r => r.MenuId == menud_id).ToList();
             return View("Menu", items);
@@ -229,6 +260,8 @@ namespace DineOut.Controllers
             Console.WriteLine(item);
             return View("Edit", item);
         }
+
+
         //Action Created by Ederson for OrderDetails OwnerSide
         public ViewResult OrderDetails(int orderId) // optional parameter just for testing purpose
         {
@@ -321,11 +354,6 @@ namespace DineOut.Controllers
             client.Send(message);
         }
 
-        //Create Profile Action bellow
-        public ViewResult Profile()
-        {
 
-            return View();
-        }
     }
 }
