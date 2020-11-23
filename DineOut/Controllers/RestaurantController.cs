@@ -355,5 +355,42 @@ namespace DineOut.Controllers
         }
 
 
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile)
+        {
+            RestaurantProfile user = DineOutContext.RestaurantProfile.ToList().Find(x => x.Email == restaurantProfile.Email);
+
+            if (user != null)
+            {
+                //reset password
+                user.PasswordHash = restaurantProfile.PasswordHash;
+                DineOutContext.RestaurantProfile.Update(user);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
+
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Register(RestaurantProfile restaurantProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                DineOutContext.RestaurantProfile.Add(restaurantProfile);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
+            }
+            return View();
+        }
+
     }
+
+
 }
+
