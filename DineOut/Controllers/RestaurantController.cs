@@ -328,5 +328,41 @@ namespace DineOut.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public IActionResult Register(RestaurantProfile restaurantProfile)
+        {
+            if (ModelState.IsValid)
+            {
+                DineOutContext.RestaurantProfile.Add(restaurantProfile);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile)
+        {
+            RestaurantProfile owner = DineOutContext.RestaurantProfile.ToList().Find(x => x.Email == restaurantProfile.Email);
+
+            if (owner != null)
+            {
+                //reset password
+                owner.PasswordHash = restaurantProfile.PasswordHash;
+                DineOutContext.RestaurantProfile.Update(owner);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
+
+            }
+            return View();
+        }
+
     }
 }
+

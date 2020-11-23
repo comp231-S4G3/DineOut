@@ -43,6 +43,34 @@ namespace DineOut.Controllers
         [HttpPost]
         public IActionResult Register(Customer customer)
         {
+            if (ModelState.IsValid)
+            {
+                DineOutContext.Customer.Add(customer);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("CustomerLogin");
+            }
+                return View();
+        }
+
+        [HttpGet]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult ForgotPassword(Customer customer)
+        {
+            Customer user = DineOutContext.Customer.ToList().Find(x => x.Email == customer.Email);
+            
+            if(user != null)
+            {
+                //reset password
+                user.PasswordHash = customer.PasswordHash;
+                DineOutContext.Customer.Update(user);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("CustomerLogin");
+                
+            }
             return View();
         }
 
