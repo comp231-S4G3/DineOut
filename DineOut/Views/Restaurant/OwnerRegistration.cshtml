@@ -1,30 +1,27 @@
-﻿@{
+﻿@model DineOut.Models.RestaurantProfile
+@{
     ViewBag.Title = "Registration";
     Layout = "_IdentityLayout";
 }
 
-<form asp-action="Menu" asp-controller="Restaurant" method="post"
+<form asp-action="Register" asp-controller="Restaurant" method="post"
       class="form-row" role="form">
     <table class="table">
         <tr>
             <td><label for="Email">Email</label></td>
-            <td><input type="email" id="Email" /></td>
+            <td><input type="email" asp-for="@Model.Email" /></td>
+        </tr>
+        <tr>
+            <td><label for="LastName"> Name</label></td>
+            <td><input type="text" asp-for="@Model.Name" /></td>
         </tr>
         <tr>
             <td><label for="Password">Password</label></td>
-            <td><input type="password" id="Password" placeholder="Enter unique password" /></td>
+            <td><input type="password" asp-for="PasswordHash" placeholder="Enter unique password" /></td>
         </tr>
         <tr>
             <td><label for="Password">Re-enter Password</label></td>
             <td><input type="password" id="Password" placeholder="Re-enter password" /></td>
-        </tr>
-        <tr>
-            <td><label for="FirstName">First Name</label></td>
-            <td><input type="text" id="FirstName" /></td>
-        </tr>
-        <tr>
-            <td><label for="LastName">Last Name</label></td>
-            <td><input type="text" id="LastName" /></td>
         </tr>
         <tr>
             <td><label for="Address">Address</label></td>
