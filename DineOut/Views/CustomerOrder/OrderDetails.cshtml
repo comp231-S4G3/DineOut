@@ -67,6 +67,10 @@
 
 <div class="marginTop" style="margin:10px">
     <form asp-action="OrderSummary" method="post">
+        <div class="form-group" style="margin-top:10px; margin-right:80%;">
+            <label class="font-weight-bold">Teble Number: </label>
+            <input name="tableNum" asp-for="@Model.Order.TableNum">
+        </div>
         <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
         <div class="marginTop">
             <button class="btn btn-success" type="submit">Order Summary</button>

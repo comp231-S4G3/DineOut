@@ -29,7 +29,8 @@ namespace DineOut.Controllers
             {
                 CustomerId = customerId,
                 RestaurantId = restaurantId,
-                StatusId = 1
+                StatusId = 1,
+                CreatedOn = DateTime.Now
             };
             DineOutContext.Add(nOrder);
             DineOutContext.SaveChanges();
@@ -139,10 +140,15 @@ namespace DineOut.Controllers
             }
         }
 
-        public IActionResult OrderSummary(int orderId)
+        public IActionResult OrderSummary(int orderId, string tableNum)
         {
             ///Action that directs customer to a summary of their order where thay can remove, update items on their order or submit their order
             ///@param int orderId
+
+            var order = DineOutContext.Order.Find(orderId);
+            order.TableNum = tableNum;
+            DineOutContext.Order.Update(order);
+            DineOutContext.SaveChanges();
 
             orderData.Order = DineOutContext.Order.Find(orderId);
             orderData.OrderItem = DineOutContext.Order_Item.Find(orderId);
