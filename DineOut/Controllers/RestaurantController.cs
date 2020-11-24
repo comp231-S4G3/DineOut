@@ -209,22 +209,35 @@ namespace DineOut.Controllers
             }
             else
             {
-                Console.WriteLine(itemViewModel);
-                Item item = new Item() { 
+                Item item = new Item()
+                {
                     ItemId = itemViewModel.ItemId,
-                    MenuId = itemViewModel.MenuId, 
-                    ItemName = itemViewModel.ItemName, 
-                    Description = itemViewModel.Description, 
-                    Ingredients = itemViewModel.Ingredients, 
-                    Price = itemViewModel.Price, 
-                    Image = itemViewModel.ImagePath, 
-                    Availability = itemViewModel.Availability, 
-                    CreatedOn = itemViewModel.CreatedOn };
+                    MenuId = itemViewModel.MenuId,
+                    ItemName = itemViewModel.ItemName,
+                    Description = itemViewModel.Description,
+                    Ingredients = itemViewModel.Ingredients,
+                    Price = itemViewModel.Price,
+                    Availability = itemViewModel.Availability,
+                    CreatedOn = itemViewModel.CreatedOn
+             
+                };
+                if (itemViewModel.Image != null)
+                {
+                    itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
+                    item.Image = itemViewModel.ImagePath;
+                    DineOutContext.Update(item);
+                }
+                else
+                {
+                    var entry = DineOutContext.Item.First(e => e.ItemId == itemViewModel.ItemId);
+                    item.Image = entry.Image;
+                    DineOutContext.Entry(entry).CurrentValues.SetValues(item);
 
-                DineOutContext.Update(item);
-                DineOutContext.SaveChanges();
+                }
+            DineOutContext.SaveChanges();
 
-            }
+
+        }
             return RedirectToAction("Menu");
         }
         private string uploadImage(IFormFile image)
@@ -376,7 +389,6 @@ namespace DineOut.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
-            TempData["message"] = "works";
             return View();
         }
         [HttpPost]

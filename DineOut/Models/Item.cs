@@ -34,5 +34,10 @@ namespace DineOut.Models
         {
             return ItemName;
         }
+
+        public static explicit operator Item(Task<Item> v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
