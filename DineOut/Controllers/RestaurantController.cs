@@ -369,20 +369,44 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile)
+        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile, string oldPassword, string firstPassword)
         {
-            RestaurantProfile user = DineOutContext.RestaurantProfile.ToList().Find(x => x.Email == restaurantProfile.Email);
+            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
 
-            if (user != null)
+
+            if (firstPassword != restaurantProfile.PasswordHash)
             {
-                //reset password
-                user.PasswordHash = restaurantProfile.PasswordHash;
-                DineOutContext.RestaurantProfile.Update(user);
-                DineOutContext.SaveChanges();
-                return RedirectToAction("OwnerLogin");
-
+                // New Password does not match
+                return View();
             }
-            return View();
+            if (isCustomer != null)
+            {
+                // Customer exist
+                string[] salt = isCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(oldPassword, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+                if (isValid == true)
+                {
+                    // Password match and will be updated
+                    string newSashed = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
+                    // Overwrite to delete the string passsword
+                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
+                    DineOutContext.Update(isCustomer);
+                    DineOutContext.SaveChanges();
+                    return RedirectToAction("Menu");
+                }
+                else
+                {
+                    // Old password does not match
+                    return View();
+
+                }
+            }
+            else
+            {
+                // Customer does not exist
+                return View();
+            }
         }
 
         [HttpPost]
@@ -391,7 +415,7 @@ namespace DineOut.Controllers
             if (firstPassword != restaurantProfile.PasswordHash)
             {
                 // Passwords don't match
-                return View();
+                return View("OwnerRegistration");
             }
             // Generate Salt
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -418,6 +442,35 @@ namespace DineOut.Controllers
             }
         }
 
+        [HttpPost]
+        public IActionResult RestaurantLogin(RestaurantProfile restaurantProfile)
+        {
+            // Check if customner exist
+            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
+
+            if (isCustomer != null)
+            {
+                // Check to see if password matches
+                string[] salt = isCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+
+                if (isValid == true)
+                {
+                    return RedirectToAction("Menu");
+                }
+                else
+                {
+                    // Password does not match
+                    return View("OwnerLogin");
+                }
+
+            }
+            else
+            {
+                return View("OwnerLogin");
+            }
+        }
     }
 
 

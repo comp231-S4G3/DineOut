@@ -98,7 +98,7 @@ namespace DineOut.Controllers
             if (firstPassword != customer.PasswordHash)
             {
                 // Passwords don't match
-                return View();
+                return RedirectToAction("CustomerRegistration");
             }
             // Generate Salt
             RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
@@ -121,7 +121,7 @@ namespace DineOut.Controllers
             catch
             {
                 // Return to same view if cannot save to database
-                return View();
+                return RedirectToAction("CustomerRegistration");
             }
 
         }
