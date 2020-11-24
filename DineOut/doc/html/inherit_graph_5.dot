@@ -1,0 +1,22 @@
+digraph "Graphical Class Hierarchy"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node67 [label="Controller",height=0.2,width=0.4,color="grey75", fillcolor="white", style="filled",tooltip=" "];
+  Node67 -> Node0 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node0 [label="DineOut.Controllers.Customer\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_customer_controller.html",tooltip=" "];
+  Node67 -> Node69 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node69 [label="DineOut.Controllers.Customer\lOrderController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_customer_order_controller.html",tooltip=" "];
+  Node67 -> Node70 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node70 [label="DineOut.Controllers.Home\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_home_controller.html",tooltip=" "];
+  Node67 -> Node71 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node71 [label="DineOut.Controllers.Payment\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_payment_controller.html",tooltip=" "];
+  Node67 -> Node72 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node72 [label="DineOut.Controllers.QrController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_qr_controller.html",tooltip=" "];
+  Node67 -> Node73 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node73 [label="DineOut.Controllers.Restaurant\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_restaurant_controller.html",tooltip=" "];
+  Node67 -> Node74 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node74 [label="DineOut.Controllers.Test\lController",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_dine_out_1_1_controllers_1_1_test_controller.html",tooltip=" "];
+}
