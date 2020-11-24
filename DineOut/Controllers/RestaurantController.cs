@@ -13,8 +13,6 @@ using System.IO;
 using System.Security.Claims;
 using DineOut.Common;
 using Microsoft.AspNetCore.Hosting;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace DineOut.Controllers
 {
@@ -356,6 +354,11 @@ namespace DineOut.Controllers
                     break;
             }
             string to = "Dineout2021@gmail.com";
+            SendMail(body, subject, to);
+        }
+
+        private void SendMail(string body, string subject, string to)
+        {
             string from = "Dineout2021@gmail.com";
             MailMessage message = new MailMessage(from, to);
             message.IsBodyHtml = true;
@@ -369,123 +372,85 @@ namespace DineOut.Controllers
             client.Send(message);
         }
 
-        public string GenerateHash(string input, string salt)
-        {
-            byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
-            SHA256Managed sHA256ManagedString = new SHA256Managed();
-            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
-            return Convert.ToBase64String(hash);
-        }
+
         [HttpGet]
         public IActionResult ForgotPassword()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile, string oldPassword, string firstPassword)
+        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile)
         {
-            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
+            RestaurantProfile user = DineOutContext.RestaurantProfile.ToList().Find(x => x.Email == restaurantProfile.Email);
 
+            if (user != null)
+            {
+                //reset password
+                user.PasswordHash = restaurantProfile.PasswordHash;
+                DineOutContext.RestaurantProfile.Update(user);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
 
-            if (firstPassword != restaurantProfile.PasswordHash)
-            {
-                // New Password does not match
-                return View();
             }
-            if (isCustomer != null)
-            {
-                // Customer exist
-                string[] salt = isCustomer.PasswordHash.Split(":");
-                string newHashedPin = GenerateHash(oldPassword, salt[0]);
-                bool isValid = newHashedPin.Equals(salt[1]);
-                if (isValid == true)
-                {
-                    // Password match and will be updated
-                    string newSashed = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
-                    // Overwrite to delete the string passsword
-                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
-                    DineOutContext.Update(isCustomer);
-                    DineOutContext.SaveChanges();
-                    return RedirectToAction("Menu");
-                }
-                else
-                {
-                    // Old password does not match
-                    return View();
-
-                }
-            }
-            else
-            {
-                // Customer does not exist
-                return View();
-            }
+            return View();
         }
 
         [HttpPost]
-        public IActionResult Register(RestaurantProfile restaurantProfile, string firstPassword)
+        public IActionResult Register(RestaurantProfile restaurantProfile)
         {
-            if (firstPassword != restaurantProfile.PasswordHash)
+            if (ModelState.IsValid)
             {
-                // Passwords don't match
-                return View("OwnerRegistration");
-            }
-            // Generate Salt
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] buff = new byte[31];
-            rng.GetBytes(buff);
-            string salt = Convert.ToBase64String(buff);
-
-            // Generate Hash
-            string hashed = GenerateHash(restaurantProfile.PasswordHash, salt);
-            // Overwrite to delete the string passsword
-            restaurantProfile.PasswordHash = String.Format("{0}:{1}", salt, hashed);
-
-            try
-            {
-                //Try to save new customer
                 DineOutContext.RestaurantProfile.Add(restaurantProfile);
                 DineOutContext.SaveChanges();
-                return RedirectToAction("Menu");
+                return RedirectToAction("OwnerLogin");
             }
-            catch
-            {
-                // Return to same view if cannot save to database
-                return RedirectToAction("OwnerRegistration");
-            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Notification()
+        {
+            ViewBag.RestaurantNames = DineOutContext.Restaurant.ToList().Select(r => r.RestaurantName);
+            return View(DineOutContext.Notification.ToList());
         }
 
         [HttpPost]
-        public IActionResult RestaurantLogin(RestaurantProfile restaurantProfile)
+        public IActionResult Notification(string content, string template)
         {
-            // Check if customner exist
-            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
-
-            if (isCustomer != null)
+            var subject = "recommended dishes";
+            if (template.Equals("covid"))
             {
-                // Check to see if password matches
-                string[] salt = isCustomer.PasswordHash.Split(":");
-                string newHashedPin = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
-                bool isValid = newHashedPin.Equals(salt[1]);
-
-                if (isValid == true)
-                {
-                    return RedirectToAction("Menu");
-                }
-                else
-                {
-                    // Password does not match
-                    return View("OwnerLogin");
-                }
-
+                subject = "covid alert";
             }
-            else
+
+            var failedInfo = "";
+            var customerList = DineOutContext.Customer.Where(customer => customer.Email != null && customer.Email.Trim().Length > 0);
+            foreach (var customer in customerList)
             {
-                return View("OwnerLogin");
+                try
+                {
+                    SendMail(content, subject, customer.Email);
+                }
+                catch (Exception e)
+                {
+                    failedInfo += customer.Email + ": " + e.Message;
+                }
             }
+
+            var notification = new Notification
+            {
+                Content = content,
+                Subject = subject,
+                SendTime = DateTime.Now,
+                FailedInfo = failedInfo
+            };
+            DineOutContext.Notification.Add(notification);
+            DineOutContext.SaveChanges();
+            ViewBag.RestaurantNames = DineOutContext.Restaurant.ToList().Select(r => r.RestaurantName);
+            return View(DineOutContext.Notification.ToList());
         }
+
     }
 
 
 }
-
