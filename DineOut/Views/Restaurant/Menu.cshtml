@@ -40,7 +40,7 @@
                         }
                     </td>
                     <td>
-                        <form asp-action="Delete" method="post">
+                        <form asp-action="Delete_Item" method="post">
                             <input type="hidden" name="itemID" value="@item.ItemId" />
                             <a class="btn btn-sm btn-info" asp-action="Update_Item" asp-route-itemId="@item.ItemId" asp-route-menuId="@item.MenuId">
                                 Edit
@@ -58,5 +58,5 @@
 
 
 <div class="text-center">
-    <a asp-action="Edit" class="btn btn-success">Add New Dish</a>
+    <a asp-action="Update_Item" class="btn btn-success">Add New Dish</a>
 </div>

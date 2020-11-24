@@ -16,6 +16,10 @@ namespace DineOut.Controllers
         public IActionResult OrderDetails(
             int menuId, int customerId, int restaurantId)
         {
+            ///The action that returns the orderable menu. this allows the customer to build their order
+            ///@param int menuId
+            ///@param int restaurantId
+            ///@param int customerId
             //Those parameters are hard coded for testing purpose
             menuId = 1;
             customerId = 1;
@@ -46,6 +50,11 @@ namespace DineOut.Controllers
         public IActionResult AddItem(CustomerOrderViewModel order,
             int quantity, int orderId, int customerId)
         {
+            ///The action adds an item to the current order
+            ///@param int quantity
+            ///@param int orderId
+            ///@param int customerId
+            ///@param CustomerOrderViewModel order
             Order nOrder = new Order
             {
                 OrderId = orderId,
@@ -132,8 +141,8 @@ namespace DineOut.Controllers
 
         public IActionResult OrderSummary(int orderId)
         {
-            //for testing purpose
-            //orderId = 1;
+            ///Action that directs customer to a summary of their order where thay can remove, update items on their order or submit their order
+            ///@param int orderId
 
             orderData.Order = DineOutContext.Order.Find(orderId);
             orderData.OrderItem = DineOutContext.Order_Item.Find(orderId);
@@ -155,6 +164,10 @@ namespace DineOut.Controllers
 
         public IActionResult DeleteItem(int orderId, int itemId, int orderItemId)
         {
+            /// action called when an item is to be removed from an order
+            /// @param int orderId
+            /// @param int itemId
+            /// @param int orderItemIs
             var item_delete = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
@@ -167,6 +180,12 @@ namespace DineOut.Controllers
 
         public IActionResult ChangeQuantity(int orderId, int itemId, int orderItemId, int quantity)
         {
+
+            /// action called when an item's quantity is being changed by the customer
+            /// @param int orderId
+            /// @param int itemId
+            /// @param int orderItemId
+            /// @param int quantity
             var itemUpdate = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
@@ -180,6 +199,9 @@ namespace DineOut.Controllers
 
         public IActionResult BackToMenu(int orderId, string orderNote)
         {
+            ///actiont that takes the customer back from the order summary back to the orderable menu
+            ///@param int orderId
+            ///@param string orderNote
             var order = DineOutContext.Order.Find(orderId);
             order.Note = orderNote;
             DineOutContext.Update(order);
@@ -203,6 +225,11 @@ namespace DineOut.Controllers
         public IActionResult Checkout(int orderId, int customerId,
             double totalPrice, string orderNote)
         {
+            /// the checkout action sends the customer to the payment gateway along with the order id, customer id, the total order price and custom notes
+            /// @param int orderId
+            /// @param int customerId
+            /// @param double totalPrice
+            /// @param string orderNote
             var order = DineOutContext.Order.Find(orderId);
             order.Note = orderNote;
             DineOutContext.Update(order);
@@ -210,7 +237,7 @@ namespace DineOut.Controllers
 
             var customerEmail = DineOutContext.Customer.Find(customerId).Email;
 
-            //Set the payment function
+            //Set the payment function here
 
             return RedirectToAction("OrderSummary",
                 new { orderId = orderId });
@@ -218,6 +245,8 @@ namespace DineOut.Controllers
 
         public IActionResult CancelOrder(int orderId)
         {
+            /// the action that cancels the current order and returns the customer to the customer index page
+            /// @param int orderId
             var order = DineOutContext.Order.Find(orderId);
             //List<OrderItem> orderItems = new List<OrderItem>();
             var orderItems = DineOutContext.Order_Item
