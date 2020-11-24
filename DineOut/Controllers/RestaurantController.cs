@@ -358,6 +358,7 @@ namespace DineOut.Controllers
         [HttpGet]
         public IActionResult ForgotPassword()
         {
+            TempData["message"] = "works";
             return View();
         }
         [HttpPost]
