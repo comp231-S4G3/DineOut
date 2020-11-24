@@ -109,31 +109,350 @@ Inheritance diagram for DineOut.Controllers.CustomerOrderController:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a806f7185da95c322ac0cd8c40328f68a"><td class="memItemLeft" align="right" valign="top"><a id="a806f7185da95c322ac0cd8c40328f68a"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>OrderDetails</b> (int menuId, int customerId, int restaurantId)</td></tr>
+<tr class="memitem:a806f7185da95c322ac0cd8c40328f68a"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a806f7185da95c322ac0cd8c40328f68a">OrderDetails</a> (int menuId, int customerId, int restaurantId)</td></tr>
 <tr class="separator:a806f7185da95c322ac0cd8c40328f68a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa15c81aaa663a7eaeda8316cb5c70511"><td class="memItemLeft" align="right" valign="top"><a id="aa15c81aaa663a7eaeda8316cb5c70511"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>AddItem</b> (<a class="el" href="class_dine_out_1_1_view_models_1_1_customer_order_view_model.html">CustomerOrderViewModel</a> order, int quantity, int orderId, int customerId, List&lt; <a class="el" href="class_dine_out_1_1_models_1_1_order_item.html">OrderItem</a> &gt; orderItems)</td></tr>
+<tr class="memitem:aa15c81aaa663a7eaeda8316cb5c70511"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#aa15c81aaa663a7eaeda8316cb5c70511">AddItem</a> (<a class="el" href="class_dine_out_1_1_view_models_1_1_customer_order_view_model.html">CustomerOrderViewModel</a> order, int quantity, int orderId, int customerId, List&lt; <a class="el" href="class_dine_out_1_1_models_1_1_order_item.html">OrderItem</a> &gt; orderItems)</td></tr>
 <tr class="separator:aa15c81aaa663a7eaeda8316cb5c70511"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a67740f4af12a4c8bbbfa4d0d2a723113"><td class="memItemLeft" align="right" valign="top"><a id="a67740f4af12a4c8bbbfa4d0d2a723113"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>OrderSummary</b> (int orderId, int restaurantId, int customerId)</td></tr>
+<tr class="memitem:a67740f4af12a4c8bbbfa4d0d2a723113"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a67740f4af12a4c8bbbfa4d0d2a723113">OrderSummary</a> (int orderId, int restaurantId, int customerId)</td></tr>
 <tr class="separator:a67740f4af12a4c8bbbfa4d0d2a723113"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7b7609de10b97fdef2669abff6e83e49"><td class="memItemLeft" align="right" valign="top"><a id="a7b7609de10b97fdef2669abff6e83e49"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>DeleteItem</b> (int itemId, int orderItemId)</td></tr>
+<tr class="memitem:a7b7609de10b97fdef2669abff6e83e49"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a7b7609de10b97fdef2669abff6e83e49">DeleteItem</a> (int itemId, int orderItemId)</td></tr>
 <tr class="separator:a7b7609de10b97fdef2669abff6e83e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a793fef4284f9acba6c4adc29daffbaba"><td class="memItemLeft" align="right" valign="top"><a id="a793fef4284f9acba6c4adc29daffbaba"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>ChangeQuantity</b> (int itemId, int orderItemId, int quantity)</td></tr>
+<tr class="memitem:a793fef4284f9acba6c4adc29daffbaba"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a793fef4284f9acba6c4adc29daffbaba">ChangeQuantity</a> (int itemId, int orderItemId, int quantity)</td></tr>
 <tr class="separator:a793fef4284f9acba6c4adc29daffbaba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8debc5daace183e7e45ed8ebac01a482"><td class="memItemLeft" align="right" valign="top"><a id="a8debc5daace183e7e45ed8ebac01a482"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>BackToMenu</b> (int orderId, string orderNote)</td></tr>
+<tr class="memitem:a8debc5daace183e7e45ed8ebac01a482"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a8debc5daace183e7e45ed8ebac01a482">BackToMenu</a> (int orderId, string orderNote)</td></tr>
 <tr class="separator:a8debc5daace183e7e45ed8ebac01a482"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af18731b5caa8f0f5f4456a42e37b1f71"><td class="memItemLeft" align="right" valign="top"><a id="af18731b5caa8f0f5f4456a42e37b1f71"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>Checkout</b> (int orderId, int customerId, double totalPrice, string orderNote)</td></tr>
+<tr class="memitem:af18731b5caa8f0f5f4456a42e37b1f71"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#af18731b5caa8f0f5f4456a42e37b1f71">Checkout</a> (int orderId, int customerId, double totalPrice, string orderNote)</td></tr>
 <tr class="separator:af18731b5caa8f0f5f4456a42e37b1f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71f99c42f11fa85eb9bbbe82c30dd519"><td class="memItemLeft" align="right" valign="top"><a id="a71f99c42f11fa85eb9bbbe82c30dd519"></a>
-IActionResult&#160;</td><td class="memItemRight" valign="bottom"><b>CancelOrder</b> (int orderId)</td></tr>
+<tr class="memitem:a71f99c42f11fa85eb9bbbe82c30dd519"><td class="memItemLeft" align="right" valign="top">IActionResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a71f99c42f11fa85eb9bbbe82c30dd519">CancelOrder</a> (int orderId)</td></tr>
 <tr class="separator:a71f99c42f11fa85eb9bbbe82c30dd519"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aa15c81aaa663a7eaeda8316cb5c70511"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa15c81aaa663a7eaeda8316cb5c70511">&#9670;&nbsp;</a></span>AddItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.AddItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_dine_out_1_1_view_models_1_1_customer_order_view_model.html">CustomerOrderViewModel</a>&#160;</td>
+          <td class="paramname"><em>order</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quantity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>customerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; <a class="el" href="class_dine_out_1_1_models_1_1_order_item.html">OrderItem</a> &gt;&#160;</td>
+          <td class="paramname"><em>orderItems</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The action adds an item to the current order </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>quantity </td></tr>
+    <tr><td class="paramname">int</td><td>orderId </td></tr>
+    <tr><td class="paramname">int</td><td>customerId </td></tr>
+    <tr><td class="paramname">CustomerOrderViewModel</td><td>order </td></tr>
+    <tr><td class="paramname">List</td><td>orderItems <br  />
+</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a8debc5daace183e7e45ed8ebac01a482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8debc5daace183e7e45ed8ebac01a482">&#9670;&nbsp;</a></span>BackToMenu()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.BackToMenu </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>orderNote</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>actiont that takes the customer back from the order summary back to the orderable menu </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>orderId </td></tr>
+    <tr><td class="paramname">string</td><td>orderNote</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a71f99c42f11fa85eb9bbbe82c30dd519"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71f99c42f11fa85eb9bbbe82c30dd519">&#9670;&nbsp;</a></span>CancelOrder()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.CancelOrder </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the action that cancels the current order and returns the customer to the customer index page </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>orderId</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a793fef4284f9acba6c4adc29daffbaba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793fef4284f9acba6c4adc29daffbaba">&#9670;&nbsp;</a></span>ChangeQuantity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.ChangeQuantity </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>itemId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderItemId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>quantity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>action called when an item's quantity is being changed by the customer </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>itemId </td></tr>
+    <tr><td class="paramname">int</td><td>orderItemId </td></tr>
+    <tr><td class="paramname">int</td><td>quantity</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af18731b5caa8f0f5f4456a42e37b1f71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af18731b5caa8f0f5f4456a42e37b1f71">&#9670;&nbsp;</a></span>Checkout()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.Checkout </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>customerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>totalPrice</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>orderNote</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>the checkout action sends the customer to the payment gateway along with the order id, customer id, the total order price and custom notes </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>orderId </td></tr>
+    <tr><td class="paramname">int</td><td>customerId </td></tr>
+    <tr><td class="paramname">double</td><td>totalPrice </td></tr>
+    <tr><td class="paramname">string</td><td>orderNote</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a7b7609de10b97fdef2669abff6e83e49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7609de10b97fdef2669abff6e83e49">&#9670;&nbsp;</a></span>DeleteItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.DeleteItem </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>itemId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderItemId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>action called when an item is to be removed from an order </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>itemId </td></tr>
+    <tr><td class="paramname">int</td><td>orderItemIs</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a806f7185da95c322ac0cd8c40328f68a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a806f7185da95c322ac0cd8c40328f68a">&#9670;&nbsp;</a></span>OrderDetails()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.OrderDetails </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>menuId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>customerId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>restaurantId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>The action that returns the orderable menu. this allows the customer to build their order </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>menuId </td></tr>
+    <tr><td class="paramname">int</td><td>restaurantId </td></tr>
+    <tr><td class="paramname">int</td><td>customerId</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a67740f4af12a4c8bbbfa4d0d2a723113"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a67740f4af12a4c8bbbfa4d0d2a723113">&#9670;&nbsp;</a></span>OrderSummary()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">IActionResult DineOut.Controllers.CustomerOrderController.OrderSummary </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>orderId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>restaurantId</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>customerId</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Action that directs customer to a summary of their order where thay can remove, update items on their order or submit their order </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>orderId </td></tr>
+    <tr><td class="paramname">int</td><td>restaurantId </td></tr>
+    <tr><td class="paramname">int</td><td>customerId</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

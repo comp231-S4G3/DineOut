@@ -31,7 +31,11 @@ var NAVTREE =
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],
-      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ]
+      [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
+      [ "Class Members", "functions.html", [
+        [ "All", "functions.html", null ],
+        [ "Functions", "functions_func.html", null ]
+      ] ]
     ] ]
   ] ]
 ];
@@ -40,7 +44,7 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "class_asp_net_core_1_1_views___shared_____restaurant_layout.html",
-"namespace_dine_out_1_1_controllers.html"
+"namespace_dine_out_1_1_common.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -242,12 +242,12 @@ var NAVTREEINDEX1 =
 "class_dine_out_1_1_view_models_1_1_profile_view_model.html#a51bf1af8ecb3c5178729c57b10608d3f":[1,0,1,4,4,1],
 "class_dine_out_1_1_view_models_1_1_profile_view_model.html#a73d92076b885dfe76780fb36543229a7":[1,0,1,4,4,0],
 "classes.html":[1,1],
+"functions.html":[1,3,0],
+"functions_func.html":[1,3,1],
 "hierarchy.html":[1,2],
 "index.html":[],
-"namespace_asp_net_core.html":[0,0,0],
 "namespace_asp_net_core.html":[1,0,0],
+"namespace_asp_net_core.html":[0,0,0],
 "namespace_dine_out.html":[0,0,1],
-"namespace_dine_out.html":[1,0,1],
-"namespace_dine_out_1_1_common.html":[1,0,1,0],
-"namespace_dine_out_1_1_common.html":[0,0,1,0]
+"namespace_dine_out.html":[1,0,1]
 };

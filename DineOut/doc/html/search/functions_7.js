@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['index_422',['Index',['../class_dine_out_1_1_controllers_1_1_customer_controller.html#adcb70181d837fb47486dda251e52567c',1,'DineOut.Controllers.CustomerController.Index()'],['../class_dine_out_1_1_controllers_1_1_home_controller.html#aedfd620d26e80128fda4ac1f421cfdcb',1,'DineOut.Controllers.HomeController.Index()'],['../class_dine_out_1_1_controllers_1_1_payment_controller.html#ac4f595189c9e210b411b35c6e7e9fa94',1,'DineOut.Controllers.PaymentController.Index()'],['../class_dine_out_1_1_controllers_1_1_test_controller.html#a3627f483b93f4e7aa31039f994adf40e',1,'DineOut.Controllers.TestController.Index()']]]
+  ['orderdetails_173',['OrderDetails',['../class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a806f7185da95c322ac0cd8c40328f68a',1,'DineOut::Controllers::CustomerOrderController']]],
+  ['ordersummary_174',['OrderSummary',['../class_dine_out_1_1_controllers_1_1_customer_order_controller.html#a67740f4af12a4c8bbbfa4d0d2a723113',1,'DineOut::Controllers::CustomerOrderController']]]
 ];

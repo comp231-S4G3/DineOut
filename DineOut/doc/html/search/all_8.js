@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['paymentcontroller_30',['PaymentController',['../class_dine_out_1_1_controllers_1_1_payment_controller.html',1,'DineOut::Controllers']]],
-  ['paymentinformation_31',['PaymentInformation',['../class_dine_out_1_1_models_1_1_payment_information.html',1,'DineOut::Models']]],
-  ['profileviewmodel_32',['ProfileViewModel',['../class_dine_out_1_1_view_models_1_1_profile_view_model.html',1,'DineOut::ViewModels']]],
-  ['program_33',['Program',['../class_dine_out_1_1_program.html',1,'DineOut']]]
+  ['menu_33',['Menu',['../class_dine_out_1_1_models_1_1_menu.html',1,'DineOut.Models.Menu'],['../class_dine_out_1_1_controllers_1_1_customer_controller.html#a3f5ec4d423ab253b468f9317b34ba9d4',1,'DineOut.Controllers.CustomerController.Menu()']]],
+  ['menu_5frestaurantdetails_34',['Menu_RestaurantDetails',['../class_dine_out_1_1_view_models_1_1_menu___restaurant_details.html',1,'DineOut::ViewModels']]]
 ];

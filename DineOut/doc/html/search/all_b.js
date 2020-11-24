@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['startup_38',['Startup',['../class_dine_out_1_1_startup.html',1,'DineOut']]]
+  ['qrcontroller_45',['QrController',['../class_dine_out_1_1_controllers_1_1_qr_controller.html',1,'DineOut::Controllers']]]
 ];

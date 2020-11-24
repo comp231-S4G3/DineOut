@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['homecontroller_21',['HomeController',['../class_dine_out_1_1_controllers_1_1_home_controller.html',1,'DineOut::Controllers']]]
+  ['errorviewmodel_27',['ErrorViewModel',['../class_dine_out_1_1_models_1_1_error_view_model.html',1,'DineOut::Models']]]
 ];
