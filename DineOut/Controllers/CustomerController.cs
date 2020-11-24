@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
 using DineOut.ViewModels;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DineOut.Controllers
 {
@@ -53,26 +55,75 @@ namespace DineOut.Controllers
 
         public IActionResult CustomerLogin() => View();
         public IActionResult CustomerRegistration() => View();
-
+        public string GenerateHash(string input, string salt)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
         [HttpPost]
         public IActionResult CustomerLogin(Customer customer)
         {
-            /// Action login action. takes in a Customer object in order to test that email and password are correct
-            /// @param Customer customer
-            return View();
+            // Check if customner exist
+            var isCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
+
+            if (isCustomer != null)
+            {
+                // Check to see if password matches
+                string[] salt = isCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(customer.PasswordHash, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+
+                if (isValid == true)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Password does not match
+                    return View();
+                }
+                
+            }
+            else
+            {
+                return View();
+            }
+
         }
         [HttpPost]
-        public IActionResult Register(Customer customer)
+        public IActionResult Register(Customer customer, string firstPassword)
         {
-            /// Action responsible for customer registration. takes a customer object in order to create a new custome rin the database
-            /// @param Customer customer
-            if (ModelState.IsValid)
+            if (firstPassword != customer.PasswordHash)
             {
-                DineOutContext.Customer.Add(customer);
-                DineOutContext.SaveChanges();
-                return RedirectToAction("CustomerLogin");
-            }
+                // Passwords don't match
                 return View();
+            }
+            // Generate Salt
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[31];
+            rng.GetBytes(buff);
+            string salt = Convert.ToBase64String(buff);
+
+            // Generate Hash
+            string hashed = GenerateHash(customer.PasswordHash, salt);
+            // Overwrite to delete the string passsword
+            customer.PasswordHash = String.Format("{0}:{1}", salt, hashed);
+
+            try
+            {
+                // Try to save new customer
+                DineOutContext.Add(customer);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                // Return to same view if cannot save to database
+                return View();
+            }
+
         }
 
         [HttpGet]
@@ -81,23 +132,47 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(Customer customer)
+        public IActionResult ForgotPassword(Customer customer, string oldPassword, string firstPassword)
         {
-            ///Action that is responsible to replace a user's password. takes a Customer object in order to match a customer in the database through their email
-            /// @param Customer customer
-            Customer user = DineOutContext.Customer.ToList().Find(x => x.Email == customer.Email);
-            
-            if(user != null)
+            var isCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
+
+
+            if (firstPassword != customer.PasswordHash)
             {
-                //reset password
-                user.PasswordHash = customer.PasswordHash;
-                DineOutContext.Customer.Update(user);
-                DineOutContext.SaveChanges();
-                return RedirectToAction("CustomerLogin");
-                
+                // New Password does not match
+                return View();
             }
-            return View();
+            if (isCustomer !=  null)
+            {
+                // Customer exist
+                string[] salt = isCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(oldPassword, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+                if (isValid == true)
+                {
+                    // Password match and will be updated
+                    string newSashed = GenerateHash(customer.PasswordHash, salt[0]);
+                    // Overwrite to delete the string passsword
+                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
+                    DineOutContext.Update(isCustomer);
+                    DineOutContext.SaveChanges();
+                    return RedirectToAction("CustomerLogin");
+                }
+                else
+                {
+                    // Old password does not match
+                    return View();
+                    
+                }
+            }
+            else
+            {
+                // Customer does not exist
+                return View();
+            }
         }
+        
+
 
         //Menu action created by ederson
 
