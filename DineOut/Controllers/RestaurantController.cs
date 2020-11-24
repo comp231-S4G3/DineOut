@@ -13,6 +13,8 @@ using System.IO;
 using System.Security.Claims;
 using DineOut.Common;
 using Microsoft.AspNetCore.Hosting;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DineOut.Controllers
 {
@@ -354,7 +356,13 @@ namespace DineOut.Controllers
             client.Send(message);
         }
 
-
+        public string GenerateHash(string input, string salt)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
         [HttpGet]
         public IActionResult ForgotPassword()
         {
@@ -378,15 +386,36 @@ namespace DineOut.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RestaurantProfile restaurantProfile)
+        public IActionResult Register(RestaurantProfile restaurantProfile, string firstPassword)
         {
-            if (ModelState.IsValid)
+            if (firstPassword != restaurantProfile.PasswordHash)
             {
+                // Passwords don't match
+                return View();
+            }
+            // Generate Salt
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[31];
+            rng.GetBytes(buff);
+            string salt = Convert.ToBase64String(buff);
+
+            // Generate Hash
+            string hashed = GenerateHash(restaurantProfile.PasswordHash, salt);
+            // Overwrite to delete the string passsword
+            restaurantProfile.PasswordHash = String.Format("{0}:{1}", salt, hashed);
+
+            try
+            {
+                //Try to save new customer
                 DineOutContext.RestaurantProfile.Add(restaurantProfile);
                 DineOutContext.SaveChanges();
-                return RedirectToAction("OwnerLogin");
+                return RedirectToAction("Menu");
             }
-            return View();
+            catch
+            {
+                // Return to same view if cannot save to database
+                return RedirectToAction("OwnerRegistration");
+            }
         }
 
     }
