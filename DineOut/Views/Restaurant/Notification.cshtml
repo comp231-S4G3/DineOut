@@ -1,0 +1,104 @@
+@model IEnumerable<Notification> 
+@{
+    ViewData["Title"] = "Notification";
+    Layout = "_RestaurantLayout";
+}
+<script>
+    function changeTemplate(select) {
+        const lastSelectedIndex = select['lastSelectedIndex'] || 0;
+        const restaurant = document.getElementById('restaurant');
+        const template = document.getElementById('template');
+        const restaurantName = restaurant.options[restaurant.selectedIndex].value;
+        const textarea = document.getElementById('content');
+        if (textarea.innerHTML.trim().length > 0) {
+            if (!confirm('content is not empty, do you sure to discard it.')) {
+                select.selectedIndex = lastSelectedIndex;
+                return;
+            }
+        }
+        select['lastSelectedIndex'] = select.selectedIndex;
+        switch (template.value) {
+            case "covid":
+                textarea.innerHTML = `
+    Dear Client:
+        Our restaurant ${restaurantName} has found a covid-19 patient at [time],
+                `;
+                break;
+            case "common":
+                textarea.innerHTML = `
+    Dear Client:
+        Our restaurant ${restaurantName} has launched new menu.
+                `;
+                break;
+            default:
+                textarea.innerHTML = '';
+                break;
+        }
+    }
+</script>
+<style>
+    td {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+</style>
+<h2>Notification</h2>
+<div>
+    <form method="post" class="w-75 m-auto">
+        <div class="form-group">
+            <label style="width: 150px">Choose Restaurant: </label>
+            <select id="restaurant" name="restaurant" onchange="changeTemplate(this)" required>
+                <option value="" selected>Choose...</option>
+                @foreach (var name in ViewBag.RestaurantNames)
+                {
+                    <option value="@name">@name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label style="width: 150px">Choose Template: </label>
+            <select id="template" name="template" onchange="changeTemplate(this)" required>
+                <option value="" selected>Choose...</option>
+                <option value="covid">Covid</option>
+                <option value="common">Common</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <textarea class="w-100" id="content" name="content" style="min-height: 300px"></textarea>
+        </div>
+        <div>
+            <button class="btn btn-primary">Send Email</button>
+        </div>
+    </form>
+</div>
+@if (Model.Any())
+{
+    <div class="mt-5">
+        <h4 class="m-5">notification histories</h4>
+        <div class="w-75 m-auto">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Notify Id</th>
+                    <th>Send Time</th>
+                    <th>Subject</th>
+                    <th>Content</th>
+                    <th>Failed Info</th>
+                </tr></thead>
+                <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.NotifyId</td>
+                        <td>@item.SendTime</td>
+                        <td>@item.Subject</td>
+                        <td>@item.Content</td>
+                        <td>@item.FailedInfo</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
