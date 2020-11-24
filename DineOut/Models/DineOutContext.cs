@@ -16,6 +16,7 @@ namespace DineOut.Models
         public DbSet<OrderStatus> OrderStatus { get; set; }
         public DbSet<Restaurant> Restaurant { get; set; }
         public DbSet<RestaurantProfile> RestaurantProfile { get; set; }
+        public DbSet<Notification> Notification { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Host=salt.db.elephantsql.com; Port=5432; Database=jliofnqg;Username=jliofnqg; Password=peZJAtdSrAdJIte3YjKqacTbL2PptxD4");
