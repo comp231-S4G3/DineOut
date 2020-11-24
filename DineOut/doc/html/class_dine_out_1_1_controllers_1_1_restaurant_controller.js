@@ -1,0 +1,26 @@
+var class_dine_out_1_1_controllers_1_1_restaurant_controller =
+[
+    [ "RestaurantController", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a499f6f5e0f29b9e72024a44b9ceddbf5", null ],
+    [ "Add_Menu", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#ab631db4bbc8295433ce2eb674e06ed56", null ],
+    [ "Add_Update_Item", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a09af701d29ac7f73852488bc3060a7a6", null ],
+    [ "ChangeStatus", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#ade0ac9f848a187f97889bb41aa7e876e", null ],
+    [ "CompletedOrders", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a59949f4a445616ca6e3d8bd8d7d32aa3", null ],
+    [ "CurrentOrders", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a0dffc1895b6088377a4d036bb8bf5993", null ],
+    [ "Delete_Item", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a291ad81a06d1def901010fb880e2b890", null ],
+    [ "Edit", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a5a58fbf649604f4829824e2cb2ba8556", null ],
+    [ "ForgotPassword", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a49fd82f28bfbb1a9ee1f695570349555", null ],
+    [ "ForgotPassword", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#ac3191fc7ab956c0776eedd12c7d5b224", null ],
+    [ "Menu", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a60210a72d0d9093330cfd06cb41dabbf", null ],
+    [ "OrderByDate", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#aeb7b466b978e9fc98efb4fdc629e1142", null ],
+    [ "OrderByItemPeriod", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a5ef773418037c4c4be0ce22bc9b75c23", null ],
+    [ "OrderDetails", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#aa48b968cc221cdb5e5163e8b18f1770e", null ],
+    [ "Orders", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a2e8dcd69388173e9e1df8f4b40324131", null ],
+    [ "OwnerLogin", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a6ccf45c8ffdfbe47fb316508985b328e", null ],
+    [ "OwnerRegistration", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a1d549fee225d3c1368d4bd121b054e19", null ],
+    [ "Profile", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#adcb3345e7aaf2cb6f8d3e86a293d1d0d", null ],
+    [ "Register", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a992b34c30a47f381bc5bc2807a1cdce2", null ],
+    [ "SaveChanges", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a3b0db5387280229dac8bc878746e63c7", null ],
+    [ "SearchString", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a016cd4441d2cd109f79882d65d69959f", null ],
+    [ "Update_Item", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a6e419d7d2d4a9079df3d1c8e5d5a8576", null ],
+    [ "Update_Menu", "class_dine_out_1_1_controllers_1_1_restaurant_controller.html#a93c05b9e8513c1270d80355eacb29c3c", null ]
+];
