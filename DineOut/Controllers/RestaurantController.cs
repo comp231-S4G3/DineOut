@@ -95,6 +95,8 @@ namespace DineOut.Controllers
             var orderDate = DineOutContext.Order.OrderByDescending(r => r.CreatedOn).ToList();
             return View("Orders", orderDate);
         }
+
+
         // Not yet implemented
         public IActionResult OrderByItemPeriod(string time_period)
         {
@@ -144,10 +146,10 @@ namespace DineOut.Controllers
             //return View("Menu", DineOutContext.Item);
 
         }
-        public IActionResult Edit()
-        {
-            return View();
-        }
+        //public ViewResult Edit()
+        //{
+        //    return View();
+        //}
 
 
         // MENU CRUD
@@ -248,7 +250,9 @@ namespace DineOut.Controllers
 
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
-            var item_delete = DineOutContext.Item.Where(r => r.MenuId == menu_id).Where(r => r.ItemId == item_id).FirstOrDefault();
+            var item_delete = DineOutContext.Item
+                .Where(r => r.ItemId == item_id)
+                .FirstOrDefault();
             DineOutContext.Remove(item_delete);
             DineOutContext.SaveChanges();
             return RedirectToAction("Menu");
