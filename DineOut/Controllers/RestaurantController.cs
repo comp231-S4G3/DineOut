@@ -210,7 +210,16 @@ namespace DineOut.Controllers
             else
             {
                 Console.WriteLine(itemViewModel);
-                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
+                Item item = new Item() { 
+                    ItemId = itemViewModel.ItemId,
+                    MenuId = itemViewModel.MenuId, 
+                    ItemName = itemViewModel.ItemName, 
+                    Description = itemViewModel.Description, 
+                    Ingredients = itemViewModel.Ingredients, 
+                    Price = itemViewModel.Price, 
+                    Image = itemViewModel.ImagePath, 
+                    Availability = itemViewModel.Availability, 
+                    CreatedOn = itemViewModel.CreatedOn };
 
                 DineOutContext.Update(item);
                 DineOutContext.SaveChanges();
