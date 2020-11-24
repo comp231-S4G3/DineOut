@@ -44,7 +44,7 @@ namespace DineOut.Controllers
         //Create a new order
         [HttpPost]
         public IActionResult AddItem(CustomerOrderViewModel order,
-            int quantity, int orderId, int customerId, List<OrderItem> orderItems)
+            int quantity, int orderId, int customerId)
         {
             Order nOrder = new Order
             {
@@ -64,9 +64,19 @@ namespace DineOut.Controllers
                 if (DineOutContext.Order_Item
                     .Any(x => x.OrderId == orderItem.OrderId) == true)
                 {
+                    var checkItems = DineOutContext.Order_Item
+                        .Where(x => x.OrderId == orderItem.OrderId)
+                        .Where(x => x.ItemId == orderItem.ItemId);
+
                     OrderItem checkItem = new OrderItem();
-                    checkItem = orderItems
-                        .Find(x => x.ItemId == orderItem.ItemId);
+
+                    foreach(var i in checkItems)
+                    {
+                        if (orderItem.ItemId == i.ItemId)
+                        {
+                            checkItem = i;
+                        }
+                    }
 
                     if (orderItem.ItemId == checkItem.ItemId)
                     {
@@ -120,42 +130,30 @@ namespace DineOut.Controllers
             }
         }
 
-        //Display order summary
-        public IActionResult OrderSummary(int orderId, int restaurantId, int customerId)
+        public IActionResult OrderSummary(int orderId)
         {
             //for testing purpose
-            orderId = 1;
-            restaurantId = 1;
-            customerId = 1;
+            //orderId = 1;
 
-            List<Item> items = new List<Item>();
-            Order nOrder = new Order
-            {
-                OrderId = orderId,
-                RestaurantId = restaurantId,
-                CustomerId = customerId
-            };
-
-            orderData.Order = DineOutContext.Order.Find(nOrder.OrderId);
-
-            orderData.OrderItem = DineOutContext.Order_Item.Find(nOrder.OrderId);
+            orderData.Order = DineOutContext.Order.Find(orderId);
+            orderData.OrderItem = DineOutContext.Order_Item.Find(orderId);
             orderData.OrderItems = DineOutContext.Order_Item
-                .ToList().FindAll(x => x.OrderId == nOrder.OrderId);
+                .ToList().FindAll(x => x.OrderId == orderId);
             orderData.Restaurant = DineOutContext.Restaurant
-                .Find(nOrder.RestaurantId);
+                .Find(orderData.Order.RestaurantId);
             orderData.Restaurant = DineOutContext.Restaurant
-                .Find(nOrder.RestaurantId);
+                .Find(orderData.Order.RestaurantId);
             orderData.Customer = DineOutContext.Customer
-                .Find(nOrder.CustomerId);
+                .Find(orderData.Order.CustomerId);
             foreach (OrderItem orderItem in orderData.OrderItems)
             {
                 orderItem.Item = DineOutContext.Item.Find(orderItem.ItemId);
             }
 
-            return View(orderData);
+            return View("OrderSummary", orderData);
         }
 
-        public IActionResult DeleteItem(int itemId, int orderItemId)
+        public IActionResult DeleteItem(int orderId, int itemId, int orderItemId)
         {
             var item_delete = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
@@ -163,19 +161,21 @@ namespace DineOut.Controllers
             DineOutContext.Remove(item_delete);
             DineOutContext.SaveChanges();
 
-            return RedirectToAction("OrderSummary");
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
         }
 
-        public IActionResult ChangeQuantity(int itemId, int orderItemId, int quantity)
+        public IActionResult ChangeQuantity(int orderId, int itemId, int orderItemId, int quantity)
         {
             var itemUpdate = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
             itemUpdate.Quantity = quantity;
             DineOutContext.Update(itemUpdate);
-            DineOutContext.SaveChanges(); 
+            DineOutContext.SaveChanges();
 
-            return RedirectToAction("OrderSummary");
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
         }
 
         public IActionResult BackToMenu(int orderId, string orderNote)
@@ -209,10 +209,11 @@ namespace DineOut.Controllers
             DineOutContext.SaveChanges();
 
             var customerEmail = DineOutContext.Customer.Find(customerId).Email;
-            
+
             //Set the payment function
 
-            return RedirectToAction();
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
         }
 
         public IActionResult CancelOrder(int orderId)
