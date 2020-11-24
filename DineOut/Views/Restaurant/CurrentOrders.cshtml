@@ -45,7 +45,9 @@
                     </form>
                 </td>
                 <td>
-                    <form asp-action="Menu" method="post">
+                    <form asp-action="ChangeStatus" method="post">
+                        <input asp-for="@order.OrderId" hidden />
+                        <input asp-for="@order.StatusId" value="5" hidden />
                         <button class="btn btn-success" type="submit">Complete</button>
                     </form>
                 </td>

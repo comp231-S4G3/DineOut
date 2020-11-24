@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
 using DineOut.ViewModels;
-using DineOut.Infrastructure;
 
 namespace DineOut.Controllers
 {
@@ -13,37 +12,36 @@ namespace DineOut.Controllers
     {
         DineOutContext DineOutContext = new DineOutContext();
         CustomerOrderViewModel orderData = new CustomerOrderViewModel();
-        OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();
 
-        public IActionResult OrderDetails(int menuId, int customerId, int restaurantId)
+        public IActionResult OrderDetails(
+            int menuId, int customerId, int restaurantId)
         {
-            //menu_id and customer_id is hard coded for testing purpose
+            ///The action that returns the orderable menu. this allows the customer to build their order
+            ///@param int menuId
+            ///@param int restaurantId
+            ///@param int customerId
+            //Those parameters are hard coded for testing purpose
             menuId = 1;
             customerId = 1;
             restaurantId = 1;
 
             Order nOrder = new Order
             {
-                CustomerId = customerId, //newOrder.Customer.CustomerId
+                CustomerId = customerId,
                 RestaurantId = restaurantId,
-                StatusId = 1
+                StatusId = 1,
+                CreatedOn = DateTime.Now
             };
             DineOutContext.Add(nOrder);
             DineOutContext.SaveChanges();
 
             orderData.Order
                 = DineOutContext.Order.Find(nOrder.OrderId);
-            orderData.Customer
-               = DineOutContext.Customer.Find(nOrder.CustomerId);
             orderData.Menu = DineOutContext.Menu.Find(menuId);
             orderData.Items = DineOutContext.Item
                 .ToList().FindAll(x => x.MenuId == menuId);
             orderData.Restaurant = DineOutContext.Restaurant
-                .Find(orderData.Menu.RestaurantId);
-            foreach (Item item in orderData.Items)
-            {
-                orderData.Item = DineOutContext.Item.Find(item.ItemId);
-            }
+                .Find(nOrder.RestaurantId);
 
             return View(orderData);
         }
@@ -53,6 +51,11 @@ namespace DineOut.Controllers
         public IActionResult AddItem(CustomerOrderViewModel order,
             int quantity, int orderId, int customerId)
         {
+            ///The action adds an item to the current order
+            ///@param int quantity
+            ///@param int orderId
+            ///@param int customerId
+            ///@param CustomerOrderViewModel order
             Order nOrder = new Order
             {
                 OrderId = orderId,
@@ -69,14 +72,26 @@ namespace DineOut.Controllers
             {
                 //Check if the same orderId already exists
                 if (DineOutContext.Order_Item
-                    .Any(x => x.OrderId == orderItem.OrderId))
+                    .Any(x => x.OrderId == orderItem.OrderId) == true)
                 {
-                    if (DineOutContext.Order_Item
-                        .Any(x => x.OrderItemId == orderItem.OrderItemId)
-                        )
+                    var checkItems = DineOutContext.Order_Item
+                        .Where(x => x.OrderId == orderItem.OrderId)
+                        .Where(x => x.ItemId == orderItem.ItemId);
+
+                    OrderItem checkItem = new OrderItem();
+
+                    foreach(var i in checkItems)
                     {
-                        orderItem.Quantity += quantity;
-                        DineOutContext.Order_Item.Update(orderItem);
+                        if (orderItem.ItemId == i.ItemId)
+                        {
+                            checkItem = i;
+                        }
+                    }
+
+                    if (orderItem.ItemId == checkItem.ItemId)
+                    {
+                        checkItem.Quantity += quantity;
+                        DineOutContext.Order_Item.Update(checkItem);
                         DineOutContext.SaveChanges();
                     }
                     else
@@ -101,8 +116,11 @@ namespace DineOut.Controllers
                     .ToList().FindAll(x => x.MenuId == order.Item.MenuId);
                 orderData.Restaurant = DineOutContext.Restaurant
                     .Find(orderData.Menu.RestaurantId);
+                orderData.Item = DineOutContext.Item.Find(order.Item.ItemId);
+                orderData.OrderItems = DineOutContext.Order_Item
+                    .ToList().FindAll(x => x.OrderId == nOrder.OrderId);
 
-                TempData["message"] = "Item is added";
+                TempData["message"] = $"{orderData.Item.ItemName} is added";
                 return View("OrderDetails", orderData);
             }
             else
@@ -115,40 +133,139 @@ namespace DineOut.Controllers
                     .ToList().FindAll(x => x.MenuId == order.Item.MenuId);
                 orderData.Restaurant = DineOutContext.Restaurant
                     .Find(orderData.Menu.RestaurantId);
+                orderData.Item = DineOutContext.Item.Find(order.Item.ItemId);
 
                 TempData["message"] = "Sorry, there is an error. Plese try it again.";
                 return View("OrderDetails", orderData);
             }
         }
 
-        //Display order summary
-        public IActionResult OrderSummary(int orderId, int restaurantId, int customerId)
+        public IActionResult OrderSummary(int orderId, string tableNum)
         {
-            List<Item> items = new List<Item>();
-            Order nOrder = new Order
-            {
-                OrderId = orderId,
-                RestaurantId = restaurantId,
-                CustomerId = customerId
-            };
+            ///Action that directs customer to a summary of their order where thay can remove, update items on their order or submit their order
+            ///@param int orderId
 
-            orderData.Order = DineOutContext.Order.Find(nOrder.OrderId);
+            var order = DineOutContext.Order.Find(orderId);
+            order.TableNum = tableNum;
+            DineOutContext.Order.Update(order);
+            DineOutContext.SaveChanges();
 
-            orderData.OrderItem = DineOutContext.Order_Item.Find(nOrder.OrderId);
+            orderData.Order = DineOutContext.Order.Find(orderId);
+            orderData.OrderItem = DineOutContext.Order_Item.Find(orderId);
             orderData.OrderItems = DineOutContext.Order_Item
-                .ToList().FindAll(x => x.OrderId == nOrder.OrderId);
+                .ToList().FindAll(x => x.OrderId == orderId);
             orderData.Restaurant = DineOutContext.Restaurant
-                .Find(nOrder.RestaurantId);
+                .Find(orderData.Order.RestaurantId);
             orderData.Restaurant = DineOutContext.Restaurant
-                .Find(nOrder.RestaurantId);
+                .Find(orderData.Order.RestaurantId);
             orderData.Customer = DineOutContext.Customer
-                .Find(nOrder.CustomerId);
+                .Find(orderData.Order.CustomerId);
             foreach (OrderItem orderItem in orderData.OrderItems)
             {
                 orderItem.Item = DineOutContext.Item.Find(orderItem.ItemId);
             }
 
-            return View(orderData);
+            return View("OrderSummary", orderData);
+        }
+
+        public IActionResult DeleteItem(int orderId, int itemId, int orderItemId)
+        {
+            /// action called when an item is to be removed from an order
+            /// @param int orderId
+            /// @param int itemId
+            /// @param int orderItemIs
+            var item_delete = DineOutContext.Order_Item
+                .Where(r => r.OrderItemId == orderItemId)
+                .Where(r => r.ItemId == itemId).FirstOrDefault();
+            DineOutContext.Remove(item_delete);
+            DineOutContext.SaveChanges();
+
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
+        }
+
+        public IActionResult ChangeQuantity(int orderId, int itemId, int orderItemId, int quantity)
+        {
+
+            /// action called when an item's quantity is being changed by the customer
+            /// @param int orderId
+            /// @param int itemId
+            /// @param int orderItemId
+            /// @param int quantity
+            var itemUpdate = DineOutContext.Order_Item
+                .Where(r => r.OrderItemId == orderItemId)
+                .Where(r => r.ItemId == itemId).FirstOrDefault();
+            itemUpdate.Quantity = quantity;
+            DineOutContext.Update(itemUpdate);
+            DineOutContext.SaveChanges();
+
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
+        }
+
+        public IActionResult BackToMenu(int orderId, string orderNote)
+        {
+            ///actiont that takes the customer back from the order summary back to the orderable menu
+            ///@param int orderId
+            ///@param string orderNote
+            var order = DineOutContext.Order.Find(orderId);
+            order.Note = orderNote;
+            DineOutContext.Update(order);
+            DineOutContext.SaveChanges();
+
+            orderData.Order
+                = DineOutContext.Order.Find(order.OrderId);
+            orderData.Customer
+                = DineOutContext.Customer.Find(order.CustomerId);
+            orderData.Menu = DineOutContext.Menu.Find(order.RestaurantId);
+            orderData.Items = DineOutContext.Item
+                .ToList().FindAll(x => x.MenuId == orderData.Menu.MenuId);
+            orderData.Restaurant = DineOutContext.Restaurant
+                .Find(order.RestaurantId);
+            orderData.OrderItems = DineOutContext.Order_Item
+                .ToList().FindAll(x => x.OrderId == order.OrderId);
+
+            return View("OrderDetails", orderData);
+        }
+
+        public IActionResult Checkout(int orderId, int customerId,
+            double totalPrice, string orderNote)
+        {
+            /// the checkout action sends the customer to the payment gateway along with the order id, customer id, the total order price and custom notes
+            /// @param int orderId
+            /// @param int customerId
+            /// @param double totalPrice
+            /// @param string orderNote
+            var order = DineOutContext.Order.Find(orderId);
+            order.Note = orderNote;
+            DineOutContext.Update(order);
+            DineOutContext.SaveChanges();
+
+            var customerEmail = DineOutContext.Customer.Find(customerId).Email;
+
+            //Set the payment function here
+
+            return RedirectToAction("OrderSummary",
+                new { orderId = orderId });
+        }
+
+        public IActionResult CancelOrder(int orderId)
+        {
+            /// the action that cancels the current order and returns the customer to the customer index page
+            /// @param int orderId
+            var order = DineOutContext.Order.Find(orderId);
+            //List<OrderItem> orderItems = new List<OrderItem>();
+            var orderItems = DineOutContext.Order_Item
+                .Where(x => x.OrderId == orderId).ToList();
+
+            //DineOutContext.Remove(order);
+            //foreach(var orderItem in orderItems)
+            //{
+            //    DineOutContext.Remove(orderItem);
+            //}
+            //DineOutContext.SaveChanges();
+
+            return RedirectToAction("Index", "Customer");
         }
     }
 }

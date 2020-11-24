@@ -1,7 +1,7 @@
 ﻿@model DineOut.ViewModels.CustomerOrderViewModel
 @{
     ViewData["Title"] = "Create Order";
-    Layout = "_Layout";
+    Layout = "_CustomerLayout";
 }
 
 @if (TempData["message"] != null)
@@ -11,8 +11,7 @@
 
 <h1>@Model.Restaurant.RestaurantName</h1>
 <h2>@Model.Menu.Title</h2>
-<h2>OrderId: @Model.Order.OrderId</h2>
-<h2>CustomerId: @Model.Customer.CustomerId</h2>
+<h2>OrderId: @Model.Order.OrderId <em style="color: red">*For testing purpose</em></h2>
 
 @foreach (var item in Model.Items)
 {
@@ -38,33 +37,46 @@
         </div>
 
         <form asp-action="AddItem" method="post">
-            <div style="margin:10px">
+            <div class="form-group" style="width:75px">
                 <label class="font-weight-bold"
                        asp-for="@Model.OrderItem.Quantity"></label>
-                <div><input name="quantity" asp-for="@Model.OrderItem.Quantity" type="number" /></div>
+                <select class="form-control"
+                        name="quantity" asp-for="@Model.OrderItem.Quantity">
+                    @if (Model.OrderItem != null)
+                    {
+                        <option value="@Model.OrderItem.Quantity">
+                            @Model.OrderItem.Quantity</option>
+                    }
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
             </div>
             <div class="marginTop">
                 <input type="hidden" name="item.ItemId" value="@item.ItemId" />
                 <input type="hidden" asp-for="@item.MenuId" />
                 <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-                <input type="hidden" name="customerId" asp-for="@Model.Customer.CustomerId" />
-                @*<input type="hidden" name="OrderItemId" asp-for="@Model.OrderItem.OrderItemId" />*@
+                <input type="hidden" name="customerId" asp-for="@Model.Order.CustomerId" />
                 <button class="btn btn-success" type="submit">Add</button>
             </div>
         </form>
     </div>
 }
 
-<div class="marginTop">
+<div class="marginTop" style="margin:10px">
     <form asp-action="OrderSummary" method="post">
+        <div class="form-group" style="margin-top:10px; margin-right:80%;">
+            <label class="font-weight-bold">Teble Number: </label>
+            <input name="tableNum" asp-for="@Model.Order.TableNum">
+        </div>
         <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-        <input type="hidden" name="restaurantId" asp-for="@Model.Restaurant.RestaurantId" />
-        <input type="hidden" name="customerId" asp-for="@Model.Customer.CustomerId" />
         <div class="marginTop">
             <button class="btn btn-success" type="submit">Order Summary</button>
         </div>
     </form>
-    <div class="btn btn-danger">
+    <div>
         <a class="btn btn-danger" asp-controller="Home"
            asp-action="Index">Cancel Order</a>
     </div>
