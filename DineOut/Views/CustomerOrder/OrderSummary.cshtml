@@ -4,6 +4,11 @@
     Layout = "_CustomerLayout";
 }
 
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success mt-1">@TempData["message"]</div>
+}
+
 <h2>Order Summary</h2>
 <table class="table table-bordered table-striped">
     <thead>
@@ -46,6 +51,7 @@
                     <form action="ChangeQuantity" method="post">
                         <input type="hidden" name="itemId" asp-for="@item.Item.ItemId" />
                         <input type="hidden" name="orderItemId" asp-for="@item.OrderItemId" />
+                        <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
                         <div class="form-group" style="margin-top:10px; margin-right:80%;">
                             <select class="form-control" name="quantity"
                                     asp-for="@item.Quantity">
@@ -63,6 +69,7 @@
                     <form asp-action="DeleteItem" method="post">
                         <input type="hidden" name="itemId" value="@item.ItemId" />
                         <input type="hidden" name="orderItemId" value="@item.OrderItemId" />
+                        <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
                         <button type="submit" title="Delete Item" class="btn btn-sm btn-danger"
                                 onclick="location.href='@Url.Action("DeleteItem",
                                                        new { menuId = item.OrderItemId, itemId = item.ItemId})'">
