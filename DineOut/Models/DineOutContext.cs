@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DineOut.Data;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
 namespace DineOut.Models
@@ -20,6 +23,7 @@ namespace DineOut.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             => optionsBuilder.UseNpgsql("Host=salt.db.elephantsql.com; Port=5432; Database=jliofnqg;Username=jliofnqg; Password=peZJAtdSrAdJIte3YjKqacTbL2PptxD4");
+     
 
     }
 }

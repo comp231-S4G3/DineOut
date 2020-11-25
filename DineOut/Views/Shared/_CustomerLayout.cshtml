@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,17 +11,23 @@
 </head>
 <body>
     <div style="float:right">
-        <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
-            <span>
-                <small>Customer Login</small>
-            </span>
-        </a>
-        &nbsp;&nbsp;
-        <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">
-            <span>
-                <small>Log Out</small>
-            </span>
-        </a>
+        @if (Context.Session.GetString("customer_id") == null)
+        {
+            <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
+                <span>
+                    <small>Customer Login</small>
+                </span>
+            </a>
+        }
+        else
+        {
+            <a asp-action="CustomerLogout" asp-controller="Customer" class="btn btn-sm btn-success">
+                <span>
+                    <small>Log Out</small>
+                </span>
+            </a>
+        }
+
     </div>
 
     <div class="bg-dark">
@@ -30,11 +38,16 @@
             <ul class="nav navbar-nav mr-auto">
                 <li class="nav-item active"><a asp-controller="Customer" asp-action="Index" class="nav-link">Home</a></li>
                 <li class="nav-item active"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                <li class="nav-item active"><a asp-controller="Payment"  class="nav-link">Payment</a></li>
+                <li class="nav-item active"><a asp-controller="Payment" class="nav-link">Payment</a></li>
             </ul>
         </nav>
     </div>
-
+    <div>
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success mt-1">@TempData["message"]</div>
+        }
+    </div>
     <div style="float:right">
         <form class="form-inline my-2 my-lg-0" asp-controller="Customer" asp-action="SearchString">
             <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" name="searchedString" />
