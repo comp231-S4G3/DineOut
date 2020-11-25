@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -9,11 +11,22 @@
 </head>
 <body>
     <div style="float:right">
-        <a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">
-            <span>
-                <small>Log Out</small>
-            </span>
-        </a>
+        @if (Context.Session.GetString("restaurant_owner_Id") == null)
+        {
+            <a asp-action="OwnerLogin" asp-controller="Restaurant" class="btn btn-sm btn-success">
+                <span>
+                    <small>Restaurant Login</small>
+                </span>
+            </a>
+        }
+        else
+        {
+            <a asp-action="RestaurantLogout" asp-controller="Restaurant" class="btn btn-sm btn-success">
+                <span>
+                    <small>Log Out</small>
+                </span>
+            </a>
+        }
     </div>
     <div class="bg-dark">
         <h2 class="navbar-brand text-light">DineOut</h2>

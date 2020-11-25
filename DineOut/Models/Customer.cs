@@ -22,7 +22,7 @@ namespace DineOut.Models
         public DateTime CreatedOn { get; set; }
         public override string ToString()
         {
-            return Name;
+            return CustomerId.ToString();
         }
     }
 }

@@ -21,7 +21,6 @@ namespace DineOut.Controllers
         AzureConnection AzureConnection = new AzureConnection();
         DineOutContext DineOutContext = new DineOutContext();
         OrderDetailsInfo orderDetailsInfo = new OrderDetailsInfo();  // this a new view model
-        ProfileViewModel profileInfo = new ProfileViewModel();
         List<Order> orders = new List<Order>();
 
         public RestaurantController()
@@ -60,8 +59,14 @@ namespace DineOut.Controllers
 
         public IActionResult Profile()
         {
-            int restaurantId = 2;
-            int restaurantProfileId = 2;
+            ProfileViewModel profileInfo = new ProfileViewModel();
+            int profile_id = Int32.Parse(HttpContext.Session.GetString("restaurant_owner_Id"));
+            int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == profile_id).RestaurantId;
+            var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+
+
+            int restaurantId = restaurant_id;
+            int restaurantProfileId = profile_id;
             //TempData["message"] = $"Your changes have been saved succesfully";
             profileInfo.restaurant = DineOutContext.Restaurant.Find(restaurantId);
             profileInfo.restaurantProfile = DineOutContext.RestaurantProfile.Find(restaurantProfileId);
@@ -136,74 +141,89 @@ namespace DineOut.Controllers
 
 
 
-        // Test View
+        // MENU View
         public IActionResult Menu()
         {
-            int restaurant_id = 2;
-            var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
-            var items = DineOutContext.Item.Where(r => r.MenuId == menud_id).ToList();
-            return View("Menu", items);
-            //return View("Menu", DineOutContext.Item);
+            var profile_id =  HttpContext.Session.GetString("restaurant_owner_Id");
+            if (profile_id != null)
+            {
+                int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == Int32.Parse(profile_id)).RestaurantId;
+                var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+                var items = DineOutContext.Item.Where(r => r.MenuId == menud_id).ToList();
+                return View("Menu", items);
+            }
+            return RedirectToAction("OwnerLogin");
+            
 
         }
-        //public ViewResult Edit()
-        //{
-        //    return View();
-        //}
-
 
         // MENU CRUD
         public IActionResult Add_Menu(int restaurant_id, string menu_title)
         {
-            var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault();
-
-            if (menu_row != null)
+            var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+            if (profile_id != null)
             {
-                TempData["message"] = $"You already have a menu created!";
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                Menu menu_object = new Menu();
-                menu_object.RestaurantId = restaurant_id;
-                var datetime = DateTime.Now.ToString("yyyy-MM-dd");
-                menu_object.CreatedOn = DateTime.Today;
-                menu_object.Title = menu_title;
-                Console.WriteLine(menu_object);
+                var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault();
 
-                DineOutContext.Add(menu_object);
-                DineOutContext.SaveChanges();
+                if (menu_row != null)
+                {
+                    TempData["message"] = $"You already have a menu created!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    Menu menu_object = new Menu();
+                    menu_object.RestaurantId = restaurant_id;
+                    var datetime = DateTime.Now.ToString("yyyy-MM-dd");
+                    menu_object.CreatedOn = DateTime.Today;
+                    menu_object.Title = menu_title;
+                    Console.WriteLine(menu_object);
 
-                TempData["message"] = $"Welcome! Your menu has been created!";
-                return RedirectToAction("Menu");
+                    DineOutContext.Add(menu_object);
+                    DineOutContext.SaveChanges();
+
+                    TempData["message"] = $"Welcome! Your menu has been created!";
+                    return RedirectToAction("Menu");
+                }
             }
+            return RedirectToAction("OwnerLogin");
         }
 
         public IActionResult Update_Menu(int restaurant_id, int menu_id, string menu_title)
         {
-            var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id)
+            var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+            if (profile_id != null)
+            {
+                var menu_row = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id)
                 .Where(r => r.MenuId == menu_id)
                 .FirstOrDefault();
 
-            Menu menu_object = menu_row;
+                Menu menu_object = menu_row;
 
-            menu_object.Title = menu_title;
-            Console.WriteLine(menu_object);
+                menu_object.Title = menu_title;
+                Console.WriteLine(menu_object);
 
-            DineOutContext.Update(menu_object);
-            DineOutContext.SaveChanges();
+                DineOutContext.Update(menu_object);
+                DineOutContext.SaveChanges();
 
-            TempData["message"] = $"Title updated!";
-            return RedirectToAction("Menu");
+                TempData["message"] = $"Title updated!";
+                return RedirectToAction("Menu");
+            }
+            return RedirectToAction("OwnerLogin");
         }
         [ValidateAntiForgeryToken]
         public IActionResult Add_Update_Item(ItemViewModel itemViewModel)
         {
             if (itemViewModel.ItemId == 0)
             {
+                var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+                int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == Int32.Parse(profile_id)).RestaurantId;
+                var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+
+
                 itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
                 Console.WriteLine(itemViewModel);
-                Item item = new Item() { MenuId = itemViewModel.MenuId, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
+                Item item = new Item() { MenuId = menud_id, ItemName = itemViewModel.ItemName, Description = itemViewModel.Description, Ingredients = itemViewModel.Ingredients, Price = itemViewModel.Price, Image = itemViewModel.ImagePath, Availability = itemViewModel.Availability, CreatedOn = itemViewModel.CreatedOn };
                 DineOutContext.Add(item);
                 DineOutContext.SaveChanges();
             }
@@ -282,7 +302,9 @@ namespace DineOut.Controllers
 
         public IActionResult Update_Item(int itemId, int menuId)
         {
+            
             var item = DineOutContext.Item.Where(r => r.MenuId == menuId).Where(r => r.ItemId == itemId).FirstOrDefault();
+           
             Console.WriteLine(item);
             return View("Edit", item);
         }
@@ -409,12 +431,49 @@ namespace DineOut.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RestaurantProfile restaurantProfile)
+        public IActionResult RestaurantLogin(RestaurantProfile restaurantProfile)
+        {
+            var loggedInOwner = DineOutContext.RestaurantProfile.ToList().Find(c => c.Email == restaurantProfile.Email);
+            if (loggedInOwner != null)
+            {
+                if (loggedInOwner.PasswordHash.Equals(restaurantProfile.PasswordHash))
+                {
+
+                    HttpContext.Session.SetString("restaurant_owner_Id", loggedInOwner.ToString());
+                    TempData["message"] = "Successfully Logged In!";
+                    return RedirectToAction("Menu");
+                }
+            }
+            TempData["message"] = "Invalid Login!";
+            return RedirectToAction("OwnerLogin");
+        }
+
+        public IActionResult RestaurantLogout()
+        {
+            HttpContext.Session.Remove("restaurant_owner_Id");
+            TempData["message"] = "Successfully Logged Out!";
+            return RedirectToAction("OwnerLogin");
+        }
+
+
+        [HttpPost]
+        public IActionResult Register(ProfileViewModel profileViewModel)
         {
             if (ModelState.IsValid)
             {
-                DineOutContext.RestaurantProfile.Add(restaurantProfile);
+                var profile = DineOutContext.RestaurantProfile.Add(profileViewModel.restaurantProfile);
                 DineOutContext.SaveChanges();
+                Restaurant restaurant = new Restaurant();
+                restaurant.RestaurantName = profileViewModel.restaurant.RestaurantName;
+                restaurant.RestaurantProfileId = profile.Entity.RestaurantProfileId;
+                DineOutContext.Restaurant.Add(restaurant);
+                DineOutContext.SaveChanges();
+                Menu menu = new Menu();
+                menu.Title = restaurant.RestaurantName + " Menu";
+                menu.RestaurantId = restaurant.RestaurantId;
+                DineOutContext.Menu.Add(menu);
+                DineOutContext.SaveChanges();
+                TempData["message"] = "Successfully Registed!";
                 return RedirectToAction("OwnerLogin");
             }
             return View();

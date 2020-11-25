@@ -34,15 +34,15 @@ namespace DineOut
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseNpgsql("DefaultEndpointsProtocol=https;AccountName=dineout5;AccountKey=dbfbz68bPqcki2XygjEnn1SYZPNb4bg/g4vXXvJDxdmJbEiAlZPHQrW2DWHiX7gi5/abRojfscnARnEAb+j7dw==;EndpointSuffix=core.windows.net"));
+
             services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+               .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMemoryCache();

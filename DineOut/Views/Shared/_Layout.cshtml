@@ -9,6 +9,7 @@
 </head>
 <body>
     <div style="float:right">
+
         <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
             <span>
                 <small>Customer Login</small>
@@ -20,6 +21,7 @@
                 <small>Owner Login</small>
             </span>
         </a>
+
     </div>
     
     <div class="bg-dark">
@@ -33,7 +35,12 @@
             </ul>
         </nav>
     </div>
-
+    <div>
+        @if (TempData["message"] != null)
+        {
+            <div class="alert alert-success mt-1">@TempData["message"]</div>
+        }
+    </div>
     <div>
         @RenderBody()
         <hr />
