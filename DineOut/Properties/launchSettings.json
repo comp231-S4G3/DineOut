@@ -6,5 +6,16 @@
       "applicationUrl": "http://localhost:50682",
       "sslPort": 0
     }
+  },
+  "profiles": {
+    "DineOut": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "sqlDebugging": false,
+      "nativeDebugging": false
+    }
   }
 }

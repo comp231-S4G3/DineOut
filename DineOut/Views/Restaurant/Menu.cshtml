@@ -11,16 +11,30 @@
 
 <div class="container-fluid d-flex justify-content-center" style="margin-top:20px">
     <table class="table table-sm table-striped" style="margin:auto; width:50% !important">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Image</th>
-                <th>Dish</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
+        @if (Model.Count() == 0)
+        {
+            <thead>
+                <tr>
+                    <td class="text-center font-weight-bold">You have not created your first dish yet!</td>
+                </tr>
+                <tr>
+                    <td class="text-center font-weight-bold">What are you waiting for?!</td>
+                </tr>
+            </thead>
+        }
+        else
+        {
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Dish</th>
+                    <th>Price</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+        }
         <tbody>
             @foreach (var item in Model)
             {
