@@ -16,15 +16,27 @@
     </div>
 }
 <table class="table table-sm table-bordered text-center">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Table #</th>
-            <th>Costumer</th>
-            <th>Date</th>
-            <th colspan="2">Status</th>
-        </tr>
-    </thead>
+    @if (Model.Count() == 0)
+    {
+        <thead>
+            <tr>
+                <th class=" text-sm-center font-weight-bold">You have no current orders yet!</th>
+            </tr>
+        </thead>
+    }
+    else
+    {
+        <thead>
+            <tr>
+                <th>Order#</th>
+                <th>Table #</th>
+                <th>Costumer</th>
+                <th>Date</th>
+                <th colspan="2">Status</th>
+            </tr>
+        </thead>
+    }
+
     <tbody>
         @foreach (var order in Model)
         {
@@ -39,8 +51,8 @@
                 <td>@order.CreatedOn</td>
                 <td>
                     <form asp-action="ChangeStatus" method="post">
-                        <input asp-for="@order.OrderId" hidden/>
-                        <input asp-for="@order.StatusId" value="@(order.StatusId + 1)" hidden/>
+                        <input asp-for="@order.OrderId" hidden />
+                        <input asp-for="@order.StatusId" value="@(order.StatusId + 1)" hidden />
                         <button class="btn btn-danger" type="submit">@orderStatus[order.StatusId]</button>
                     </form>
                 </td>

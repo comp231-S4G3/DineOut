@@ -35,25 +35,54 @@ namespace DineOut.Controllers
 
         public IActionResult Orders()
         {
-            return View(DineOutContext.Order.OrderBy(o => o.OrderId));
+            var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+            int restautantId = DineOutContext.Restaurant.ToList()
+                    .Find(o => o.RestaurantProfileId == Int32.Parse(profile_id))
+                    .RestaurantId;
+            return View(DineOutContext.Order
+                .Where(o => o.RestaurantId == restautantId)
+                .OrderBy(o => o.OrderId)
+                .ToList());
         }
         public IActionResult CompletedOrders(int statusOrder)
         {
             statusOrder = 5; //A status Order of 5 is considered completed
-            orders = DineOutContext.Order
-                .OrderBy(o => o.OrderId)
-                .ToList()
-                .FindAll(o => o.StatusId == statusOrder);
+            var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+            if (profile_id != null)
+            {
+                int restautantId = DineOutContext.Restaurant.ToList()
+                    .Find(o => o.RestaurantProfileId == Int32.Parse(profile_id))
+                    .RestaurantId;
+                orders = DineOutContext.Order
+                            .Where(o => o.RestaurantId == restautantId)
+                            .OrderBy(o => o.OrderId)
+                            .ToList()
+                            .FindAll(o => o.StatusId == statusOrder);
+            }
+            //orders = DineOutContext.Order
+            //    .OrderBy(o => o.OrderId)
+            //    .ToList()
+            //    .FindAll(o => o.StatusId == statusOrder);
             return View(orders);
         }
         public IActionResult CurrentOrders()
         {
+            var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+            if (profile_id != null)
+            {
+                int restautantId = DineOutContext.Restaurant.ToList()
+                    .Find(o => o.RestaurantProfileId == Int32.Parse(profile_id))
+                    .RestaurantId;
+                orders = DineOutContext.Order
+                            .Where(o => o.RestaurantId == restautantId)
+                            .OrderBy(o => o.OrderId)
+                            .ToList()
+                            .FindAll(o => o.StatusId != 5);
+            }
+
             //This will populate Orders that are of any statuses but 5
             //Which means Orders that are still open and/or current
-            orders = DineOutContext.Order
-                .OrderBy(o => o.OrderId)
-                .ToList()
-                .FindAll(o => o.StatusId != 5);
+            
             return View(orders);
         }
 
@@ -67,7 +96,6 @@ namespace DineOut.Controllers
 
             int restaurantId = restaurant_id;
             int restaurantProfileId = profile_id;
-            //TempData["message"] = $"Your changes have been saved succesfully";
             profileInfo.restaurant = DineOutContext.Restaurant.Find(restaurantId);
             profileInfo.restaurantProfile = DineOutContext.RestaurantProfile.Find(restaurantProfileId);
 
@@ -473,7 +501,7 @@ namespace DineOut.Controllers
                 menu.RestaurantId = restaurant.RestaurantId;
                 DineOutContext.Menu.Add(menu);
                 DineOutContext.SaveChanges();
-                TempData["message"] = "Successfully Registed!";
+                TempData["message"] = "Successfully Registered!";
                 return RedirectToAction("OwnerLogin");
             }
             return View();
