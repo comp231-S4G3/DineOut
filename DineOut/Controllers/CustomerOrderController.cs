@@ -20,10 +20,11 @@ namespace DineOut.Controllers
             ///@param int menuId
             ///@param int restaurantId
             ///@param int customerId
+            ///
             //Those parameters are hard coded for testing purpose
-            menuId = 1;
-            customerId = 1;
-            restaurantId = 1;
+            //menuId = 1;
+            //customerId = 1;
+            //restaurantId = 1;
 
             Order nOrder = new Order
             {
@@ -244,10 +245,8 @@ namespace DineOut.Controllers
 
             var customerEmail = DineOutContext.Customer.Find(customerId).Email;
 
-            //Set the payment function here
-
-            return RedirectToAction("OrderSummary",
-                new { orderId = orderId });
+            return RedirectToAction("index", "Payment",
+                new { totalPrice = totalPrice });
         }
 
         public IActionResult CancelOrder(int orderId)
