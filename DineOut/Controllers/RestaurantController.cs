@@ -461,16 +461,19 @@ namespace DineOut.Controllers
         {
             if (ModelState.IsValid)
             {
+                profileViewModel.restaurantProfile.CreatedOn = DateTime.Now;
                 var profile = DineOutContext.RestaurantProfile.Add(profileViewModel.restaurantProfile);
                 DineOutContext.SaveChanges();
                 Restaurant restaurant = new Restaurant();
                 restaurant.RestaurantName = profileViewModel.restaurant.RestaurantName;
                 restaurant.RestaurantProfileId = profile.Entity.RestaurantProfileId;
+                restaurant.CreatedOn = DateTime.Now;
                 DineOutContext.Restaurant.Add(restaurant);
                 DineOutContext.SaveChanges();
                 Menu menu = new Menu();
                 menu.Title = restaurant.RestaurantName + " Menu";
                 menu.RestaurantId = restaurant.RestaurantId;
+                menu.CreatedOn = DateTime.Now;
                 DineOutContext.Menu.Add(menu);
                 DineOutContext.SaveChanges();
                 TempData["message"] = "Successfully Registed!";
