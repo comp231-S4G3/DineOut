@@ -49,7 +49,7 @@ namespace DineOut.Controllers
         //Create a new order
         [HttpPost]
         public IActionResult AddItem(CustomerOrderViewModel order,
-            int quantity, int orderId, int customerId)
+            int quantity, int orderId, int customerId, string tableNum)
         {
             ///The action adds an item to the current order
             ///@param int quantity
@@ -59,7 +59,8 @@ namespace DineOut.Controllers
             Order nOrder = new Order
             {
                 OrderId = orderId,
-                CustomerId = customerId
+                CustomerId = customerId,
+                TableNum = tableNum
             };
 
             OrderItem orderItem = new OrderItem
