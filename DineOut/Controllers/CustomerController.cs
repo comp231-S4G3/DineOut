@@ -113,11 +113,21 @@ namespace DineOut.Controllers
 
         //Menu action created by ederson
 
-        public IActionResult Menu(int menuId = 1, int restaurantId = 1)//default parameter just for testing porpuse
+        public IActionResult Menu(int menuId, int restaurantId)//default parameter just for testing porpuse
         {
-            itemsOfRestaurant.Items = DineOutContext.Item.ToList().FindAll(x => x.MenuId == menuId && x.Availability == true);// displaying only available items
-            itemsOfRestaurant.Restaurant = DineOutContext.Restaurant.Find(restaurantId);
-            return View(itemsOfRestaurant);
+            var customer_id = HttpContext.Session.GetString("customer_id");
+            if (customer_id != null)
+            {
+                return RedirectToAction("OrderDetails", "CustomerOrder",
+                    new { customerId = customer_id, menuId = menuId,
+                        restaurantId = restaurantId});
+            }
+            else
+            {
+                itemsOfRestaurant.Items = DineOutContext.Item.ToList().FindAll(x => x.MenuId == menuId && x.Availability == true);// displaying only available items
+                itemsOfRestaurant.Restaurant = DineOutContext.Restaurant.Find(restaurantId);
+                return View(itemsOfRestaurant);
+            }
         }
 
 
