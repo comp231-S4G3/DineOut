@@ -6,9 +6,10 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" asp-href-include="/lib/bootstrap/**/*.min.css"
           asp-href-exclude="**/*-reboot, **/*-grid" />
+    <link rel="shortcut icon" href="/images/favicon.png" />
 </head>
-<body>
-    <div style="float:right">
+<body background="/images/bg.png">
+    <div style="float: right; margin: 2rem;">
 
         <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
             <span>
@@ -23,9 +24,14 @@
         </a>
 
     </div>
-    
+
     <div class="bg-dark">
-        <h2 class="navbar-brand text-light">DineOut</h2>
+        @*<h2 class="navbar-brand text-light">DineOut</h2>*@
+        <div class="navbar-brand text-light">
+                <a asp-controller="Home" asp-action="Index">
+                    <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+                </a>
+        </div>
     </div>
     <div class="font-weight-bold">
         <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
@@ -44,8 +50,14 @@
     <div>
         @RenderBody()
         <hr />
-        <footer class="d-flex justify-content-center">
-            <p>&copy; 2020 - COMP231 Group4 - Project DineOut</p>
+        <footer>
+            <p class="d-flex justify-content-center">
+                &copy; 2020 - COMP231 Group4 - Project DineOut
+            </p>
+            <p class="d-flex justify-content-center">
+                Background image is lisenced by
+                <a href='https://pngtree.com/free-backgrounds' target="_blank">pngtree.com</a>
+            </p>
         </footer>
     </div>
 </body>
