@@ -219,7 +219,7 @@ namespace DineOut.Controllers
                 = DineOutContext.Order.Find(order.OrderId);
             orderData.Customer
                 = DineOutContext.Customer.Find(order.CustomerId);
-            orderData.Menu = DineOutContext.Menu.Find(order.RestaurantId);
+            orderData.Menu = DineOutContext.Menu.ToList().Find(x=> x.RestaurantId == order.RestaurantId);
             orderData.Items = DineOutContext.Item
                 .ToList().FindAll(x => x.MenuId == orderData.Menu.MenuId);
             orderData.Restaurant = DineOutContext.Restaurant
