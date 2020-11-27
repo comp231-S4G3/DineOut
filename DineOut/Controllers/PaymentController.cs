@@ -8,9 +8,13 @@ namespace DineOut.Controllers
     public class PaymentController : Controller
     {
 
+        double totalPrice;
         string error;
-        public IActionResult Index()
+        public IActionResult Index(int totalPrice)
         {
+
+            ViewBag.Greeting = (totalPrice.ToString("C"));
+            this.totalPrice = totalPrice;
             return View();
         }
 
@@ -26,6 +30,8 @@ namespace DineOut.Controllers
         {
             try
             {
+                //cardInfo.Amount = totalPrice.ToString();
+
                 Stripe.StripeConfiguration.SetApiKey("sk_test_51HqI05B1UsJ4lZg1agboQSE7i0fWn98619xc2FP5NhREH4igqo1AlKTQO8VWMfsQBUs1OlXNBzBkOqORRQP6ZlPf00E2l0QVhL");
 
 
@@ -36,6 +42,7 @@ namespace DineOut.Controllers
                 card.ExpYear = cardInfo.ExpirationYear;
                 card.ExpMonth = cardInfo.ExpirationMonth;
                 card.Cvc = cardInfo.CVV2;
+
 
                 //Assign Card to Token Object and create Token  
                 Stripe.TokenCreateOptions token = new Stripe.TokenCreateOptions();
@@ -52,7 +59,7 @@ namespace DineOut.Controllers
                 //Create Charge Object with details of Charge  
                 var options = new Stripe.ChargeCreateOptions
                 {
-                    Amount = Convert.ToInt32(cardInfo.Amount),
+                    Amount = Convert.ToInt32(totalPrice),
                     Currency = "USD",
                     ReceiptEmail = cardInfo.Buyer_Email,
                     CustomerId = stripeCustomer.Id,
@@ -98,10 +105,12 @@ namespace DineOut.Controllers
         public ViewResult Error()
         {
 
-            
+
 
 
             return View();
         }
+
+
     }
 }

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using DineOut.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using QRCoder;
@@ -21,15 +22,15 @@ namespace DineOut.Controllers
         }
 
         [HttpPost]
-        public ActionResult QrGenerator(int rest_id)
+        public ActionResult QrGenerator(String menu)
         {
             using (MemoryStream ms = new MemoryStream())
             {
-                // after complete authentication, we will get resturant_id from database  and send it to getMenuId as paramater.
-               // string resturanr_id 
 
+                var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+                int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == Int32.Parse(profile_id)).RestaurantId;
 
-                string url = "https://dineout20201118022357.azurewebsites.net/Customer/ViewRestaurantMenu" + "/" + getMenuId(rest_id);
+                string url = "https://dineout20201118022357.azurewebsites.net/CustomerOrder/OrderDetails?menuid=" + getMenuId(restaurant_id) + "&restaurantId=" + restaurant_id;
                 QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
                 QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
                 QRCode oQRCode = new QRCode(oQRCodeData);
@@ -55,3 +56,8 @@ namespace DineOut.Controllers
         }
     }
 }
+
+
+
+
+
