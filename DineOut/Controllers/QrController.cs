@@ -21,7 +21,7 @@ namespace DineOut.Controllers
         }
 
         [HttpPost]
-        public ActionResult QrGenerator(String menu)
+        public ActionResult QrGenerator(int rest_id)
         {
             using (MemoryStream ms = new MemoryStream())
             {
@@ -29,7 +29,7 @@ namespace DineOut.Controllers
                // string resturanr_id 
 
 
-                string url = "https://dineout20201118022357.azurewebsites.net/Customer/ViewRestaurantMenu" + "/" + getMenuId(3);
+                string url = "https://dineout20201118022357.azurewebsites.net/Customer/ViewRestaurantMenu" + "/" + getMenuId(rest_id);
                 QRCodeGenerator oQRCodeGenerator = new QRCodeGenerator();
                 QRCodeData oQRCodeData = oQRCodeGenerator.CreateQrCode(url, QRCodeGenerator.ECCLevel.Q);
                 QRCode oQRCode = new QRCode(oQRCodeData);
