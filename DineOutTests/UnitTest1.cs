@@ -22,14 +22,15 @@ namespace DineOutTests
             Assert.AreEqual("CompletedOrders", result.ViewName);
         }
 
+        //TempData should be null if the method can find a search result whose name is the same as a parameter(string) 
         [TestMethod]
-        public void TestOrderDetails()
+        public void TestSearchStringTempDataResult()
         {
-            var controller = new CustomerOrderController();
+            var controller = new CustomerController();
 
-            var result = controller.OrderDetails(1, 1, 1);
+            var result = controller.SearchString("The Keg") as ViewResult;
 
-            Assert.AreEqual("IActionResult", result.GetType());
+            Assert.AreEqual(null, result.TempData);
         }
     }
 }
