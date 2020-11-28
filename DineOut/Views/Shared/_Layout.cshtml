@@ -6,47 +6,63 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" asp-href-include="/lib/bootstrap/**/*.min.css"
           asp-href-exclude="**/*-reboot, **/*-grid" />
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body>
-    <div style="float:right">
+<body background="/images/bg.png">
+    <div class="wrapper">
+        <div style="float: right; margin: 2rem;">
 
-        <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
-            <span>
-                <small>Customer Login</small>
-            </span>
-        </a>
-        &nbsp;&nbsp;
-        <a asp-action="OwnerLogin" asp-controller="Restaurant" class="btn btn-sm btn-success">
-            <span>
-                <small>Owner Login</small>
-            </span>
-        </a>
+            <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
+                <span>
+                    <small>Customer Login</small>
+                </span>
+            </a>
+            &nbsp;&nbsp;
+            <a asp-action="OwnerLogin" asp-controller="Restaurant" class="btn btn-sm btn-success">
+                <span>
+                    <small>Owner Login</small>
+                </span>
+            </a>
 
-    </div>
-    
-    <div class="bg-dark">
-        <h2 class="navbar-brand text-light">DineOut</h2>
-    </div>
-    <div class="font-weight-bold">
-        <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
-                <li class="nav-item active"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        @if (TempData["message"] != null)
-        {
-            <div class="alert alert-success mt-1">@TempData["message"]</div>
-        }
-    </div>
-    <div>
+        </div>
+
+        <div class="bg-dark">
+            @*<h2 class="navbar-brand text-light">DineOut</h2>*@
+            <div class="navbar-brand text-light">
+                <a asp-controller="Home" asp-action="Index">
+                    <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+                </a>
+            </div>
+        </div>
+        <div class="font-weight-bold">
+            <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item active"><a asp-controller="Home" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            @if (TempData["message"] != null)
+            {
+                <div class="alert">@TempData["message"]</div>
+            }
+        </div>
         @RenderBody()
-        <hr />
-        <footer class="d-flex justify-content-center">
-            <p>&copy; 2020 - COMP231 Group4 - Project DineOut</p>
-        </footer>
+        <div>
+            <footer class="bg-light">
+                <div>
+                    <p class="d-flex justify-content-center">
+                        &copy; 2020 - COMP231 Group4 - Project DineOut
+                    </p>
+                    <p class="d-flex justify-content-center">
+                        Background image is lisenced by
+                        <a href='https://pngtree.com/free-backgrounds' target="_blank">pngtree.com</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
     </div>
 </body>
 </html>

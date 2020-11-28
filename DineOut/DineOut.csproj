@@ -36,6 +36,7 @@
     <Folder Include="Infrastructure\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\ItemSummary\" />
+    <Folder Include="wwwroot\css\" />
   </ItemGroup>
 
   <ItemGroup>

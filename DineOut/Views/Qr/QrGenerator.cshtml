@@ -1,29 +1,34 @@
 ﻿@{
     ViewBag.Title = "Qr Generator";
+    Layout = "_RestaurantLayout";
 }
 
 <br />
 <br />
 <br />
 <br />
-@using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
-{
-    <input type="text" name="inputText" />
-    <input type="submit" value="Generate" />
+<div style="position:center">
 
-}
+    @using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
+    {
+        <input type="text" name="inputText" />
+        <input type="submit" value="Generate" />
 
-@using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
-{
+    }
 
-    <input type="submit" value="Generate Qr Code from Menu database " />
-}
+    @using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
+    {
+
+        <input type="submit" value="Generate Qr Code from Menu database " />
+    }
 
 
-<hr />
+    <hr />
 
-@if (ViewBag.QRCode != null)
-{
-    <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
+    @if (ViewBag.QRCode != null)
+    {
+        <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
 
-}
+    }
+</div>
+    

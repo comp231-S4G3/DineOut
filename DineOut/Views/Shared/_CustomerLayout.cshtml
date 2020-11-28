@@ -8,58 +8,86 @@
     <title>@ViewBag.Title</title>
     <link rel="stylesheet" asp-href-include="/lib/bootstrap/**/*.min.css"
           asp-href-exclude="**/*-reboot, **/*-grid" />
+    <link rel="shortcut icon" href="/images/favicon.png" />
+    <link rel="stylesheet" href="/css/style.css" />
 </head>
-<body>
-    <div style="float:right">
-        @if (Context.Session.GetString("customer_id") == null)
-        {
-            <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
-                <span>
-                    <small>Customer Login</small>
-                </span>
-            </a>
-        }
-        else
-        {
-            <a asp-action="CustomerLogout" asp-controller="Customer" class="btn btn-sm btn-success">
-                <span>
-                    <small>Log Out</small>
-                </span>
-            </a>
-        }
+<body background="/images/bg.png">
+    <div class="wrapper">
+        <div style="float:right; margin: 2rem;">
+            @if (Context.Session.GetString("customer_id") == null)
+            {
+                <a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">
+                    <span>
+                        <small>Customer Login</small>
+                    </span>
+                </a>
+            }
+            else
+            {
+                <a asp-action="CustomerLogout" asp-controller="Customer" class="btn btn-sm btn-success">
+                    <span>
+                        <small>Log Out</small>
+                    </span>
+                </a>
+            }
 
-    </div>
+        </div>
 
-    <div class="bg-dark">
-        <h2 class="navbar-brand text-light">DineOut</h2>
-    </div>
-    <div class="font-weight-bold">
-        <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
-            <ul class="nav navbar-nav mr-auto">
-                <li class="nav-item active"><a asp-controller="Customer" asp-action="Index" class="nav-link">Home</a></li>
-                <li class="nav-item active"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
-                <li class="nav-item active"><a asp-controller="Payment" class="nav-link">Payment</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div>
-        @if (TempData["message"] != null)
-        {
-            <div class="alert alert-success mt-1">@TempData["message"]</div>
-        }
-    </div>
-    <div style="float:right">
-        <form class="form-inline my-2 my-lg-0" asp-controller="Customer" asp-action="SearchString">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" name="searchedString" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
-    </div>
-
-    <div>
-        @RenderBody()
-        <hr />
-        <footer class="d-flex justify-content-center">
-            <p>&copy; 2020 - COMP231 Group4 - Project DineOut</p>
+        <div class="bg-dark">
+            @*<h2 class="navbar-brand text-light">DineOut</h2>*@
+            <div class="navbar-brand text-light">
+                @if (Context.Session.GetString("customer_id") == null)
+                {
+                    <a asp-controller="Home" asp-action="Index">
+                        <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Customer" asp-action="Index">
+                        <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+                    </a>
+                }
+            </div>
+        </div>
+        <div class="font-weight-bold">
+            <nav class="nav-justified navbar-expand-lg navbar-light bg-light">
+                <ul class="nav navbar-nav mr-auto">
+                    <li class="nav-item active"><a asp-controller="Customer" asp-action="Index" class="nav-link">Home</a></li>
+                    <li class="nav-item active"><a asp-controller="Home" asp-action="About" class="nav-link">About</a></li>
+                    <li class="nav-item active"><a asp-controller="Payment" class="nav-link">Payment</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div>
+            @if (TempData["message"] != null)
+            {
+                <div class="alert">@TempData["message"]</div>
+            }
+        </div>
+        <div style="float:right">
+            <form class="form-inline my-2 my-lg-0" asp-controller="Customer" asp-action="SearchString">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search by Name" name="searchedString" />
+                <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="container">
+            @RenderBody()
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <footer class="bg-light">
+            <div>
+                <p class="d-flex justify-content-center">
+                    &copy; 2020 - COMP231 Group4 - Project DineOut
+                </p>
+                <p class="d-flex justify-content-center">
+                    Background image is lisenced by
+                    <a href='https://pngtree.com/free-backgrounds' target="_blank">pngtree.com</a>
+                </p>
+            </div>
         </footer>
     </div>
 </body>
