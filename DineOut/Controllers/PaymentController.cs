@@ -8,17 +8,25 @@ namespace DineOut.Controllers
     public class PaymentController : Controller
     {
 
-        double totalPrice;
+        int TotalPrice { get; set; }
+        public object ClientScript { get; private set; }
+
         string error;
+
         public IActionResult Index(int totalPrice)
         {
 
             ViewBag.Greeting = (totalPrice.ToString("C"));
-            this.totalPrice = totalPrice;
+
+            TempData["totalCost"] = totalPrice;
+
             return View();
         }
 
-
+        private int getAmount()
+        {
+            return TotalPrice;
+        }
 
         [HttpGet]
         public ViewResult makePayment()
@@ -26,6 +34,7 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
+
         public ViewResult makePayment(PaymentInformation cardInfo)
         {
             try
@@ -43,6 +52,7 @@ namespace DineOut.Controllers
                 card.ExpMonth = cardInfo.ExpirationMonth;
                 card.Cvc = cardInfo.CVV2;
 
+                Console.WriteLine(TotalPrice.ToString());
 
                 //Assign Card to Token Object and create Token  
                 Stripe.TokenCreateOptions token = new Stripe.TokenCreateOptions();
@@ -56,15 +66,20 @@ namespace DineOut.Controllers
                 var customerService = new Stripe.CustomerService();
                 Stripe.Customer stripeCustomer = customerService.Create(myCustomer);
 
+                var t = TempData["totalCost"];
+                string s = t.ToString() + "00";
                 //Create Charge Object with details of Charge  
+                // System.Diagnostics.Debug.WriteLine(s.ToString());
                 var options = new Stripe.ChargeCreateOptions
                 {
-                    Amount = Convert.ToInt32(totalPrice),
+                    Amount = Convert.ToInt32(s),
                     Currency = "USD",
                     ReceiptEmail = cardInfo.Buyer_Email,
                     CustomerId = stripeCustomer.Id,
 
                 };
+
+                // System.Diagnostics.Debug.WriteLine(50);
                 //and Create Method of this object is doing the payment execution.  
                 var service = new Stripe.ChargeService();
                 Stripe.Charge charge = service.Create(options); // This will do the Payment  
