@@ -379,7 +379,7 @@ namespace DineOut.Controllers
                 orderDetailsInfo.order.StatusId = order.StatusId;
                 DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
-                SendMail(order);
+                SendMail(order, orderDetailsInfo.order.CustomerId);
             }
 
             UriBuilder uriBuilder = new UriBuilder(Request.GetTypedHeaders().Referer);
@@ -389,10 +389,12 @@ namespace DineOut.Controllers
             return Redirect(uriBuilder.ToString());
         }
 
-        private void SendMail(Order order)
+        private void SendMail(Order order, int customerId)
         {
             string subject = "";
             string body = "";
+            
+            
             switch (order.StatusId)
             {
                 case 1:
@@ -418,8 +420,19 @@ namespace DineOut.Controllers
                 default:
                     break;
             }
-            string to = "Dineout2021@gmail.com";
+            string to = getEmail(customerId);
             SendMail(body, subject, to);
+        }
+
+        private string getEmail(int customerID)
+        {
+            string customerEmail;
+
+            Customer customer = DineOutContext.Customer
+                                .Where(c => c.CustomerId == customerID)
+                                .FirstOrDefault();
+            customerEmail = customer.Email;
+            return customerEmail;
         }
 
         private void SendMail(string body, string subject, string to)
@@ -542,6 +555,7 @@ namespace DineOut.Controllers
         public IActionResult Register(ProfileViewModel profileViewModel, string firstPassword)
         {
             if (firstPassword != profileViewModel.restaurantProfile.PasswordHash)
+<<<<<<< HEAD
             {
                 // Passwords don't match
                 TempData["message"] = "Passwords don't match!";
@@ -561,6 +575,27 @@ namespace DineOut.Controllers
 
             try
             {
+=======
+            {
+                // Passwords don't match
+                TempData["message"] = "Passwords don't match!";
+                return View("OwnerRegistration");
+            }
+
+            // Generate Salt
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[31];
+            rng.GetBytes(buff);
+            string salt = Convert.ToBase64String(buff);
+
+            // Generate Hash
+            string hashed = GenerateHash(profileViewModel.restaurantProfile.PasswordHash, salt);
+            // Overwrite to delete the string passsword
+            profileViewModel.restaurantProfile.PasswordHash = String.Format("{0}:{1}", salt, hashed);
+
+            try
+            {
+>>>>>>> a662a55fc32b86a99c76a191c8cc3c9b9c70c53b
                 //Try to save new customer
                 profileViewModel.restaurantProfile.CreatedOn = DateTime.Now;
                 var profile = DineOutContext.RestaurantProfile.Add(profileViewModel.restaurantProfile);
