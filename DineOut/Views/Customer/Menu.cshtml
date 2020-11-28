@@ -10,7 +10,7 @@
 
 <div class="container">
 	<a class="btn btn-sm btn-secondary" asp-action="Index">Back to the List</a>
-	<table class="table table-striped">
+	<table class="table ">
 		<thead>
 			<tr>
 				<th>Image</th>
@@ -18,7 +18,7 @@
 				<th>Description</th>
 				<th>Ingredients</th>
 				<th>Price</th>
-				<th>Availability</th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -30,7 +30,7 @@
 					<td>@item.Description</td>
 					<td>@item.Ingredients</td>
 					<td>@item.Price.ToString("c")</td>
-					<td>@item.Availability</td>
+					
 				</tr>
 			}
 		</tbody>
