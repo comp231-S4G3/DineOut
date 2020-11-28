@@ -44,9 +44,9 @@ namespace DineOut.Controllers
                 .OrderBy(o => o.OrderId)
                 .ToList());
         }
-        public IActionResult CompletedOrders(int statusOrder)
+        public IActionResult CompletedOrders()
         {
-            statusOrder = 5; //A status Order of 5 is considered completed
+            int statusOrder = 5; //A status Order of 5 is considered completed
             var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
             if (profile_id != null)
             {
