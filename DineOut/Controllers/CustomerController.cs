@@ -7,6 +7,8 @@ using DineOut.Models;
 using DineOut.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Http;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace DineOut.Controllers
 {
@@ -52,22 +54,44 @@ namespace DineOut.Controllers
         public IActionResult CustomerLogin() => View();
         public IActionResult CustomerRegistration() => View();
 
+        public string GenerateHash(string input, string salt)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(input + salt);
+            SHA256Managed sHA256ManagedString = new SHA256Managed();
+            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
+            return Convert.ToBase64String(hash);
+        }
+
         [HttpPost]
         public IActionResult CustomerLogin(Customer customer)
         {
-            var loggedInCustomer = DineOutContext.Customer.ToList().Find(c => c.Email == customer.Email);
-            if(loggedInCustomer != null)
-            {
-                if (loggedInCustomer.PasswordHash.Equals(customer.PasswordHash))
-                {
+            var loggedInCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
 
+            if (loggedInCustomer != null)
+            {
+                // Check to see if password matches
+                string[] salt = loggedInCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(customer.PasswordHash, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+
+                if (isValid == true)
+                {
                     HttpContext.Session.SetString("customer_id", loggedInCustomer.ToString());
                     TempData["message"] = "Successfully Logged In!";
                     return RedirectToAction("Index");
                 }
+                else
+                {
+                    // Password does not match
+                    TempData["message"] = "Password does not match!";
+                    return View();
+                }
             }
-            TempData["message"] = "Invalid User Login!";
-            return View();
+            else
+            {
+                TempData["message"] = "User Does not Exist!";
+                return View();
+            }
         }
 
         public IActionResult CustomerLogout()
@@ -77,16 +101,39 @@ namespace DineOut.Controllers
             return RedirectToAction("CustomerLogin");
         }
         [HttpPost]
-        public IActionResult Register(Customer customer)
+        public IActionResult Register(Customer customer, string firstPassword)
         {
-            if (ModelState.IsValid)
+            if (firstPassword != customer.PasswordHash)
             {
-                DineOutContext.Customer.Add(customer);
+                // Passwords don't match
+                TempData["message"] = "Passwords don't match!";
+                return RedirectToAction("CustomerRegistration");
+            }
+            // Generate Salt
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[31];
+            rng.GetBytes(buff);
+            string salt = Convert.ToBase64String(buff);
+
+            // Generate Hash
+            string hashed = GenerateHash(customer.PasswordHash, salt);
+            // Overwrite to delete the string passsword
+            customer.PasswordHash = String.Format("{0}:{1}", salt, hashed);
+
+            try
+            {
+                // Try to save new customer
+                DineOutContext.Add(customer);
                 DineOutContext.SaveChanges();
                 TempData["message"] = "Successfully Registed!";
                 return RedirectToAction("CustomerLogin");
             }
-                return View();
+            catch
+            {
+                // Return to same view if cannot save to database
+                TempData["message"] = "Couldn't create user!";
+                return RedirectToAction("CustomerRegistration");
+            }
         }
 
         [HttpGet]
@@ -95,20 +142,46 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(Customer customer)
+        public IActionResult ForgotPassword(Customer customer, string oldPassword, string firstPassword)
         {
-            Customer user = DineOutContext.Customer.ToList().Find(x => x.Email == customer.Email);
-            
-            if(user != null)
+            var isCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
+
+            if (firstPassword != customer.PasswordHash)
             {
-                //reset password
-                user.PasswordHash = customer.PasswordHash;
-                DineOutContext.Customer.Update(user);
-                DineOutContext.SaveChanges();
-                return RedirectToAction("CustomerLogin");
-                
+                // New Password does not match
+                TempData["message"] = "Password don't match!";
+                return View();
             }
-            return View();
+            if (isCustomer != null)
+            {
+                // Customer exist
+                string[] salt = isCustomer.PasswordHash.Split(":");
+                string newHashedPin = GenerateHash(oldPassword, salt[0]);
+                bool isValid = newHashedPin.Equals(salt[1]);
+                if (isValid == true)
+                {
+                    // Password match and will be updated
+                    string newSashed = GenerateHash(customer.PasswordHash, salt[0]);
+                    // Overwrite to delete the string passsword
+                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
+                    DineOutContext.Update(isCustomer);
+                    DineOutContext.SaveChanges();
+                    return RedirectToAction("CustomerLogin");
+                }
+                else
+                {
+                    // Old password does not match
+                    TempData["message"] = "Old Password is not correct!";
+                    return View();
+
+                }
+            }
+            else
+            {
+                // Customer does not exist
+                TempData["message"] = "User does not exist";
+                return View();
+            }
         }
 
         //Menu action created by ederson
