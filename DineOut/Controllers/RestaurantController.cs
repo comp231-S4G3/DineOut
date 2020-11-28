@@ -379,7 +379,7 @@ namespace DineOut.Controllers
                 orderDetailsInfo.order.StatusId = order.StatusId;
                 DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
-                SendMail(order);
+                SendMail(order, orderDetailsInfo.order.CustomerId);
             }
 
             UriBuilder uriBuilder = new UriBuilder(Request.GetTypedHeaders().Referer);
@@ -389,10 +389,12 @@ namespace DineOut.Controllers
             return Redirect(uriBuilder.ToString());
         }
 
-        private void SendMail(Order order)
+        private void SendMail(Order order, int customerId)
         {
             string subject = "";
             string body = "";
+            
+            
             switch (order.StatusId)
             {
                 case 1:
@@ -418,8 +420,19 @@ namespace DineOut.Controllers
                 default:
                     break;
             }
-            string to = "Dineout2021@gmail.com";
+            string to = getEmail(customerId);
             SendMail(body, subject, to);
+        }
+
+        private string getEmail(int customerID)
+        {
+            string customerEmail;
+
+            Customer customer = DineOutContext.Customer
+                                .Where(c => c.CustomerId == customerID)
+                                .FirstOrDefault();
+            customerEmail = customer.Email;
+            return customerEmail;
         }
 
         private void SendMail(string body, string subject, string to)
