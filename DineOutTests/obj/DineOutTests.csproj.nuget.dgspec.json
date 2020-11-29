@@ -1,7 +1,6 @@
 {
   "format": 1,
   "restore": {
-<<<<<<< HEAD
     "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOutTests\\DineOutTests.csproj": {}
   },
   "projects": {
@@ -13,48 +12,26 @@
         "projectPath": "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOutTests\\DineOutTests.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOutTests\\obj\\",
-=======
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {}
-  },
-  "projects": {
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
-        "projectName": "DineOutTests",
-        "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
-        "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\obj\\",
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\edmar\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netcoreapp2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netcoreapp2.1": {
             "projectReferences": {
-<<<<<<< HEAD
               "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOut\\DineOut.csproj": {
                 "projectPath": "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOut\\DineOut.csproj"
-=======
-              "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {
-                "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj"
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
               }
             }
           }
@@ -66,8 +43,30 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
-<<<<<<< HEAD
+        "netcoreapp2.1": {
+          "dependencies": {
+            "MSTest.TestAdapter": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "MSTest.TestFramework": {
+              "target": "Package",
+              "version": "[2.1.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          },
           "imports": [
             "net461"
           ],
@@ -84,63 +83,12 @@
         "projectPath": "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOut\\DineOut.csproj",
         "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\user\\Documents\\College\\2020Fall\\Group231\\DineOut\\DineOut\\obj\\",
-=======
-          "dependencies": {
-            "MSTest.TestAdapter": {
-              "target": "Package",
-              "version": "[2.1.0, )"
-            },
-            "MSTest.TestFramework": {
-              "target": "Package",
-              "version": "[2.1.0, )"
-            },
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[16.5.0, )"
-            },
-            "coverlet.collector": {
-              "target": "Package",
-              "version": "[1.2.0, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
-        "projectName": "DineOut",
-        "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
-        "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\obj\\",
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-<<<<<<< HEAD
           "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-=======
-          "C:\\Users\\edmar\\AppData\\Roaming\\NuGet\\NuGet.Config",
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -210,10 +158,6 @@
               "version": "[2.1.1, )"
             },
             "Microsoft.NETCore.App": {
-<<<<<<< HEAD
-=======
-              "suppressParent": "All",
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
@@ -244,23 +188,10 @@
             }
           },
           "imports": [
-<<<<<<< HEAD
             "net461"
           ],
           "assetTargetFallback": true,
           "warn": true
-=======
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
->>>>>>> 88e3533da5db34a92ad2f47c693592344a126f7d
         }
       }
     }
