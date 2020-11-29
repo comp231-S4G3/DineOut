@@ -12,11 +12,11 @@
 <h2>Order Summary</h2>
 
 <div class="container">
-	<table class="table table-sm table-striped" style=" background-color: rgba(255, 226, 112, 0.8);">
+	<table class="table table-sm table-striped" style="		background-color: rgba(255, 226, 112, 0.8);">
 		<thead>
 			<tr>
 				<th>Order Number</th>
-				<th>Costumer</th>
+                <th>Customer</th>
 				<th>Restaurant</th>
 				<th>Date</th>
 				<th>Table #</th>
@@ -24,16 +24,16 @@
 		</thead>
 		<tbody>
 			<tr>
-				<td>@Model.Order.OrderId</td>
-				<td>@Model.Customer.Name</td>
-				<td>@Model.Restaurant.RestaurantName</td>
-				<td>@Model.Order.CreatedOn</td>
-				<td>@Model.Order.TableNum</td>
+				<td><h6>@Model.Order.OrderId</h6></td>
+				<td><h6>@Model.Customer.Name</h6></td>
+				<td><h6>@Model.Restaurant.RestaurantName</h6></td>
+				<td><h6>@Model.Order.CreatedOn</h6></td>
+				<td><h6>@Model.Order.TableNum</h6></td>
 			</tr>
 		</tbody>
 	</table>
 
-	<table class="table table-striped orderDetailsTable ">
+	<table class="table table-striped orderDetailsTable" style="background-color: rgba(255, 226, 112, 0.8);">
 		<thead>
 			<tr>
 				<th>Item</th>
@@ -47,8 +47,8 @@
 			@foreach (var item in Model.OrderItems)
 			{
 				<tr>
-					<td>@item.Item.ItemName</td>
-					<td>@item.Item.Price.ToString("c")</td>
+					<td><h6>@item.Item.ItemName</h6></td>
+					<td><h6>@item.Item.Price.ToString("c")</h6></td>
 					<td>
 						<form action="ChangeQuantity" method="post">
 							<input type="hidden" name="itemId" asp-for="@item.Item.ItemId" />
@@ -64,7 +64,7 @@
 									<option value="5">5</option>
 								</select>
 							</div>
-							<button type="submit" class="btn btn-success">Change Quantity</button>
+							<button type="submit" class="btn btn-sm btn-success">Change Quantity</button>
 						</form>
 					</td>
 					<td>
@@ -85,8 +85,10 @@
 		<tfoot>
 			<tr>
 				<td colspan="2" class="">
-					Total:
-					@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
+					<h6>
+						Total:
+						@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
+					</h6>
 				</td>
 			</tr>
 		</tfoot>
@@ -96,9 +98,9 @@
 		<div class="font-weight-bold">
 			<form asp-action="BackToMenu" method="post">
 				<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-				<div>
+				<div class="form-group">
 					<label class="font-weight-bold">Special Note: </label>
-					<input name="orderNote" asp-for="@Model.Order.Note" />
+					<textarea name="orderNote" asp-for="@Model.Order.Note"></textarea>
 				</div>
 				<div class="marginTop">
 					<button class="btn btn-success" type="submit">Continue Order</button>

@@ -17,7 +17,7 @@
 
 	<!--Navbar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a asp-controller="Restaurant" asp-action="Menu">
+		<a asp-controller="Home" asp-action="Index">
 			<img class="banner" style="width: 80px" src="/images/logo_transparent.png">
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
@@ -55,7 +55,7 @@
 			<ul class="nav navbar-nav navbar-right">
 
 
-					<li><a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">Log Out  <i class="fas fa-user"></i></a></li>
+					<li><a asp-action="RestaurantLogout" asp-controller="Restaurant" class="btn btn-sm btn-success">Log Out  <i class="fas fa-user"></i></a></li>
 				
 			</ul>
 		</div>
@@ -66,14 +66,7 @@
 		<div class="alert alert-success mt-1">@TempData["message"]</div>
 	}
 	<div class="container" style="margin-top:100px">
-		<nav class="navbar navbar-dark default-color">
-			<form class="form-inline" asp-action="SearchString">
-				<div class="md-form my-0">
-					<input class="form-control mr-sm-2" type="text" placeholder="Search Item" name="searchedString" aria-label="Search">
-				</div>
-				<button class="btn btn-outline-dark btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
-			</form>
-		</nav>
+		
 
 		@RenderBody()
 	</div>
