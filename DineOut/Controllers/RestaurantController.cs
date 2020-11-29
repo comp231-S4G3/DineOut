@@ -555,7 +555,6 @@ namespace DineOut.Controllers
         public IActionResult Register(ProfileViewModel profileViewModel, string firstPassword)
         {
             if (firstPassword != profileViewModel.restaurantProfile.PasswordHash)
-<<<<<<< HEAD
             {
                 // Passwords don't match
                 TempData["message"] = "Passwords don't match!";
@@ -575,27 +574,7 @@ namespace DineOut.Controllers
 
             try
             {
-=======
-            {
-                // Passwords don't match
-                TempData["message"] = "Passwords don't match!";
-                return View("OwnerRegistration");
-            }
 
-            // Generate Salt
-            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
-            byte[] buff = new byte[31];
-            rng.GetBytes(buff);
-            string salt = Convert.ToBase64String(buff);
-
-            // Generate Hash
-            string hashed = GenerateHash(profileViewModel.restaurantProfile.PasswordHash, salt);
-            // Overwrite to delete the string passsword
-            profileViewModel.restaurantProfile.PasswordHash = String.Format("{0}:{1}", salt, hashed);
-
-            try
-            {
->>>>>>> a662a55fc32b86a99c76a191c8cc3c9b9c70c53b
                 //Try to save new customer
                 profileViewModel.restaurantProfile.CreatedOn = DateTime.Now;
                 var profile = DineOutContext.RestaurantProfile.Add(profileViewModel.restaurantProfile);
