@@ -6,26 +6,24 @@
 <br />
 <br />
 
-@using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
-{
-    <input type="text" name="inputText" />
-    <input type="submit" value="Generate" />
-
-}
 
 
 <br />
-@using (Html.BeginForm("QrGenerator", "Qr", FormMethod.Post))
-{
+<div class="container " style="position:center">
+    <div  >
+        @using (Html.BeginForm("QrGenerator", "Qr", FormMethod.Post))
+        {
 
-    <input type="submit" value="Generate Qr Code from Menu database " />
-}
+            <input type="submit" value="Generate Qr Code from Menu database " class="btn btn-info" />
+        }
 
 
-<hr />
+        <hr />
 
-@if (ViewBag.QRCode != null)
-{
-    <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
+        @if (ViewBag.QRCode != null)
+        {
+            <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
 
-}
+        }
+    </div>
+</div>
