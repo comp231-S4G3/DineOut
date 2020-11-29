@@ -3,3 +3,5 @@
 .git/
 DineOut/bin/
 DineOut/obj/
+DineOutTests/bin/
+DineOutTests/obj/
