@@ -32,5 +32,23 @@ namespace DineOutTests
 
             Assert.AreEqual(null, result.TempData);
         }
+
+        [TestMethod]
+        public void TestGetEmail()
+        {
+            var context = new DineOutContext();
+            var controller = new RestaurantController();
+            string testEmail;
+
+            foreach (var customer in context.Customer)
+            {
+                testEmail = customer.Email;
+                Assert.AreEqual(testEmail, controller.getEmail(customer.CustomerId));
+            }
+
+            
+        }
+
+        
     }
 }

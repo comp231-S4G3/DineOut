@@ -12,113 +12,113 @@
 <h2>Order Summary</h2>
 
 <div class="container">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Order Number</th>
-                <th>Costumer</th>
-                <th>Restaurant</th>
-                <th>Date</th>
-                <th>Table #</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@Model.Order.OrderId</td>
-                <td>@Model.Customer.Name</td>
-                <td>@Model.Restaurant.RestaurantName</td>
-                <td>@Model.Order.CreatedOn</td>
-                <td>@Model.Order.TableNum</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table table-sm table-striped" style=" background-color: rgba(255, 226, 112, 0.8);">
+		<thead>
+			<tr>
+				<th>Order Number</th>
+				<th>Costumer</th>
+				<th>Restaurant</th>
+				<th>Date</th>
+				<th>Table #</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>@Model.Order.OrderId</td>
+				<td>@Model.Customer.Name</td>
+				<td>@Model.Restaurant.RestaurantName</td>
+				<td>@Model.Order.CreatedOn</td>
+				<td>@Model.Order.TableNum</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <table class="table table-striped orderDetailsTable ">
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Edit</th>
-            </tr>
-        </thead>
-        <tbody>
+	<table class="table table-striped orderDetailsTable ">
+		<thead>
+			<tr>
+				<th>Item</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Edit</th>
+			</tr>
+		</thead>
+		<tbody>
 
-            @foreach (var item in Model.OrderItems)
-            {
-                <tr>
-                    <td>@item.Item.ItemName</td>
-                    <td>@item.Item.Price.ToString("c")</td>
-                    <td>
-                        <form action="ChangeQuantity" method="post">
-                            <input type="hidden" name="itemId" asp-for="@item.Item.ItemId" />
-                            <input type="hidden" name="orderItemId" asp-for="@item.OrderItemId" />
-                            <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-                            <div class="form-group" style="margin-top:10px; margin-right:80%;">
-                                <select class="form-control" name="quantity"
-                                        asp-for="@item.Quantity">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-success">Change Quantity</button>
-                        </form>
-                    </td>
-                    <td>
-                        <form asp-action="DeleteItem" method="post">
-                            <input type="hidden" name="itemId" value="@item.ItemId" />
-                            <input type="hidden" name="orderItemId" value="@item.OrderItemId" />
-                            <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-                            <button type="submit" title="Delete Item" class="btn btn-sm btn-danger"
-                                    onclick="location.href='@Url.Action("DeleteItem",
+			@foreach (var item in Model.OrderItems)
+			{
+				<tr>
+					<td>@item.Item.ItemName</td>
+					<td>@item.Item.Price.ToString("c")</td>
+					<td>
+						<form action="ChangeQuantity" method="post">
+							<input type="hidden" name="itemId" asp-for="@item.Item.ItemId" />
+							<input type="hidden" name="orderItemId" asp-for="@item.OrderItemId" />
+							<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+							<div class="form-group" style="margin-top:10px; margin-right:80%;">
+								<select class="form-control" name="quantity"
+										asp-for="@item.Quantity">
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-success">Change Quantity</button>
+						</form>
+					</td>
+					<td>
+						<form asp-action="DeleteItem" method="post">
+							<input type="hidden" name="itemId" value="@item.ItemId" />
+							<input type="hidden" name="orderItemId" value="@item.OrderItemId" />
+							<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+							<button type="submit" title="Delete Item" class="btn btn-sm btn-danger"
+									onclick="location.href='@Url.Action("DeleteItem",
                                                        new { menuId = item.OrderItemId, itemId = item.ItemId})'">
-                                Delete
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-        <tfoot>
-            <tr>
-                <td colspan="2" class="">
-                    Total:
-                    @Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
-                </td>
-            </tr>
-        </tfoot>
-    </table>
+								Delete
+							</button>
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2" class="">
+					Total:
+					@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity).ToString("c")
+				</td>
+			</tr>
+		</tfoot>
+	</table>
 
-    <div class="container">
-        <div class="font-weight-bold">
-            <form asp-action="BackToMenu" method="post">
-                <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-                <div>
-                    <label class="font-weight-bold">Special Note: </label>
-                    <input name="orderNote" asp-for="@Model.Order.Note" />
-                </div>
-                <div class="marginTop">
-                    <button class="btn btn-success" type="submit">Continue Order</button>
-                </div>
-            </form>
-        </div>
-        <div class="font-weight-bold">
-            <a class="btn btn-primary" asp-action="Checkout"
-               asp-route-orderId="@Model.Order.OrderId"
-               asp-route-customerId="@Model.Order.CustomerId"
-               asp-route-orderNote="@Model.Order.Note"
-               asp-route-totalPrice="@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity)">
-                Checkout
-            </a>
-        </div>
-        <div class="font-weight-bold">
-            <a class="btn btn-danger" asp-action="CancelOrder"
-               asp-route-orderId="@Model.Order.OrderId">Cancel Order</a>
-        </div>
-    </div>
+	<div class="container">
+		<div class="font-weight-bold">
+			<form asp-action="BackToMenu" method="post">
+				<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+				<div>
+					<label class="font-weight-bold">Special Note: </label>
+					<input name="orderNote" asp-for="@Model.Order.Note" />
+				</div>
+				<div class="marginTop">
+					<button class="btn btn-success" type="submit">Continue Order</button>
+				</div>
+			</form>
+		</div>
+		<div class="font-weight-bold">
+			<a class="btn btn-primary" asp-action="Checkout"
+			   asp-route-orderId="@Model.Order.OrderId"
+			   asp-route-customerId="@Model.Order.CustomerId"
+			   asp-route-orderNote="@Model.Order.Note"
+			   asp-route-totalPrice="@Model.OrderItems.Sum(e => e.Item.Price * e.Quantity)">
+				Checkout
+			</a>
+		</div>
+		<div class="font-weight-bold">
+			<a class="btn btn-danger" asp-action="CancelOrder"
+			   asp-route-orderId="@Model.Order.OrderId">Cancel Order</a>
+		</div>
+	</div>
 
 </div>
     
