@@ -34,7 +34,7 @@ namespace DineOut.Controllers
 
         public IActionResult OwnerRegistration() => View();
 
-
+        [HttpPost]
         public IActionResult Orders()
         {
             var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
@@ -46,6 +46,8 @@ namespace DineOut.Controllers
                 .OrderBy(o => o.OrderId)
                 .ToList());
         }
+
+        [HttpPost]
         public IActionResult CompletedOrders()
         {
             int statusOrder = 5; //A status Order of 5 is considered completed
@@ -67,6 +69,8 @@ namespace DineOut.Controllers
             //    .FindAll(o => o.StatusId == statusOrder);
             return View(orders);
         }
+
+        [HttpPost]
         public IActionResult CurrentOrders()
         {
             var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
@@ -424,7 +428,7 @@ namespace DineOut.Controllers
             SendMail(body, subject, to);
         }
 
-        private string getEmail(int customerID)
+        public string getEmail(int customerID)
         {
             string customerEmail;
 
