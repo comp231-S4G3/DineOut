@@ -75,33 +75,3 @@
         </div>
     </form>
 </div>
-@if (Model.Any())
-{
-    <div class="mt-5">
-        <h4 class="m-5">notification histories</h4>
-        <div class="w-75 m-auto">
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Notify Id</th>
-                    <th>Send Time</th>
-                    <th>Subject</th>
-                    <th>Content</th>
-                    <th>Failed Info</th>
-                </tr></thead>
-                <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.NotifyId</td>
-                        <td>@item.SendTime</td>
-                        <td>@item.Subject</td>
-                        <td>@item.Content</td>
-                        <td>@item.FailedInfo</td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
-    </div>
-}
