@@ -21,10 +21,7 @@ namespace DineOut.Controllers
             ///@param int restaurantId
             ///@param int customerId
             ///
-            //Those parameters are hard coded for testing purpose
-            //menuId = 1;
-            //customerId = 1;
-            //restaurantId = 1;
+            
 
             Order nOrder = new Order
             {
@@ -254,16 +251,10 @@ namespace DineOut.Controllers
             /// the action that cancels the current order and returns the customer to the customer index page
             /// @param int orderId
             var order = DineOutContext.Order.Find(orderId);
-            //List<OrderItem> orderItems = new List<OrderItem>();
+            
             var orderItems = DineOutContext.Order_Item
                 .Where(x => x.OrderId == orderId).ToList();
 
-            //DineOutContext.Remove(order);
-            //foreach(var orderItem in orderItems)
-            //{
-            //    DineOutContext.Remove(orderItem);
-            //}
-            //DineOutContext.SaveChanges();
 
             return RedirectToAction("Index", "Customer");
         }
