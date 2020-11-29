@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Ld95gEIFBmEv43vKZILcgl+fjwnW2Lwb5pLqIM4hfjPz+BsPlFKyn2oXHXUGfWO5LuYrITAOuVQVcX/za/kZBw==",
+  "dgSpecHash": "gVDAoq/z6lnK5+oLpYgmx7KvIBv8M8a5Jd3pa9nmEFn5WT+qpEnwVml0yIWkOp+LISsGCvOq578kiNqC6Rucdw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
+  "projectFilePath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\edmar\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\edmar\\.nuget\\packages\\azure.storage.blobs\\12.7.0\\azure.storage.blobs.12.7.0.nupkg.sha512",

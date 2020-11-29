@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {}
+    "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {
+    "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\DineOutTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
+        "projectUniqueName": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
         "projectName": "DineOutTests",
-        "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
+        "projectPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\DineOutTests.csproj",
         "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOutTests\\obj\\",
+        "outputPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOutTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -30,8 +30,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {
-                "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj"
+              "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {
+                "projectPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj"
               }
             }
           }
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj": {
+    "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
+        "projectUniqueName": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
         "projectName": "DineOut",
-        "projectPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\DineOut.csproj",
+        "projectPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\DineOut.csproj",
         "packagesPath": "C:\\Users\\edmar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\edmar\\source\\repos\\DineOut\\DineOut\\obj\\",
+        "outputPath": "C:\\Users\\edmar\\Source\\Repos\\DineOut\\DineOut\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
