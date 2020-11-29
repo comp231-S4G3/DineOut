@@ -14,84 +14,84 @@
 <h2>OrderId: @Model.Order.OrderId <em style="color: red">*For testing purpose</em></h2>
 
 <div class="container">
-    <a class="btn btn-sm btn-secondary" asp-controller="Customer"
-       asp-action="Index">Back to the List</a>
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Dish</th>
-                <th>Description</th>
-                <th>Ingredients</th>
-                <th>Price</th>
-                <th>Availability</th>
-                <th>Add</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Items)
-            {
-                <tr>
-                    <td>
-                        <Img width="100" height="100" src="@item.Image"
-                             style="border-radius:50%; border-color:black; border:1px;" />
-                    </td>
-                    <td>@item.ItemName</td>
-                    <td>@item.Description</td>
-                    <td>@item.Ingredients</td>
-                    <td>@item.Price.ToString("c")</td>
-                    <td>@item.Availability</td>
-                    <td>
-                        <form asp-action="AddItem" method="post">
-                            <div class="form-group" style="width:75px">
-                                <label class="font-weight-bold"
-                                       asp-for="@Model.OrderItem.Quantity"></label>
-                                <select class="form-control"
-                                        name="quantity" asp-for="@Model.OrderItem.Quantity">
-                                    @if (Model.OrderItem != null)
-                                    {
-                                        <option value="@Model.OrderItem.Quantity">
-                                            @Model.OrderItem.Quantity
-                                        </option>
-                                    }
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                            <div class="marginTop">
-                                <input type="hidden" name="item.ItemId" value="@item.ItemId" />
-                                <input type="hidden" asp-for="@item.MenuId" />
-                                <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-                                <input type="hidden" name="customerId" asp-for="@Model.Order.CustomerId" />
-                                <input type="hidden" name="tableNum" asp-for="@Model.Order.TableNum">
-                                <button class="btn btn-success" type="submit">Add</button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+	<a class="btn btn-sm btn-secondary" asp-controller="Customer"
+	   asp-action="Index">Back to the List</a>
+	<table class="table table-sm table-striped" style=" background-color: rgba(255, 226, 112, 0.8);">
+		<thead>
+			<tr>
+				<th>Image</th>
+				<th>Dish</th>
+				<th>Description</th>
+				<th>Ingredients</th>
+				<th>Price</th>
+				<th>Availability</th>
+				<th>Add</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model.Items)
+			{
+				<tr>
+					<td>
+						<Img width="100" height="100" src="@item.Image"
+							 style="border-radius:50%; border-color:black; border:1px;" />
+					</td>
+					<td><h6>@item.ItemName</h6></td>
+					<td><h6>@item.Description</h6></td>
+					<td><h6>@item.Ingredients</h6></td>
+					<td><h6>@item.Price.ToString("c")</h6></td>
+					<td><h6>@item.Availability</h6></td>
+					<td>
+						<form asp-action="AddItem" method="post">
+							<div class="form-group" style="width:75px">
+								<label class="font-weight-bold"
+									   asp-for="@Model.OrderItem.Quantity"></label>
+								<select class="form-control"
+										name="quantity" asp-for="@Model.OrderItem.Quantity">
+									@if (Model.OrderItem != null)
+									{
+										<option value="@Model.OrderItem.Quantity">
+											@Model.OrderItem.Quantity
+										</option>
+									}
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>
+							</div>
+							<div class="marginTop">
+								<input type="hidden" name="item.ItemId" value="@item.ItemId" />
+								<input type="hidden" asp-for="@item.MenuId" />
+								<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+								<input type="hidden" name="customerId" asp-for="@Model.Order.CustomerId" />
+								<input type="hidden" name="tableNum" asp-for="@Model.Order.TableNum">
+								<button class="btn btn-success" type="submit">Add</button>
+							</div>
+						</form>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 
-    <div class="marginTop" style="margin:10px">
-        <form asp-action="OrderSummary" method="post">
-            <div class="form-group" style="margin-top:10px; margin-right:80%;">
-                <label class="font-weight-bold">Table Number: </label>
-                <input name="tableNum" asp-for="@Model.Order.TableNum">
-            </div>
-            <input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
-            <div class="marginTop">
-                <button class="btn btn-success" type="submit">Order Summary</button>
-            </div>
-        </form>
-        <div>
-            <a class="btn btn-danger" asp-controller="Customer"
-               asp-action="Index">Cancel Order</a>
-        </div>
-    </div>
+	<div class="marginTop" style="margin:10px">
+		<form asp-action="OrderSummary" method="post">
+			<div class="form-group" style="margin-top:10px; margin-right:80%;">
+				<label class="font-weight-bold">Table Number: </label>
+				<input name="tableNum" asp-for="@Model.Order.TableNum">
+			</div>
+			<input type="hidden" name="orderId" asp-for="@Model.Order.OrderId" />
+			<div class="marginTop">
+				<button class="btn btn-success" type="submit">Order Summary</button>
+			</div>
+		</form>
+		<div>
+			<a class="btn btn-danger" asp-controller="Customer"
+			   asp-action="Index">Cancel Order</a>
+		</div>
+	</div>
 </div>
 
 @*@foreach (var item in Model.Items)
