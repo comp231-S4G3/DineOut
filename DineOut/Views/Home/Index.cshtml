@@ -2,13 +2,30 @@
     ViewBag.Title = "Home";
 }
 
-<div class="d-flex justify-content-center">
-    <img style="width: 500px;" src="/images/logo_transparent.png">
+<div class="d-flex justify-content-center" style="margin-top:2rem;">
+    <img  src="/images/logo_transparent.png"style="width:30rem;" class="img-fluid">
 </div>
-<div class="d-flex justify-content-center">
-    <a asp-action="Menu" asp-controller="Restaurant" class="btn btn-primary text-center">Owner Side</a>
-    &nbsp;&nbsp;
-    <a asp-action="Index" asp-controller="Customer" class="btn btn-secondary text-center">Customer Side</a>
-</div>
+<section class="d-flex justify-content-center">
+	<div style="margin-right: 1rem;">
+		<a asp-action="Menu" asp-controller="Restaurant" class="text-center">
+			<img class="img-fluid" style="width: 10rem;
+		height:10rem;
+		border-radius: 50%;"
+				 src="https://images.unsplash.com/photo-1577106263724-2c8e03bfe9cf?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80" alt="Alternate Text" />
+			<h6 style="color:black">Owner Side</h6>
+		</a>
 
-<br />
+	</div>
+	<div>
+		<a asp-action="Index" asp-controller="Customer" class="text-center">
+			<img class="img-fluid" style="width: 10rem;
+		height:10rem;
+		border-radius: 50%;"
+				 src="https://images.unsplash.com/photo-1588123190131-1c3fac394f4b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=701&q=80" alt="Alternate Text" />
+			<h6 style="color:black">Customer Side</h6>
+
+		</a>
+
+	</div>
+</section>
+
