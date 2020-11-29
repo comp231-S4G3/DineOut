@@ -51,7 +51,11 @@ namespace DineOut.Controllers
 
         }
 
-        public IActionResult CustomerLogin() => View();
+        [HttpGet]
+        public IActionResult CustomerLogin(int menuId, int restaurantId)
+        {
+            return View();
+        }
         public IActionResult CustomerRegistration() => View();
 
         public string GenerateHash(string input, string salt)
@@ -63,22 +67,35 @@ namespace DineOut.Controllers
         }
 
         [HttpPost]
-        public IActionResult CustomerLogin(Customer customer)
+        public IActionResult CustomerLogin(CustomerLoginViewModel customerLoginViewModel)
         {
-            var loggedInCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
+            var loggedInCustomer = DineOutContext.Customer.Where(r => r.Email == customerLoginViewModel.Customer.Email).FirstOrDefault();
 
             if (loggedInCustomer != null)
             {
                 // Check to see if password matches
                 string[] salt = loggedInCustomer.PasswordHash.Split(":");
-                string newHashedPin = GenerateHash(customer.PasswordHash, salt[0]);
+                string newHashedPin = GenerateHash(customerLoginViewModel.Customer.PasswordHash, salt[0]);
                 bool isValid = newHashedPin.Equals(salt[1]);
 
                 if (isValid == true)
                 {
                     HttpContext.Session.SetString("customer_id", loggedInCustomer.ToString());
                     TempData["message"] = "Successfully Logged In!";
-                    return RedirectToAction("Index");
+                    if (customerLoginViewModel.RestaurantId != 0 && customerLoginViewModel.MenuId != 0)
+                    {
+                        return RedirectToAction("OrderDetails", "CustomerOrder",
+                       new
+                       {
+                           customerId = loggedInCustomer.CustomerId,
+                           menuId = customerLoginViewModel.MenuId,
+                           restaurantId = customerLoginViewModel.RestaurantId
+                       });
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index");
+                    }
                 }
                 else
                 {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using DineOut.Models;
 using DineOut.ViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace DineOut.Controllers
 {
@@ -23,25 +24,37 @@ namespace DineOut.Controllers
             ///
             
 
-            Order nOrder = new Order
+            var customer_id = HttpContext.Session.GetString("customer_id");
+            if (customer_id != null)
             {
-                CustomerId = customerId,
-                RestaurantId = restaurantId,
-                StatusId = 1,
-                CreatedOn = DateTime.Now
-            };
-            DineOutContext.Add(nOrder);
-            DineOutContext.SaveChanges();
+               
+                Order nOrder = new Order
+                {
+                    CustomerId = customerId,
+                    RestaurantId = restaurantId,
+                    StatusId = 1,
+                    CreatedOn = DateTime.Now
+                };
+                DineOutContext.Add(nOrder);
+                DineOutContext.SaveChanges();
 
-            orderData.Order
-                = DineOutContext.Order.Find(nOrder.OrderId);
-            orderData.Menu = DineOutContext.Menu.Find(menuId);
-            orderData.Items = DineOutContext.Item
-                .ToList().FindAll(x => x.MenuId == menuId);
-            orderData.Restaurant = DineOutContext.Restaurant
-                .Find(nOrder.RestaurantId);
+                orderData.Order
+                    = DineOutContext.Order.Find(nOrder.OrderId);
+                orderData.Menu = DineOutContext.Menu.Find(menuId);
+                orderData.Items = DineOutContext.Item
+                    .ToList().FindAll(x => x.MenuId == menuId);
+                orderData.Restaurant = DineOutContext.Restaurant
+                    .Find(nOrder.RestaurantId);
 
-            return View(orderData);
+                return View(orderData);
+            }
+            return RedirectToAction("CustomerLogin", "Customer",
+                   new
+                   {
+                       menuId = menuId,
+                       restaurantId = restaurantId
+                   });
+
         }
 
         //Create a new order
