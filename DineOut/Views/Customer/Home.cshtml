@@ -8,7 +8,7 @@
 
 
 
-<table class="table table-sm table-bordered">
+<table class="table table-sm table-bordered" style=" background-color: rgba(255, 226, 112, 0.8);">
 
     <thead>
         <tr>
@@ -19,10 +19,9 @@
         @foreach (var restaurant in Model)
         {
             <tr>
-                <td>@restaurant.RestaurantName</td>
+                <td><h6>@restaurant.RestaurantName</h6></td>
                 <td>
                     <div class="text-center">
-                        @*change the action name later*@
                         <a asp-action="Menu" asp-route-restaurantId="@restaurant.RestaurantId" asp-route-menuId="@restaurant.Menu.MenuId" class="btn btn-success">Select</a>
                     </div>
                 </td>
