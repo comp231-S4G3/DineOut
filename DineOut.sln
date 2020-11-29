@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DineOut", "DineOut\DineOut.csproj", "{A851E86F-18E0-4697-8345-975A1A30103F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DineOut", "DineOut\DineOut.csproj", "{A851E86F-18E0-4697-8345-975A1A30103F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DineOutTests", "DineOutTests\DineOutTests.csproj", "{1B3DEBDF-6367-46F3-B0CD-7432B32B1B1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{A851E86F-18E0-4697-8345-975A1A30103F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A851E86F-18E0-4697-8345-975A1A30103F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A851E86F-18E0-4697-8345-975A1A30103F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B3DEBDF-6367-46F3-B0CD-7432B32B1B1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B3DEBDF-6367-46F3-B0CD-7432B32B1B1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B3DEBDF-6367-46F3-B0CD-7432B32B1B1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B3DEBDF-6367-46F3-B0CD-7432B32B1B1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
