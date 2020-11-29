@@ -13,7 +13,7 @@ namespace DineOut.Controllers
 
         string error;
 
-        public IActionResult Index(int totalPrice)
+        public IActionResult Index(double totalPrice)
         {
 
             ViewBag.Greeting = (totalPrice.ToString("C"));
