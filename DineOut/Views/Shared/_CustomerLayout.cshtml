@@ -12,44 +12,54 @@
 </head>
 <body background="/images/bg.png">
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a asp-controller="Home" asp-action="Index">
-			<img class="banner" style="width: 80px" src="/images/logo_transparent.png">
-		</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        @if (Context.Session.GetString("customer_id") == null)
+        {
+            <a asp-controller="Home" asp-action="Index">
+                <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Customer" asp-action="Index">
+                <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
+            </a>
+        }
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a asp-controller="Customer" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
-				</li>
-				<li class="nav-item">
 
-					<a asp-controller="Home" asp-action="About" class="nav-link">About</a>
-				</li>
-				<li class="nav-item">
-					<a asp-controller="Payment" class="nav-link">Payment</a>
-				</li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				@if (Context.Session.GetString("customer_id") == null)
-				{
-					<li><a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">Login <i class="fas fa-user-plus"></i></a></li>
-				}
-				else
-				{
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-					<li><a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">Log Out  <i class="fas fa-user"></i></a></li>
-				}
-			</ul>
-		</div>
-	</nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a asp-controller="Customer" asp-action="Index" class="nav-link">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+
+                    <a asp-controller="Home" asp-action="About" class="nav-link">About</a>
+                </li>
+                @*<li class="nav-item">
+                    <a asp-controller="Payment" class="nav-link">Payment</a>
+                </li>*@
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @if (Context.Session.GetString("customer_id") == null)
+                {
+                    <li><a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">Login <i class="fas fa-user-plus"></i></a></li>
+                }
+                else
+                {
+
+                    <li><a asp-action="Index" asp-controller="Home" class="btn btn-sm btn-success">Log Out  <i class="fas fa-user"></i></a></li>
+                }
+            </ul>
+        </div>
+    </nav>
 
 
     <div class="container" style="margin-top:100px">
-        
 
         @if (TempData["message"] != null)
         {
