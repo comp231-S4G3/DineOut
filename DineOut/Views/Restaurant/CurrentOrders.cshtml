@@ -6,6 +6,14 @@
 	string[] orderStatus = { "", "Accepted", "Ongoing", "Ready", "Received", "Completed" };
 }
 
+<nav class="navbar navbar-dark default-color">
+    <form class="form-inline" asp-action="SearchString">
+        <div class="md-form my-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Order number" name="searchedString" aria-label="Search">
+        </div>
+        <button class="btn btn-outline-dark btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+    </form>
+</nav>
 @if (Context.Request.Query["message"].Count > 0 && Context.Request.Query["message"].ToString().Length > 0)
 {
 	<div class="alert alert-primary" role="alert">

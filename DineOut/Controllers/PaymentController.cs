@@ -8,12 +8,12 @@ namespace DineOut.Controllers
     public class PaymentController : Controller
     {
 
-        int TotalPrice { get; set; }
+        double TotalPrice { get; set; }
         public object ClientScript { get; private set; }
 
         string error;
 
-        public IActionResult Index(int totalPrice)
+        public IActionResult Index(double totalPrice)
         {
 
             ViewBag.Greeting = (totalPrice.ToString("C"));
@@ -23,7 +23,7 @@ namespace DineOut.Controllers
             return View();
         }
 
-        private int getAmount()
+        private double getAmount()
         {
             return TotalPrice;
         }

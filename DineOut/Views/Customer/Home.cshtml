@@ -7,7 +7,14 @@
 
 
 
-
+<nav class="navbar navbar-dark default-color">
+    <form class="form-inline" asp-controller="Customer" asp-action="SearchString">
+        <div class="md-form my-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Restaurant Name" name="searchedString" aria-label="Search">
+        </div>
+        <button class="btn btn-success my-2 my-sm-0 ml-3" type="submit">Search</button>
+    </form>
+</nav>
 <table class="table table-sm table-bordered" style=" background-color: rgba(255, 226, 112, 0.8);">
 
     <thead>

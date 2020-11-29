@@ -7,19 +7,14 @@
 <br />
 <br />
 <br />
-<div style="position:center">
+<div class="d-flex justify-content-center"  >
 
-    @using (Html.BeginForm("QrGenerator", "Home", FormMethod.Post))
-    {
-        <input type="text" name="inputText" />
-        <input type="submit" value="Generate" />
-
-    }
+    
 
     @using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
     {
 
-        <input type="submit" value="Generate Qr Code from Menu database " />
+        <input type="submit" value="Generate Qr Code from Menu database " class="btn btn-info"/>
     }
 
 
