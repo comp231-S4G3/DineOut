@@ -61,10 +61,7 @@ namespace DineOut.Controllers
                             .ToList()
                             .FindAll(o => o.StatusId == statusOrder);
             }
-            //orders = DineOutContext.Order
-            //    .OrderBy(o => o.OrderId)
-            //    .ToList()
-            //    .FindAll(o => o.StatusId == statusOrder);
+
             return View(orders);
         }
         public IActionResult CurrentOrders()
@@ -424,7 +421,7 @@ namespace DineOut.Controllers
             SendMail(body, subject, to);
         }
 
-        private string getEmail(int customerID)
+        public string getEmail(int customerID)
         {
             string customerEmail;
 

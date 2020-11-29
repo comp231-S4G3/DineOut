@@ -39,7 +39,7 @@ namespace DineOut.Controllers
         {
             try
             {
-                //cardInfo.Amount = totalPrice.ToString();
+               
 
                 Stripe.StripeConfiguration.SetApiKey("sk_test_51HqI05B1UsJ4lZg1agboQSE7i0fWn98619xc2FP5NhREH4igqo1AlKTQO8VWMfsQBUs1OlXNBzBkOqORRQP6ZlPf00E2l0QVhL");
 
@@ -69,7 +69,7 @@ namespace DineOut.Controllers
                 var t = TempData["totalCost"];
                 string s = t.ToString() + "00";
                 //Create Charge Object with details of Charge  
-                // System.Diagnostics.Debug.WriteLine(s.ToString());
+                
                 var options = new Stripe.ChargeCreateOptions
                 {
                     Amount = Convert.ToInt32(s),
@@ -79,7 +79,7 @@ namespace DineOut.Controllers
 
                 };
 
-                // System.Diagnostics.Debug.WriteLine(50);
+                
                 //and Create Method of this object is doing the payment execution.  
                 var service = new Stripe.ChargeService();
                 Stripe.Charge charge = service.Create(options); // This will do the Payment  
@@ -92,7 +92,7 @@ namespace DineOut.Controllers
                 switch (e.StripeError.ErrorType)
                 {
                     case "card_error":
-                        //error = ("Code: " + e.StripeError.Code + "; ");
+                        
                         error = (" Error Message: " + e.StripeError.Message);
                         break;
                     case "api_connection_error":
@@ -119,9 +119,6 @@ namespace DineOut.Controllers
 
         public ViewResult Error()
         {
-
-
-
 
             return View();
         }
