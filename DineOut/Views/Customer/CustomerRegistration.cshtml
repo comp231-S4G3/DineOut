@@ -1,35 +1,39 @@
 ﻿@model DineOut.Models.Customer
 @{
-    ViewBag.Title = "Registration";
-    Layout = "_IdentityLayout";
+	ViewBag.Title = "Customer Registration";
+	Layout = "_IdentityLayout";
 }
 
 <form asp-action="Register" asp-controller="Customer" method="post"
-      class="form-row" role="form">
-    <table class="table">
-        <tr>
-            <td><label for="Email">Email</label></td>
-            <td><input type="email" asp-for="@Model.Email" /></td>
-        </tr>
-        <tr>
-            <td><label for="Password">Password</label></td>
-            <td><input type="password" name="firstPassword" placeholder="Enter unique password" /></td>
-        </tr>
-        <tr>
-            <td><label for="Password">Re-enter Password</label></td>
-            <td><input type="password" asp-for="@Model.PasswordHash" placeholder="Enter unique password" /></td>
-        </tr>
-        <tr>
-            <td><label for="FirstName">Name</label></td>
-            <td><input type="text" asp-for="@Model.Name"  /></td>
-        </tr>
-    </table>
+	  role="form">
 
-    <div>
-        <button type="submit" class="btn btn-sm btn-success">Create your new DineOut Account</button>
-        <button type="reset" class="btn btn-sm btn-secondary">Clear Form</button>
-    </div>
+	<div class="form-row">
+		<div class="form-group col-md-12">
+			<h5><label for="Email">Email</label></h5>
+			<input class="form-control" type="email" asp-for="@Model.Email"/>
+		</div>
+
+		<div class="form-group col-md-12">
+			<h5><label for="LastName"> Name</label></h5>
+			<input class="form-control" type="text" asp-for="@Model.Name" />
+		</div>
+		<div class="form-group col-md-12">
+			<h5><label for="Password">Password</label></h5>
+			<input  class="form-control" type="password" name="firstPassword" placeholder="password" />
+		</div>
+		<div class="form-group col-md-12">
+			<h5><label for="Password">Re-enter Password</label></h5>
+			<input class="form-control" type="password" asp-for="@Model.PasswordHash" placeholder="password" />
+		</div>
+
+	</div>
+	<div class="d-flex justify-content-between">
+		<button type="submit" class="btn btn-sm btn-success">Create DineOut Account</button>
+		<button type="reset" class="btn btn-sm btn-secondary">Clear Form</button>
+	</div>
 </form>
+<br />
+
 
 
 
