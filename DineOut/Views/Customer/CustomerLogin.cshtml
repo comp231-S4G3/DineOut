@@ -1,4 +1,4 @@
-﻿@model DineOut.Models.Customer
+﻿@model DineOut.ViewModels.CustomerLoginViewModel
 
 @{
     ViewBag.Title = "Customer Login";
@@ -9,11 +9,13 @@
     <table class="table">
         <tr>
             <td><label for="Email">Email</label></td>
-            <td><input type="email" asp-for="@Model.Email" id="Email" placeholder="Username" /></td>
+            <td><input type="email" asp-for="@Model.Customer.Email" id="Email" placeholder="Username" /></td>
         </tr>
         <tr>
             <td><label for="Password">Password</label></td>
-            <td><input type="password" asp-for="@Model.PasswordHash" id="Password" placeholder="Enter unique password" /></td>
+            <td><input type="password" asp-for="@Model.Customer.PasswordHash" id="Password" placeholder="Enter unique password" /></td>
+            <td><input type="hidden" asp-for="@Model.MenuId"  /></td>
+            <td><input type="hidden" asp-for="@Model.RestaurantId" /></td>
         </tr>
         <tr>
             <td><br /></td>
