@@ -38,7 +38,7 @@ namespace DineOut.Controllers
 
             foreach ( Restaurant restaurant in Restaurants)
             {
-                restaurant.Menu = DineOutContext.Menu.Find(restaurant.RestaurantId);
+                restaurant.Menu = DineOutContext.Menu.Find(restaurant.RestaurantId + 3);
             }
 
             if (Restaurants.Count() == 0)
