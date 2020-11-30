@@ -30,12 +30,12 @@ namespace DineOut.Controllers
                
                 Order nOrder = new Order
                 {
-                    CustomerId = customerId,
+                    CustomerId = Int32.Parse(customer_id),
                     RestaurantId = restaurantId,
                     StatusId = 1,
                     CreatedOn = DateTime.Now
                 };
-                DineOutContext.Add(nOrder);
+                DineOutContext.Order.Add(nOrder);
                 DineOutContext.SaveChanges();
 
                 orderData.Order

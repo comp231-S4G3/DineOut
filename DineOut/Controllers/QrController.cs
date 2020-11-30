@@ -18,12 +18,6 @@ namespace DineOut.Controllers
         DineOutContext DineOutContext = new DineOutContext();
         public IActionResult QrGenerator()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult QrGenerator(String menu)
-        {
             using (MemoryStream ms = new MemoryStream())
             {
 
@@ -45,6 +39,7 @@ namespace DineOut.Controllers
             }
             return View();
         }
+
 
         public string getMenuId(int resturant_id)
         {
