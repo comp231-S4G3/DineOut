@@ -8,22 +8,25 @@
 <br />
 <br />
 <div class="d-flex justify-content-center"  >
+    <table class="table table-sm table-striped text-center">
+        <tr>
+            <td>
+                @using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
+                {
 
-    
+                    <input type="submit" value="Generate Qr Code from Menu database " class="btn btn-info" />
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @if (ViewBag.QRCode != null)
+                {
+                    <img src="@ViewBag.QRCode" style="width:400px;height:400px; padding:50px; background-color:dimgray; " />
 
-    @using (Html.BeginForm("QrGenerator", "QrController", FormMethod.Post))
-    {
-
-        <input type="submit" value="Generate Qr Code from Menu database " class="btn btn-info"/>
-    }
-
-
-    <hr />
-
-    @if (ViewBag.QRCode != null)
-    {
-        <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
-
-    }
+                }
+            </td>
+        </tr>
+    </table>
 </div>
     
