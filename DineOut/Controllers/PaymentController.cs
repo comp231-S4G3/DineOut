@@ -18,15 +18,11 @@ namespace DineOut.Controllers
 
             ViewBag.Greeting = (totalPrice.ToString("C"));
 
-            TempData["totalCost"] = totalPrice;
+            TempData["totalCost"] = Convert.ToString(totalPrice);
 
             return View();
         }
 
-        private double getAmount()
-        {
-            return TotalPrice;
-        }
 
         [HttpGet]
         public ViewResult makePayment()
@@ -39,12 +35,12 @@ namespace DineOut.Controllers
         {
             try
             {
-               
+
 
                 Stripe.StripeConfiguration.SetApiKey("sk_test_51HqI05B1UsJ4lZg1agboQSE7i0fWn98619xc2FP5NhREH4igqo1AlKTQO8VWMfsQBUs1OlXNBzBkOqORRQP6ZlPf00E2l0QVhL");
 
 
-                //Create Card Object to create Token  
+
                 Stripe.CreditCardOptions card = new Stripe.CreditCardOptions();
                 card.Name = cardInfo.CardOwnerFirstName + " " + cardInfo.CardOwnerLastName;
                 card.Number = cardInfo.CardNumber;
@@ -54,7 +50,7 @@ namespace DineOut.Controllers
 
                 Console.WriteLine(TotalPrice.ToString());
 
-                //Assign Card to Token Object and create Token  
+
                 Stripe.TokenCreateOptions token = new Stripe.TokenCreateOptions();
                 token.Card = card;
                 Stripe.TokenService serviceToken = new Stripe.TokenService();
@@ -67,22 +63,40 @@ namespace DineOut.Controllers
                 Stripe.Customer stripeCustomer = customerService.Create(myCustomer);
 
                 var t = TempData["totalCost"];
-                string s = t.ToString() + "00";
-                //Create Charge Object with details of Charge  
-                
+               
+
+                int t1 = (int)Math.Round(Convert.ToDouble(t)) - 1;
+                string total;
+                string input_decimal_number = t.ToString();
+
+                var regex = new System.Text.RegularExpressions.Regex("(?<=[\\.])[0-9]+");
+                if (regex.IsMatch(input_decimal_number))
+                {
+                    string decimal_places = regex.Match(input_decimal_number).Value;
+                    total = t1.ToString() + decimal_places;
+                }
+                else
+                {
+                    total = t1 + "00";
+                }
+
+
+                System.Diagnostics.Trace.WriteLine(t1.ToString());
+
+
                 var options = new Stripe.ChargeCreateOptions
                 {
-                    Amount = Convert.ToInt32(s),
+                    Amount = Convert.ToInt32(total),
                     Currency = "USD",
                     ReceiptEmail = cardInfo.Buyer_Email,
                     CustomerId = stripeCustomer.Id,
 
                 };
 
-                
-                //and Create Method of this object is doing the payment execution.  
+
+
                 var service = new Stripe.ChargeService();
-                Stripe.Charge charge = service.Create(options); // This will do the Payment  
+                Stripe.Charge charge = service.Create(options);
 
 
                 return View("Thanks");
@@ -92,7 +106,7 @@ namespace DineOut.Controllers
                 switch (e.StripeError.ErrorType)
                 {
                     case "card_error":
-                        
+
                         error = (" Error Message: " + e.StripeError.Message);
                         break;
                     case "api_connection_error":
