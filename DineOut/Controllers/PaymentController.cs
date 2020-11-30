@@ -122,7 +122,15 @@ namespace DineOut.Controllers
 
             return View();
         }
+        public IActionResult CancelOrder()
+        {
+            /// the action that cancels the current order and returns the customer to the customer index page
+            /// @param int orderId
 
+
+
+            return RedirectToAction("Index", "Customer");
+        }
 
     }
 }

@@ -13,63 +13,67 @@
 
 <section class="container" style="background-color: rgba(255, 226, 112, 0.8);">
 	<h2>Payment Information</h2>
-	<form asp-action="makePayment" method="post">
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<h5><label asp-for="CardOwnerFirstName">FirstName</label></h5>
-				<input asp-for="CardOwnerFirstName" class="form-control" id="CardOwnerFirstName" required="required" />
-			</div>
+    <form asp-action="makePayment" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <h5><label asp-for="CardOwnerFirstName">FirstName</label></h5>
+                <input asp-for="CardOwnerFirstName" class="form-control" id="CardOwnerFirstName" required="required" />
+            </div>
 
-			<div class="form-group col-md-6">
-				<h5><label asp-for="CardOwnerLastName">Last Name</label></h5>
-				<input asp-for="CardOwnerLastName" class="form-control" id="CardOwnerLastName" required="required" />
-			</div>
+            <div class="form-group col-md-6">
+                <h5><label asp-for="CardOwnerLastName">Last Name</label></h5>
+                <input asp-for="CardOwnerLastName" class="form-control" id="CardOwnerLastName" required="required" />
+            </div>
 
-		</div>
-		<div class="form-group">
-			<h5><label asp-for="CardNumber"> CardNumber</label></h5>
-			<input asp-for="CardNumber" class="form-control" id="CardNumber" required="required" />
+        </div>
+        <div class="form-group">
+            <h5><label asp-for="CardNumber"> CardNumber</label></h5>
+            <input asp-for="CardNumber" class="form-control" id="CardNumber" required="required" />
 
-		</div>
-		<div class="form-row">
-			<div class="form-group col-md-6">
-				<h5><label asp-for="ExpirationYear">ExpirationYear</label></h5>
-				<input asp-for="ExpirationYear" class="form-control" id="ExpirationYear" required="required" />
-			</div>
-			<div class="form-group col-md-3 col-6">
-				<h5><label asp-for="ExpirationMonth">ExpirationMonth</label></h5>
-				<input asp-for="ExpirationMonth " class="form-control" id="ExpirationMonth" required="required" />
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <h5><label asp-for="ExpirationYear">ExpirationYear</label></h5>
+                <input asp-for="ExpirationYear" class="form-control" id="ExpirationYear" required="required" />
+            </div>
+            <div class="form-group col-md-3 col-6">
+                <h5><label asp-for="ExpirationMonth">ExpirationMonth</label></h5>
+                <input asp-for="ExpirationMonth " class="form-control" id="ExpirationMonth" required="required" />
 
-			</div>
-			<div class="form-group col-md-3 col-6">
-				<h5><label asp-for="CVV2">CVV2</label></h5>
-				<input asp-for="CVV2" class="form-control" id="CVV2" required="required" />
+            </div>
+            <div class="form-group col-md-3 col-6">
+                <h5><label asp-for="CVV2">CVV2</label></h5>
+                <input asp-for="CVV2" class="form-control" id="CVV2" required="required" />
 
-			</div>
-		</div>
-		<div class="form-group">
-			<h5><label asp-for="Buyer_Email">Email</label></h5>
-			<input asp-for="Buyer_Email" class="form-control" id="Buyer_Email" required="required" />
-		</div>
-
-
-		<div class="form-group">
-			<label>Amount</label>
-			<h2>@ViewBag.Greeting</h2>
-
-		</div>
-		<div class="form-group">
-
-			<input asp-for="Amount" class="form-control" id="Amount" type="hidden" />
-
-		</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <h5><label asp-for="Buyer_Email">Email</label></h5>
+            <input asp-for="Buyer_Email" class="form-control" id="Buyer_Email" required="required" />
+        </div>
 
 
+        <div class="form-group">
+            <label>Amount</label>
+            <h2>@ViewBag.Greeting</h2>
 
-		<button type="submit" class="btn btn-success btn-lg" value="Submit the new Recipe" style="margin-bottom:5px;">Make a payment</button>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input class="button" type="reset" value="Clear form" style="width: 140px; height: 52px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input asp-action="Home" class="button" type="submit" value="Cancel" style="width: 140px; height: 52px">
+        </div>
+        <div class="form-group">
 
-	</form>
+            <input asp-for="Amount" class="form-control" id="Amount" type="hidden" />
+
+        </div>
+
+
+
+        <button type="submit" class="btn btn-success btn-lg" value="Submit the new Recipe" style="margin-bottom:5px;">Make a payment</button>   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="button" type="reset" value="Clear form" style="width: 140px; height: 52px"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+        <div class="font-weight-bold">
+            <a class="btn btn-danger" asp-action="CancelOrder"
+               >Cancel Order</a>
+        </div>
+
+    </form>
 </section>
 

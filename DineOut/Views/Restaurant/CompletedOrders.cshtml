@@ -8,12 +8,12 @@
 <nav class="navbar navbar-dark default-color">
     <form class="form-inline" asp-action="SearchString">
         <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Order number" name="searchedString" aria-label="Search">
+            <input class="form-control mr-sm-2" type="text" placeholder="Order #" name="searchedString" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0 ml-3" type="submit">Search</button>
         </div>
-        <button class="btn btn-outline-dark btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
     </form>
 </nav>
-<table class="table table-sm table-striped" style=" background-color: rgba(255, 226, 112, 0.8);">
+<table class="table table-sm table-striped text-center" style=" background-color: rgba(255, 226, 112, 0.8);">
 	<thead>
 		@if (Model.Count() == 0)
 		{
