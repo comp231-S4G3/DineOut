@@ -54,7 +54,7 @@ namespace DineOutTests
         {
             var controller = new CustomerController();
 
-            var result = controller.SearchString("The Keg") as ViewResult;
+            var result = controller.SearchString("Diallo") as ViewResult;
 
             Assert.AreEqual(null, result.TempData);
         }
