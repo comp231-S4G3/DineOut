@@ -26,7 +26,6 @@
                     <th>Description</th>
                     <th>Ingredients</th>
                     <th>Price</th>
-                    <th>Availability</th>
                     <th>Add</th>
                 </tr>
             </thead>
@@ -42,7 +41,6 @@
                         <td><h6>@item.Description</h6></td>
                         <td><h6>@item.Ingredients</h6></td>
                         <td><h6>@item.Price.ToString("c")</h6></td>
-                        <td><h6>@item.Availability</h6></td>
                         <td>
                             <form asp-action="AddItem" method="post">
                                 <div class="form-group" style="width:75px">
