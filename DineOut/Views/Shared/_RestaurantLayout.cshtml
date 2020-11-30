@@ -29,7 +29,6 @@
                 <img class="banner" style="width: 80px" src="/images/logo_transparent.png">
             </a>
         }
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
                 aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,15 +39,6 @@
                     <a asp-controller="Restaurant" asp-action="Menu" class="nav-link">
                         Menu
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Restaurant" asp-action="Profile" class="nav-link">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Home" asp-action="QrGenerator" class="nav-link">Generate QR Code</a>
-                </li>
-                <li class="nav-item">
-                    <a asp-controller="Restaurant" asp-action="Notification" class="nav-link">Notification</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-333" data-toggle="dropdown"
@@ -61,6 +51,16 @@
                         <a class="dropdown-item" asp-action="CompletedOrders">Completed Orders</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a asp-controller="Home" asp-action="QrGenerator" class="nav-link">Generate QR Code</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Restaurant" asp-action="Profile" class="nav-link">Profile</a>
+                </li>
+                <li>
+                    <a asp-controller="Restaurant" asp-action="Notification" class="nav-link btn btn-sm btn-outline-danger">Notification</a>
+                </li>
+
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
@@ -81,7 +81,7 @@
 		@RenderBody()
 	</div>
 	<hr />
-	<footer class="d-flex justify-content-center bg-light">
+	<footer class="d-flex justify-content-center bg-light" style="position:page; width:100%">
 		<p>&copy; Fall 2020 - COMP231 Group4 - Project DineOut</p>
 		<p>
 			Background image is lisenced by
