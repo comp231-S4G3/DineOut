@@ -7,26 +7,27 @@
 
 
 
-<nav class="navbar navbar-dark default-color">
-    <form class="form-inline" asp-controller="Customer" asp-action="SearchString">
-        <div class="md-form my-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Restaurant Name" name="searchedString" aria-label="Search">
+<div class="d-flex justify-content-center">
+    <form asp-controller="Customer" asp-action="SearchString">
+        <div class="form-inline">
+            <input class="form-control" type="text" placeholder="Restaurant Name" name="searchedString" aria-label="Search">
+            <button class="form-control btn btn-success" type="submit">Search</button>
         </div>
-        <button class="btn btn-success my-2 my-sm-0 ml-3" type="submit">Search</button>
+        
     </form>
-</nav>
-<table class="table table-sm table-bordered" style=" background-color: rgba(255, 226, 112, 0.8);">
+</div>
+<table class="table table-sm table-striped table-borderless text-center" style=" background-color: rgba(255, 226, 112, 0.8);">
 
     <thead>
         <tr>
-            <th colspan="2">Name</th>
+            <th colspan="2">Restaurants</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var restaurant in Model)
         {
             <tr>
-                <td><h6>@restaurant.RestaurantName</h6></td>
+                <td style="text-align:center"><h6>@restaurant.RestaurantName</h6></td>
                 <td>
                     <div class="text-center">
                         <a asp-action="Menu" asp-route-restaurantId="@restaurant.RestaurantId" asp-route-menuId="@restaurant.Menu.MenuId" class="btn btn-success">Select</a>

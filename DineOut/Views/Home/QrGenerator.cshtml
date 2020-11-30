@@ -7,7 +7,7 @@
 
 <br />
 <div class="container " style="position:center">
-    <div  >
+   
         @using (Html.BeginForm("QrGenerator", "Qr", FormMethod.Post))
         {
 
@@ -19,8 +19,8 @@
 
         @if (ViewBag.QRCode != null)
         {
-            <img src="@ViewBag.QRCode" style="width:400px;height:400px; margin-left:200px; padding:50px; background-color:dimgray; " />
+            <img src="@ViewBag.QRCode" style="width:400px;height:400px; padding:50px; background-color:dimgray; " />
 
         }
-    </div>
+   
 </div>
