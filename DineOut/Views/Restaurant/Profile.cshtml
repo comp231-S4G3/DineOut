@@ -12,7 +12,7 @@
 <form asp-action="SaveChanges" method="post">
     <input type="hidden" asp-for="@Model.restaurant.RestaurantId" />
     <input type="hidden" asp-for="@Model.restaurantProfile.RestaurantProfileId" />
-    <div class="jumbotron d-flex justify-content-center">
+    <div class="jumbotron d-flex justify-content-center col-lg-8" style="opacity:0.9">
         <table class="table table-borderless">
             <tr>
                 <td class="font-weight-bold">@Model.restaurant.RestaurantName</td>
