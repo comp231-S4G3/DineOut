@@ -59,7 +59,7 @@
                             <a class="btn btn-sm btn-info" asp-action="Update_Item" asp-route-itemId="@item.ItemId" asp-route-menuId="@item.MenuId">
                                 Edit
                             </a>
-                            <button type="button" title="Delete Item" class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete_Item", new { menu_id = 5, item_id = item.ItemId})'">
+                            <button type="button" title="Delete Item" class="btn btn-sm btn-danger" onclick="location.href='@Url.Action("Delete_Item", new { menu_id = item.MenuId, item_id = item.ItemId})'">
                                 Delete
                             </button>
                         </form>

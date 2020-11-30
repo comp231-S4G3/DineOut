@@ -245,7 +245,7 @@ namespace DineOut.Controllers
             {
                 var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
                 int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == Int32.Parse(profile_id)).RestaurantId;
-                var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+                var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id ).FirstOrDefault().MenuId;
 
 
                 itemViewModel.ImagePath = uploadImage(itemViewModel.Image);
