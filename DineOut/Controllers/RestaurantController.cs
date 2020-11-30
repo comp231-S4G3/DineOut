@@ -321,6 +321,7 @@ namespace DineOut.Controllers
         {
             var item_delete = DineOutContext.Item
                 .Where(r => r.ItemId == item_id)
+                .Where(r => r.MenuId == menu_id)
                 .FirstOrDefault();
             DineOutContext.Remove(item_delete);
             DineOutContext.SaveChanges();
