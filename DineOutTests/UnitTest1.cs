@@ -36,8 +36,7 @@ namespace DineOutTests
         [TestMethod]
         public void TestGetEmail()
         {
-            DineOutContext context = new DineOutContext();
-            var cus = context.Customer.Find(1);
+            var context = new DineOutContext();
             var controller = new RestaurantController();
             string testEmail;
 
