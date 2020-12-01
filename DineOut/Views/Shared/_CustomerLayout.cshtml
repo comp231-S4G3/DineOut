@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<meta name="viewport" content="width=device-width" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>@ViewBag.Title</title>
 	<link rel="stylesheet" asp-href-include="/lib/bootstrap/**/*.min.css"
 		  asp-href-exclude="**/*-reboot, **/*-grid" />
@@ -69,12 +69,12 @@
         @RenderBody()
         <hr />
     </div>
-	<footer class="text-center bg-light">
-		<p>&copy; Fall 2020 - COMP231 Group4 - Project DineOut</p>
-		<p>
+	<footer class="text-center bg-light" style="position:page; width:100% !important">
+		<div>&copy; Fall 2020 - COMP231 Group4 - Project DineOut</div>
+		<div>
 			Background image is lisenced by
-			<a href='https://pngtree.com/free-backgrounds' target="_blank">pngtree.com</a>
-		</p>
+			<a href='https://pngtree.com/free-backgrounds' target="_blank" >pngtree.com</a>
+		</div>
 	</footer>
 
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
