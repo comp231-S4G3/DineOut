@@ -14,23 +14,23 @@
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="ItemName"></label>
-            <div><input asp-for="ItemName" /></div>
+            <div><input asp-for="ItemName" required /></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Description"></label>
-            <div><textarea asp-for="Description"></textarea></div>
+            <div><textarea asp-for="Description" required></textarea></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Ingredients"></label>
-            <div><textarea asp-for="Ingredients"></textarea></div>
+            <div><textarea asp-for="Ingredients" required></textarea></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Price"></label>
-            <div><input type="number" asp-for="Price" /></div>
+            <div><input type="number" asp-for="Price" required /></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold"asp-for="Image"></label>
-            <div><input type="file" asp-for="Image" /></div>
+            <div><input type="file" asp-for="Image" required /></div>
         </div>
         <div style="margin:10px">
             <div><input class="text-lg-right" asp-for="Availability" />
