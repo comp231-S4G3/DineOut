@@ -186,6 +186,7 @@ namespace DineOut.Controllers
             /// @param int orderId
             /// @param int itemId
             /// @param int orderItemIs
+            var tableNum = DineOutContext.Order.Find(orderId).TableNum;
             var item_delete = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
@@ -193,17 +194,17 @@ namespace DineOut.Controllers
             DineOutContext.SaveChanges();
 
             return RedirectToAction("OrderSummary",
-                new { orderId = orderId });
+                new { orderId = orderId, tableNum = tableNum });
         }
 
         public IActionResult ChangeQuantity(int orderId, int itemId, int orderItemId, int quantity)
         {
-
             /// action called when an item's quantity is being changed by the customer
             /// @param int orderId
             /// @param int itemId
             /// @param int orderItemId
             /// @param int quantity
+            var tableNum = DineOutContext.Order.Find(orderId).TableNum;
             var itemUpdate = DineOutContext.Order_Item
                 .Where(r => r.OrderItemId == orderItemId)
                 .Where(r => r.ItemId == itemId).FirstOrDefault();
@@ -212,7 +213,7 @@ namespace DineOut.Controllers
             DineOutContext.SaveChanges();
 
             return RedirectToAction("OrderSummary",
-                new { orderId = orderId });
+                new { orderId = orderId, tableNum = tableNum });
         }
 
         public IActionResult BackToMenu(int orderId, string orderNote)

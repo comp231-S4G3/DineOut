@@ -90,8 +90,5 @@ namespace DineOutTests
             Assert.AreEqual("RestaurantLogin", result);
         }
 
-        public void
-
-
     }
 }
