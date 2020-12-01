@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using DineOut.Controllers;
 using DineOut.Models;
 using DineOut.ViewModels;
@@ -11,32 +13,29 @@ namespace DineOutTests
     public class UnitTest1
     {
         [TestMethod]
-        public void TestCompletedOrdersView()
+        public void TestGetMenuIdMethod()
         {
-            int statusComplete = 5;
-            //var controller = new RestaurantController();
+            var controller = new QrController();
             DineOutContext context = new DineOutContext();
-            var order = new Order();
-            order.OrderId = 1;
-            order.RestaurantId = 1;
-            order.StatusId = statusComplete;
-
-            //var orders = context.Restaurant.Find(statusComplete).RestaurantId;
-
-            //var completeOrders = orders.Add(new Order())
-            var result = order;
-            Assert.AreEqual("CompletedOrders", result);
+            var rest = context.Restaurant.Find(20);
+            var result = controller.getMenuId(rest.RestaurantId);
+            Assert.AreEqual("23", result.ToString());
         }
 
         [TestMethod]
-        public void TestCustomerLoginView()
+        public void TestGenerateHash()
         {
-            var controller = new CustomerController();
             DineOutContext context = new DineOutContext();
-            int menuId = context.Menu.Find(2).MenuId;
-            int restId = context.Restaurant.Find(2).RestaurantId;
-            var result = controller.CustomerLogin(menuId, restId) as ViewResult;
-            Assert.AreEqual("CustomerLogin", result.ViewData);
+
+            var loggedInOwner = context.RestaurantProfile.Find(41);
+            var controller = new RestaurantController();
+            String myPassword = "123";
+
+            // Check to see if password matches
+            string[] salt = loggedInOwner.PasswordHash.Split(":");
+            string newHashedPin = controller.GenerateHash(myPassword, salt[0]);
+            Assert.AreEqual(salt[1], newHashedPin);
+
         }
 
         [TestMethod]

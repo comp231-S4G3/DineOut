@@ -10,7 +10,7 @@
 
 
 	<a class="btn btn-sm btn-secondary" asp-action="Index">Back to the List</a>
-	<table class="table table-sm table-bordered" style=" background-color: rgba(255, 226, 112, 0.8);">
+	<table class="table table-sm table-striped text-center" style=" background-color: rgba(255, 226, 112, 0.8);">
 		<thead>
 			<tr>
 				<th>Image</th>
@@ -28,7 +28,7 @@
 					<td><h6>@item.ItemName</h6></td>
 					<td><h6>@item.Description</h6></td>
 					<td><h6>@item.Ingredients</h6></td>
-					<td><h6>@item.Price.ToString("c")</h6></td>
+					<td class="text-success"><h6>@item.Price.ToString("c")</h6></td>
 				</tr>
 			}
 		</tbody>
