@@ -25,16 +25,7 @@ namespace DineOut.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
-            AllModels allModels = new AllModels();
-            allModels.Restaurants = DineOutContext.Restaurant.ToList();
-            allModels.Customers = DineOutContext.Customer.ToList();
-            allModels.Orders = DineOutContext.Order.ToList();
-            allModels.OrderStatuses = DineOutContext.OrderStatus.ToList();
-            allModels.Menus = DineOutContext.Menu.ToList();
-            allModels.Items = DineOutContext.Item.ToList();
-            allModels.Order_Items = DineOutContext.Order_Item.ToList();
-            return View(allModels);
+            return View();
         }
 
         public IActionResult Contact()
