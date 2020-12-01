@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\**" />
+    <Compile Remove="Tests\**" />
+    <Content Remove="Infrastructure\**" />
+    <Content Remove="Tests\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
+    <EmbeddedResource Remove="Tests\**" />
+    <None Remove="Infrastructure\**" />
+    <None Remove="Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.7.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.App">
@@ -32,8 +43,6 @@
 
   <ItemGroup>
     <Folder Include="NewFolder\" />
-    <Folder Include="Tests\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\ItemSummary\" />
     <Folder Include="wwwroot\css\" />
