@@ -111,7 +111,6 @@ namespace DineOut.Controllers
                     .FirstOrDefault(r => r.RestaurantProfileId == restaurantProfile.RestaurantProfileId);
                 if (profileEntry != null)
                 {
-                    //profileEntry.Name = restaurantProfile.Name;
                     profileEntry.Email = restaurantProfile.Email;
                 }
                 DineOutContext.SaveChanges();
@@ -119,34 +118,6 @@ namespace DineOut.Controllers
 
             }
             return RedirectToAction("Menu");
-        }
-
-        // Not yet implemented
-        public IActionResult OrderByDate()
-        {
-            var orderDate = DineOutContext.Order.OrderByDescending(r => r.CreatedOn).ToList();
-            return View("Orders", orderDate);
-        }
-
-
-        // Not yet implemented
-        public IActionResult OrderByItemPeriod(string time_period)
-        {
-            DateTime startDate;
-            DateTime endDate;
-            if (time_period == "last week")
-            {
-                startDate = DateTime.Today;
-                endDate = DateTime.Today.AddDays(-7);
-            }
-            else if (time_period == "last month")
-            {
-                startDate = DateTime.Today;
-                endDate = DateTime.Today.AddDays(-7);
-            }
-
-            //var orderTimePeriod = from row in DineOutContext.Order where row.CreatedOn > startDate
-            return View("Orders");
         }
 
 
@@ -163,10 +134,6 @@ namespace DineOut.Controllers
                 return View("Menu");
             }
         }
-
-
-
-
 
         // MENU View
         public IActionResult Menu()
@@ -287,6 +254,8 @@ namespace DineOut.Controllers
         }
             return RedirectToAction("Menu");
         }
+
+
         private string uploadImage(IFormFile image)
         {
 
@@ -360,20 +329,10 @@ namespace DineOut.Controllers
         [HttpPost]
         public IActionResult ChangeStatus(Order order)
         {
-            const int COMPLETED = 5;
-
             orderDetailsInfo.order = DineOutContext.Order.Find(order.OrderId);
 
             if (ModelState.IsValid)
             {
-                //Check if the status is already "Completed"
-                if (orderDetailsInfo.order.StatusId != COMPLETED
-                    && order.StatusId == COMPLETED)
-                {
-                    //Insert Invoking payment method here
-
-                }
-
                 orderDetailsInfo.order.StatusId = order.StatusId;
                 DineOutContext.Update(orderDetailsInfo.order);
                 DineOutContext.SaveChanges();
