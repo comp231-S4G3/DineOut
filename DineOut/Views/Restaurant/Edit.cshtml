@@ -11,27 +11,23 @@
         <input type="hidden" asp-for="ItemId" />
 
         <div style="margin:10px">
-            <div><input type="hidden" asp-for="MenuId" /></div>
+            <div><input class="form-control" type="hidden" asp-for="MenuId" /></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="ItemName"></label>
-            <div><input asp-for="ItemName" required /></div>
+            <div><input class="form-control" asp-for="ItemName" required /></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Description"></label>
-            <div><textarea asp-for="Description" required></textarea></div>
+            <div><textarea class="form-control" asp-for="Description" required></textarea></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Ingredients"></label>
-            <div><textarea asp-for="Ingredients" required></textarea></div>
+            <div><textarea class="form-control" asp-for="Ingredients" required></textarea></div>
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Price"></label>
-<<<<<<< HEAD
-            <div><input type="text" asp-for="Price" required /></div>
-=======
             <div><input type="text" id="price" asp-for="Price" required /></div>
->>>>>>> da5bc0fcbb6c67ddc4e36cd4b546e0cec4813a24
         </div>
         <div style="margin:10px">
             <label class="font-weight-bold" asp-for="Image"></label>
