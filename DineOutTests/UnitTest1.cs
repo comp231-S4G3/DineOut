@@ -77,17 +77,20 @@ namespace DineOutTests
         }
 
         [TestMethod]
-        public void TestCustomerHome()
+        public void TestRestaurantLoginAction()
         {
-            DineOutContext DineOutContext = new DineOutContext();
-            var controller = new CustomerController();
-
-            var Restaurants = DineOutContext.Restaurant.ToList();
-            var result = controller.Index() as ViewResult;
-
-            Assert.AreEqual(Restaurants.Count, result.ViewData.Model);
+            var controller = new RestaurantController();
+            DineOutContext context = new DineOutContext();
+            var id = context.RestaurantProfile.Find(41).RestaurantProfileId;
+            var email = context.RestaurantProfile.Find(41).Email;
+            var pass = context.RestaurantProfile .Find(41).PasswordHash;
+            RestaurantProfile testProfile = new RestaurantProfile();
+            testProfile.RestaurantProfileId = id;
+            testProfile.Email = email;
+            testProfile.PasswordHash = pass;
+            var result = controller.RestaurantLogin(testProfile);
+            Assert.AreEqual("RestaurantLogin", result);
         }
-
 
     }
 }
