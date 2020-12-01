@@ -7,12 +7,16 @@
 
   <ItemGroup>
     <Compile Remove="Infrastructure\**" />
+    <Compile Remove="NewFolder\**" />
     <Compile Remove="Tests\**" />
     <Content Remove="Infrastructure\**" />
+    <Content Remove="NewFolder\**" />
     <Content Remove="Tests\**" />
     <EmbeddedResource Remove="Infrastructure\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
     <EmbeddedResource Remove="Tests\**" />
     <None Remove="Infrastructure\**" />
+    <None Remove="NewFolder\**" />
     <None Remove="Tests\**" />
   </ItemGroup>
 
@@ -42,7 +46,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder\" />
     <Folder Include="Views\Shared\Components\" />
     <Folder Include="Views\Shared\Components\ItemSummary\" />
     <Folder Include="wwwroot\css\" />
