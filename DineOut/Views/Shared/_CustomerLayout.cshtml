@@ -45,9 +45,12 @@
                 </li>*@
             </ul>
             <ul class="nav navbar-nav navbar-right">
+
                 @if (Context.Session.GetString("customer_id") == null)
                 {
-                    <li><a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">Login <i class="fas fa-user-plus"></i></a></li>
+                    <li><a asp-action="CustomerLogin" asp-controller="Customer" class="btn btn-sm btn-success">Customer Login <i class="fas fa-user"></i></a></li>
+                
+                    <li><a asp-action="OwnerLogin" asp-controller="Restaurant" class="ml-2 btn btn-sm btn-success">Owner Login<i class="fas fa-user"></i></a></li>
                 }
                 else
                 {
