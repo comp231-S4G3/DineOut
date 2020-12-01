@@ -47,7 +47,8 @@ namespace DineOutTests
         }
 
 
-        //TempData should be null if the method can find a search result whose name is the same as a parameter(string) 
+        //TempData should be null if the method can find a search result 
+        //whose name is the same as a parameter(string) 
         [TestMethod]
         public void TestSearchStringTempDataResult()
         {
@@ -72,22 +73,6 @@ namespace DineOutTests
             }
 
             
-        }
-
-        [TestMethod]
-        public void TestRestaurantLoginAction()
-        {
-            var controller = new RestaurantController();
-            DineOutContext context = new DineOutContext();
-            var id = context.RestaurantProfile.Find(41).RestaurantProfileId;
-            var email = context.RestaurantProfile.Find(41).Email;
-            var pass = context.RestaurantProfile .Find(41).PasswordHash;
-            RestaurantProfile testProfile = new RestaurantProfile();
-            testProfile.RestaurantProfileId = id;
-            testProfile.Email = email;
-            testProfile.PasswordHash = pass;
-            var result = controller.RestaurantLogin(testProfile);
-            Assert.AreEqual("RestaurantLogin", result);
         }
 
     }
