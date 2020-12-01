@@ -319,13 +319,36 @@ namespace DineOut.Controllers
 
         public IActionResult Delete_Item(int item_id, int menu_id)
         {
-            var item_delete = DineOutContext.Item
-                .Where(r => r.ItemId == item_id)
-                .Where(r => r.MenuId == menu_id)
-                .FirstOrDefault();
-            DineOutContext.Item.Remove(item_delete);
-            DineOutContext.SaveChanges();
-            return RedirectToAction("Menu");
+            var item = DineOutContext.Order_Item.ToList().Find(orderItem => orderItem.ItemId == item_id);
+
+            if(item != null)
+            {
+               
+
+                var profile_id = HttpContext.Session.GetString("restaurant_owner_Id");
+                if (profile_id != null)
+                {
+                    TempData["delete"] = "You cannot delete the item because customers have orderd the item.";
+                    int restaurant_id = DineOutContext.Restaurant.ToList().Find(r => r.RestaurantProfileId == Int32.Parse(profile_id)).RestaurantId;
+                    var menud_id = DineOutContext.Menu.Where(r => r.RestaurantId == restaurant_id).FirstOrDefault().MenuId;
+                    var items = DineOutContext.Item.Where(r => r.MenuId == menud_id).ToList();
+                    return View("Menu", items);
+                }
+                return RedirectToAction("OwnerLogin");
+
+            }
+            else
+            {
+
+                var item_delete = DineOutContext.Item
+                 .Where(r => r.ItemId == item_id)
+                 .Where(r => r.MenuId == menu_id)
+                 .FirstOrDefault();
+                                DineOutContext.Item.Remove(item_delete);
+                                DineOutContext.SaveChanges();
+                                return RedirectToAction("Menu");
+            }
+
         }
 
         public IActionResult Update_Item(int itemId, int menuId)
