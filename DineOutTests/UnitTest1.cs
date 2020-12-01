@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using DineOut.Controllers;
 using DineOut.Models;
 using DineOut.ViewModels;
@@ -75,6 +76,18 @@ namespace DineOutTests
             
         }
 
-        
+        [TestMethod]
+        public void TestCustomerHome()
+        {
+            DineOutContext DineOutContext = new DineOutContext();
+            var controller = new CustomerController();
+
+            var Restaurants = DineOutContext.Restaurant.ToList();
+            var result = controller.Index() as ViewResult;
+
+            Assert.AreEqual(Restaurants.Count, result.ViewData.Model);
+        }
+
+
     }
 }
