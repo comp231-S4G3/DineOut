@@ -159,39 +159,31 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(Customer customer, string oldPassword, string firstPassword)
+        public IActionResult ForgotPassword(Customer customer, string firstPassword)
         {
-            var isCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
-
             if (firstPassword != customer.PasswordHash)
             {
                 // New Password does not match
                 TempData["message"] = "Password don't match!";
                 return View();
             }
+
+            var isCustomer = DineOutContext.Customer.Where(r => r.Email == customer.Email).FirstOrDefault();
+
             if (isCustomer != null)
             {
                 // Customer exist
                 string[] salt = isCustomer.PasswordHash.Split(":");
-                string newHashedPin = GenerateHash(oldPassword, salt[0]);
-                bool isValid = newHashedPin.Equals(salt[1]);
-                if (isValid == true)
-                {
-                    // Password match and will be updated
-                    string newSashed = GenerateHash(customer.PasswordHash, salt[0]);
-                    // Overwrite to delete the string passsword
-                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
-                    DineOutContext.Update(isCustomer);
-                    DineOutContext.SaveChanges();
-                    return RedirectToAction("CustomerLogin");
-                }
-                else
-                {
-                    // Old password does not match
-                    TempData["message"] = "Old Password is not correct!";
-                    return View();
 
-                }
+                // Password match and will be updated
+                string newSashed = GenerateHash(customer.PasswordHash, salt[0]);
+                // Overwrite to delete the string passsword
+                isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
+                DineOutContext.Update(isCustomer);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("CustomerLogin");
+
+
             }
             else
             {

@@ -464,42 +464,30 @@ namespace DineOut.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile, string oldPassword, string firstPassword)
+        public IActionResult ForgotPassword(RestaurantProfile restaurantProfile, string firstPassword)
         {
-
-
-            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
-
-
             if (firstPassword != restaurantProfile.PasswordHash)
             {
                 // New Password does not match
                 TempData["message"] = "Password does not match!";
                 return View();
             }
+
+            var isCustomer = DineOutContext.RestaurantProfile.Where(r => r.Email == restaurantProfile.Email).FirstOrDefault();
+            
             if (isCustomer != null)
             {
                 // Customer exist
                 string[] salt = isCustomer.PasswordHash.Split(":");
-                string newHashedPin = GenerateHash(oldPassword, salt[0]);
-                bool isValid = newHashedPin.Equals(salt[1]);
-                if (isValid == true)
-                {
-                    // Password match and will be updated
-                    string newSashed = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
-                    // Overwrite to delete the string passsword
-                    isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
-                    DineOutContext.Update(isCustomer);
-                    DineOutContext.SaveChanges();
-                    return RedirectToAction("OwnerLogin");
-                }
-                else
-                {
-                    // Old password does not match
-                    TempData["message"] = "Password does not match!";
-                    return View();
 
-                }
+                // Password match and will be updated
+                string newSashed = GenerateHash(restaurantProfile.PasswordHash, salt[0]);
+                // Overwrite to delete the string passsword
+                isCustomer.PasswordHash = String.Format("{0}:{1}", salt[0], newSashed);
+                DineOutContext.Update(isCustomer);
+                DineOutContext.SaveChanges();
+                return RedirectToAction("OwnerLogin");
+ 
             }
             else
             {
